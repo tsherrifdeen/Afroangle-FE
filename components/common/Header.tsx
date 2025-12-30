@@ -14,7 +14,7 @@ const Header = () => {
           />
           <p className="mb-3">The African lens for all global issues</p>
         </div>
-        <button className="bg-primary-green py-3 pl-8 pr-6 text-white [clip-path:polygon(0_0,100%_0,100%_100%,8%_100%)] ">
+        <button className="bg-primary-green py-4 pl-8 pr-6 text-white slant-top-left leading-none">
           Get the daily digest
         </button>
       </div>

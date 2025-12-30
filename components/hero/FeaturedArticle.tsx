@@ -22,7 +22,7 @@ const FeaturedArticle = ({ article }) => {
         </div>
 
         {/* Floating Category Badge */}
-        <div className="w-fit [clip-path:polygon(25%_0,100%_0,100%_100%,0%_100%)] py-5 bg-neutral pr-12 pl-24 absolute bottom-0 right-0">
+        <div className="slant-left py-5 bg-neutral pr-12 pl-24 right-0">
           <h4 className="text-primary-red font-secondary text-4xl">
             {article.category.name}
           </h4>
