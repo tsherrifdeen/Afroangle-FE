@@ -1,7 +1,7 @@
 import Image from "next/image";
 const Header = () => {
   return (
-    <header className="font-secondary border-b border-b-[#0000004D]">
+    <header className="font-secondary border-b border-black/30">
       <div className="mx-auto px-8 py-6 max-w-screen-xl flex justify-between items-end">
         <div className="flex items-end">
           <Image
