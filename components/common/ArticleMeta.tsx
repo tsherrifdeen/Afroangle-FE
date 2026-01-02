@@ -1,14 +1,23 @@
-// 3. Small helper for repeated metadata (Author/Date)
+import { formatToMonthDayYear } from "@/utils/DateConversion";
+
 interface ArticleMetaProps {
-  author?: string;
-  date?: string;
+  author: string;
+  date: string;
   large?: boolean;
 }
-const ArticleMeta = ({ author, date, large = false }) => (
-  <div className={`flex gap-2 ${large ? "text-xl" : ""}`}>
-    <p>{author}</p>
-    <span className="text-neutral-400 ">•</span>
-    <p>{date}</p>
-  </div>
-);
+
+const ArticleMeta = ({ author, date, large = false }: ArticleMetaProps) => {
+  const formattedDate = formatToMonthDayYear(date);
+
+  return (
+    <div
+      className={`flex items-center gap-2 ${large ? "text-base" : "text-sm"} text-gray-600`}
+    >
+      <span>{author}</span>
+      <span>•</span>
+      <span>{formattedDate}</span>
+    </div>
+  );
+};
+
 export default ArticleMeta;

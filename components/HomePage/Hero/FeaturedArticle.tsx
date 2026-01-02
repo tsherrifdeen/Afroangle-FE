@@ -1,9 +1,10 @@
+import { formatToMonthDayYear } from "@/utils/DateConversion";
 import ArticleMeta from "../../common/ArticleMeta";
 
 // 2. Sub-component for the Main Feature
 const FeaturedArticle = ({ article }) => {
   const backgroundStyle = {
-    backgroundImage: `linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0)), url(${article.image.url})`,
+    backgroundImage: `linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0)), url(${article.mainImage})`,
   };
 
   return (
@@ -14,17 +15,14 @@ const FeaturedArticle = ({ article }) => {
       >
         <div className="w-3/5 space-y-3">
           <h2 className="text-4xl font-extrabold italic">{article.title}</h2>
-          <ArticleMeta
-            author={article.author.name}
-            date={article.publishedAt}
-          />
-          <p className="font-secondary leading-tight">{article.exerpt}</p>
+          <ArticleMeta author={article.author} date={article.publishedAt} />
+          <p className="font-secondary leading-tight">{article.excerpt}</p>
         </div>
 
         {/* Floating Category Badge */}
         <div className="slant-left py-5 bg-neutral pr-12 pl-24 right-0">
           <h4 className="text-primary-red font-secondary text-4xl">
-            {article.category.name}
+            {article.category}
           </h4>
         </div>
       </article>

@@ -1,8 +1,15 @@
 import CategoryPage from "@/components/CategoryPage";
-const Category = ({}) => {
+
+interface PageProps {
+  params: Promise<{
+    slug: string;
+  }>;
+}
+const Category = async ({ params }: PageProps) => {
+  const { slug } = await params;
   return (
     <main className="">
-      <CategoryPage />
+      <CategoryPage slug={slug} />
     </main>
   );
 };

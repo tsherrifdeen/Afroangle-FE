@@ -1,15 +1,15 @@
-import { articles } from "@/data/article";
 import ArticleItem from "./ArticleItem";
 interface ArticleListProps {
   heading: string;
   subheading: string;
-  articles?: typeof articles;
   center?: boolean;
+  articles: any[];
 }
-const ArticleList = ({
+const ArticleList = async ({
   heading,
   subheading,
   center = false,
+  articles,
 }: ArticleListProps) => {
   return (
     <section className={`w-full max-w-5xl ${center ? "mx-auto" : ""}`}>

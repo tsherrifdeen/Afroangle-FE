@@ -18,3 +18,7 @@ export const CATEGORY_BY_SLUG_QUERY = groq`
     description
   }
 `;
+
+export const TOTAL_CATEGORY_COUNT = groq`
+  count(*[_type == "article" && $slug in categories[]->slug.current])
+`;
