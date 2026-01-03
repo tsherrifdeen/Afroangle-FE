@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
   --background: #ffffff;
@@ -33,7 +34,7 @@ body {
 
 .slant-left {
   clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%);
-  bottom: 0;
+  /* @apply lg:bottom-0 top-0; */
   position: absolute;
   width: fit-content;
 }
@@ -53,6 +54,6 @@ body {
   width: fit-content;
 }
 .top-banner-slant {
-  @apply absolute bottom-28 right-0;
+  @apply absolute bottom-22 lg:bottom-28 right-0;
   clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
 }

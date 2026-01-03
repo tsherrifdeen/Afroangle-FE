@@ -10,6 +10,7 @@ export const ARTICLE_BY_SLUG_QUERY = groq`
     "author": author->name,
     "mainImage": mainImage.asset->url,
     "category": categories[0]->name,
+    content,
   }
 `;
 
@@ -21,8 +22,10 @@ export const ALL_ARTICLES_QUERY = groq`
     publishedAt,
     "slug": slug.current,
     "author": author->name,
-    "mainImage": mainImage.asset->url,
-    "excerpt": pt::text(content)[0...320] + "...",
+    "mainImage": mainImage.asset->url, 
+    "excerpt": pt::text(
+      content[_type == "block"][0...1]
+    ),
     "category": categories[0]->name,
   }
 `;
@@ -38,7 +41,8 @@ export const ARTICLES_BY_CATEGORY_QUERY = groq`
     "slug": slug.current,
     "author": author->name,
     "mainImage": mainImage.asset->url,
-    "category": categories[0]->name,
-    "excerpt": pt::text(content)[0...320] + "..."
+    "category": categories[0]->name, "excerpt": pt::text(
+      content[_type == "block"][0...1]
+    ),
   }
 `;

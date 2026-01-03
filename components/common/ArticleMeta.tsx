@@ -1,4 +1,4 @@
-import { formatToMonthDayYear } from "@/utils/DateConversion";
+import { formatDate } from "@/utils/DateConversion";
 
 interface ArticleMetaProps {
   author: string;
@@ -7,15 +7,13 @@ interface ArticleMetaProps {
 }
 
 const ArticleMeta = ({ author, date, large = false }: ArticleMetaProps) => {
-  const formattedDate = formatToMonthDayYear(date);
-
   return (
     <div
-      className={`flex items-center gap-2 ${large ? "text-base" : "text-sm"} text-gray-600`}
+      className={`flex items-center gap-2 ${large ? "lg:text-lg text-base" : "lg:text-base text-sm"}`}
     >
       <span>{author}</span>
       <span>•</span>
-      <span>{formattedDate}</span>
+      <span>{formatDate(date)}</span>
     </div>
   );
 };

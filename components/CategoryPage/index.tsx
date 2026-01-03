@@ -38,7 +38,7 @@ const CategoryPage = async ({ slug }: { slug: string }) => {
       {articles.length > 0 && <ArticleSpotlight article={articles[0]} />}
 
       <div className="border-t border-t-black/30">
-        <div className="max-w-screen-xl mx-auto px-16 py-12">
+        <div className="max-w-screen-xl mx-auto lg:px-16 px-4 py-12">
           {articles.length > 0 ? (
             <ArticleList
               heading={`Read more of ${categoryData.name}`}

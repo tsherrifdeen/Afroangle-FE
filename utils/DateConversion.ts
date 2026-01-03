@@ -1,23 +1,16 @@
-/**
- * Converts a datetime input to "Month Day, Year" format
- * @param date - Can be a Date object, string, or number (timestamp)
- * @returns Formatted date string (e.g., "January 2, 2026")
- */
-function formatToMonthDayYear(date: Date | string | number): string {
-  const d = new Date(date);
+export function formatDate(
+  dateTime: string | Date,
+  locale: string = "en-US"
+): string {
+  const date = typeof dateTime === "string" ? new Date(dateTime) : dateTime;
 
-  // Check if date is valid
-  if (isNaN(d.getTime())) {
-    throw new Error("Invalid date input");
-  }
+  // if (isNaN(date.getTime())) {
+  //   return "";
+  // }
 
-  const options: Intl.DateTimeFormatOptions = {
-    year: "numeric",
+  return new Intl.DateTimeFormat(locale, {
     month: "long",
     day: "numeric",
-  };
-
-  return d.toLocaleDateString("en-US", options);
+    year: "numeric",
+  }).format(date);
 }
-
-export { formatToMonthDayYear };

@@ -82,6 +82,6 @@ export async function getArticleBySlug(
   return await client.fetch(
     ARTICLE_BY_SLUG_QUERY,
     { slug },
-    { next: { revalidate: 3600 } }
+    { next: { revalidate: 10 } }
   );
 }
