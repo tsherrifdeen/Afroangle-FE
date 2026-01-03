@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
   --background: #ffffff;
@@ -8,19 +9,51 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-primary: var(--font-rokkitt);
+  --font-secondary: var(--font-kumbh-sans);
+  --breakpoint-xl: 1440px;
+  --color-primary-red: #b50c0c;
+  --color-primary-green: #055b33;
+  --color-neutral: #eaeaea;
+  /* --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono); */
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* background: var(--background);
+  color: var(--foreground); */
+  font-family: var(--font-rokkitt), Helvetica, sans-serif;
+}
+
+.slant-left {
+  clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%);
+  /* @apply lg:bottom-0 top-0; */
+  position: absolute;
+  width: fit-content;
+}
+.slant-right {
+  clip-path: polygon(0 0, 75% 0, 100% 100%, 0% 100%);
+  bottom: 0;
+  width: fit-content;
+  position: absolute;
+}
+.slant-top-left {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 8% 100%);
+}
+.slant-right-top {
+  clip-path: polygon(0 0, 75% 0, 100% 100%, 0% 100%);
+  top: 0;
+  position: absolute;
+  width: fit-content;
+}
+.top-banner-slant {
+  @apply absolute bottom-22 lg:bottom-28 right-0;
+  clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
 }
