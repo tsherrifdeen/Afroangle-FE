@@ -1,8 +1,12 @@
 "use client";
+import { ALL_CATEGORIES_QUERY_RESULT } from "@/sanity/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const CategoryNav = ({ categories }) => {
+interface CategoryNavProps {
+  categories: ALL_CATEGORIES_QUERY_RESULT;
+}
+const CategoryNav = ({ categories }: CategoryNavProps) => {
   const pathname = usePathname();
   return (
     <div className="mx-auto lg:px-16 px-4 max-w-screen-xl lg:pt-8 py-4 lg:pb-4 ">

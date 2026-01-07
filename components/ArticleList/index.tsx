@@ -1,9 +1,10 @@
+import { ALL_ARTICLES_QUERY_RESULT } from "@/sanity/types";
 import ArticleItem from "./ArticleItem";
 interface ArticleListProps {
   heading: string;
   subheading: string;
   center?: boolean;
-  articles: any[];
+  articles: ALL_ARTICLES_QUERY_RESULT;
 }
 const ArticleList = async ({
   heading,
@@ -11,6 +12,7 @@ const ArticleList = async ({
   center = false,
   articles,
 }: ArticleListProps) => {
+  console.log(articles);
   return (
     <section className={`w-full max-w-5xl px-4 ${center ? "mx-auto" : ""}`}>
       <div className={`${center ? "text-center" : ""} space-y-3 mb-8 lg:mb-14`}>

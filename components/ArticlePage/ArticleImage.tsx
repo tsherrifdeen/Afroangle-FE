@@ -2,7 +2,7 @@
 import Image from "next/image";
 
 interface ArticleImageProps {
-  src: string;
+  src?: string;
   caption?: string;
 }
 
@@ -21,7 +21,7 @@ export default function ArticleImage({ src, caption }: ArticleImageProps) {
         />
       </div>
       {caption && (
-        <figcaption className="mt-2 text-sm tracking-wide text-gray-600">
+        <figcaption className="mt-3 tracking-wide text-sm">
           {caption}
         </figcaption>
       )}

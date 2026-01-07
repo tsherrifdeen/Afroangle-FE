@@ -1,7 +1,11 @@
+import { ALL_ARTICLES_QUERY_RESULT } from "@/sanity/types";
 import ArticleMeta from "../../common/ArticleMeta";
 
+interface FeaturedArticleProps {
+  article: ALL_ARTICLES_QUERY_RESULT[number];
+}
 // 2. Sub-component for the Main Feature
-const FeaturedArticle = ({ article }) => {
+const FeaturedArticle = ({ article }: FeaturedArticleProps) => {
   const backgroundStyle = {
     backgroundImage: `linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0)), url(${article.mainImage})`,
   };
@@ -25,7 +29,7 @@ const FeaturedArticle = ({ article }) => {
       {/* Floating Category Badge */}
       <div className="slant-left lg:bottom-0 top-0 lg:top-auto lg:py-5 bg-neutral lg:pr-12 lg:pl-24 py-4 pr-5 pl-10 right-0">
         <h4 className="text-primary-red font-secondary text-xl lg:text-4xl">
-          {article.category}
+          {article.category.name}
         </h4>
       </div>
     </article>

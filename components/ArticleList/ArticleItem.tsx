@@ -1,6 +1,12 @@
 import Link from "next/link";
 import ArticleMeta from "../common/ArticleMeta";
-const ArticleItem = ({ article }) => {
+import { ALL_ARTICLES_QUERY_RESULT } from "@/sanity/types";
+
+interface ArticleItemProps {
+  article: ALL_ARTICLES_QUERY_RESULT[number];
+}
+
+const ArticleItem = ({ article }: ArticleItemProps) => {
   const extract =
     article.excerpt.length > 320
       ? article.excerpt.slice(0, 320) + "…"
@@ -15,7 +21,7 @@ const ArticleItem = ({ article }) => {
           >
             <div className="bg-neutral slant-right-top py-3 pl-6 pr-10 left-0">
               <h6 className="font-secondary text-lg text-primary-green">
-                {article.category}
+                {article.category.name}
               </h6>
             </div>
           </div>

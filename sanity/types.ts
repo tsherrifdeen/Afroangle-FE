@@ -254,15 +254,21 @@ export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: sanity\queries\articles.ts
 // Variable: ARTICLE_BY_SLUG_QUERY
-// Query: *[_type == "article" && slug.current == $slug][0] {    _id,    title,    publishedAt,    "slug": slug.current,    "author": author->name,    "mainImage": mainImage.asset->url,    "category": categories[0]->name,    content,  }
+// Query: *[_type == "article" && slug.current == $slug][0] {    _id,    title,    publishedAt,    "slug": slug.current,    "author":author-> {      name,      "slug": slug.current    },    "mainImage": mainImage.asset->url,    "category": categories[0]-> {    name,     "slug": slug.current,    },    content,  }
 export type ARTICLE_BY_SLUG_QUERY_RESULT = {
   _id: string;
   title: string | null;
   publishedAt: string | null;
   slug: string | null;
-  author: string | null;
+  author: {
+    name: string | null;
+    slug: string | null;
+  } | null;
   mainImage: string | null;
-  category: string | null;
+  category: {
+    name: string | null;
+    slug: string | null;
+  } | null;
   content: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -285,16 +291,22 @@ export type ARTICLE_BY_SLUG_QUERY_RESULT = {
 
 // Source: sanity\queries\articles.ts
 // Variable: ALL_ARTICLES_QUERY
-// Query: *[_type == "article"] | order(publishedAt desc) [$start...$end] {    _id,    title,    publishedAt,    "slug": slug.current,    "author": author->name,    "mainImage": mainImage.asset->url,     "excerpt": pt::text(      content[_type == "block"][0...1]    ),    "category": categories[0]->name,  }
+// Query: *[_type == "article"] | order(publishedAt desc) [$start...$end] {    _id,    title,    publishedAt,    "slug": slug.current,    "author":author->{      name,      "slug": slug.current,    },    "mainImage": mainImage.asset->url,     "excerpt": pt::text(      content[_type == "block"][0...1]    ),    "category": categories[0]-> {      name,      "slug": slug.current      },  }
 export type ALL_ARTICLES_QUERY_RESULT = Array<{
   _id: string;
   title: string | null;
   publishedAt: string | null;
   slug: string | null;
-  author: string | null;
+  author: {
+    name: string | null;
+    slug: string | null;
+  } | null;
   mainImage: string | null;
   excerpt: string;
-  category: string | null;
+  category: {
+    name: string | null;
+    slug: string | null;
+  } | null;
 }>;
 
 // Source: sanity\queries\articles.ts
@@ -304,15 +316,21 @@ export type TOTAL_ARTICLES_COUNT_RESULT = number;
 
 // Source: sanity\queries\articles.ts
 // Variable: ARTICLES_BY_CATEGORY_QUERY
-// Query: *[_type == "article" && $slug in categories[]->slug.current] | order(publishedAt desc) [$start...$end] {    _id,    title,    publishedAt,    "slug": slug.current,    "author": author->name,    "mainImage": mainImage.asset->url,    "category": categories[0]->name, "excerpt": pt::text(      content[_type == "block"][0...1]    ),  }
+// Query: *[_type == "article" && $slug in categories[]->slug.current] | order(publishedAt desc) [$start...$end] {    _id,    title,    publishedAt,    "slug": slug.current,    "author": author-> {       name,      "slug": slug.current,    },    "mainImage": mainImage.asset->url,    "category": categories[0]->{       name,      "slug": slug.current,    },     "excerpt": pt::text(      content[_type == "block"][0...1]    ),  }
 export type ARTICLES_BY_CATEGORY_QUERY_RESULT = Array<{
   _id: string;
   title: string | null;
   publishedAt: string | null;
   slug: string | null;
-  author: string | null;
+  author: {
+    name: string | null;
+    slug: string | null;
+  } | null;
   mainImage: string | null;
-  category: string | null;
+  category: {
+    name: string | null;
+    slug: string | null;
+  } | null;
   excerpt: string;
 }>;
 
@@ -345,10 +363,10 @@ export type TOTAL_CATEGORY_COUNT_RESULT = number;
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '\n  *[_type == "article" && slug.current == $slug][0] {\n    _id,\n    title,\n    publishedAt,\n    "slug": slug.current,\n    "author": author->name,\n    "mainImage": mainImage.asset->url,\n    "category": categories[0]->name,\n    content,\n  }\n': ARTICLE_BY_SLUG_QUERY_RESULT;
-    '\n  *[_type == "article"] | order(publishedAt desc) [$start...$end] {\n    _id,\n    title,\n    publishedAt,\n    "slug": slug.current,\n    "author": author->name,\n    "mainImage": mainImage.asset->url, \n    "excerpt": pt::text(\n      content[_type == "block"][0...1]\n    ),\n    "category": categories[0]->name,\n  }\n': ALL_ARTICLES_QUERY_RESULT;
+    '\n  *[_type == "article" && slug.current == $slug][0] {\n    _id,\n    title,\n    publishedAt,\n    "slug": slug.current,\n    "author":author-> {\n      name,\n      "slug": slug.current\n    },\n    "mainImage": mainImage.asset->url,\n    "category": categories[0]-> {\n    name, \n    "slug": slug.current,\n    },\n    content,\n  }\n': ARTICLE_BY_SLUG_QUERY_RESULT;
+    '\n  *[_type == "article"] | order(publishedAt desc) [$start...$end] {\n    _id,\n    title,\n    publishedAt,\n    "slug": slug.current,\n    "author":author->{\n      name,\n      "slug": slug.current,\n    },\n    "mainImage": mainImage.asset->url, \n    "excerpt": pt::text(\n      content[_type == "block"][0...1]\n    ),\n    "category": categories[0]-> {\n      name,\n      "slug": slug.current\n      },\n  }\n': ALL_ARTICLES_QUERY_RESULT;
     'count(*[_type == "article"])': TOTAL_ARTICLES_COUNT_RESULT;
-    '\n  *[_type == "article" && $slug in categories[]->slug.current] | order(publishedAt desc) [$start...$end] {\n    _id,\n    title,\n    publishedAt,\n    "slug": slug.current,\n    "author": author->name,\n    "mainImage": mainImage.asset->url,\n    "category": categories[0]->name, "excerpt": pt::text(\n      content[_type == "block"][0...1]\n    ),\n  }\n': ARTICLES_BY_CATEGORY_QUERY_RESULT;
+    '\n  *[_type == "article" && $slug in categories[]->slug.current] | order(publishedAt desc) [$start...$end] {\n    _id,\n    title,\n    publishedAt,\n    "slug": slug.current,\n    "author": author-> { \n      name,\n      "slug": slug.current,\n    },\n    "mainImage": mainImage.asset->url,\n    "category": categories[0]->{ \n      name,\n      "slug": slug.current,\n    }, \n    "excerpt": pt::text(\n      content[_type == "block"][0...1]\n    ),\n  }\n': ARTICLES_BY_CATEGORY_QUERY_RESULT;
     '\n  *[_type == "category"] | order(name asc) {\n    _id,\n    name,\n    "slug": slug.current,\n    description\n  }\n': ALL_CATEGORIES_QUERY_RESULT;
     '\n  *[_type == "category" && slug.current == $slug][0] {\n    _id,\n    name,\n    "slug": slug.current,\n    description\n  }\n': CATEGORY_BY_SLUG_QUERY_RESULT;
     '\n  count(*[_type == "article" && $slug in categories[]->slug.current])\n': TOTAL_CATEGORY_COUNT_RESULT;

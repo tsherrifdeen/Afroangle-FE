@@ -56,8 +56,24 @@ export const articleType = defineType({
       name: "content",
       title: "Content",
       type: "array",
-      of: [{ type: "block" }],
-      validation: (Rule) => Rule.required(),
+      of: [
+        { type: "block" },
+        // Fixed: Expanded inline image to allow Alt Text
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            {
+              name: "alt",
+              type: "string",
+              title: "Alternative Text",
+              validation: (Rule) => Rule.required(),
+            },
+          ],
+        },
+        { type: "videoEmbed" },
+        { type: "twitterEmbed" },
+      ],
     }),
     defineField({
       name: "audioUrl",
@@ -68,7 +84,6 @@ export const articleType = defineType({
       name: "publishedAt",
       title: "Published at",
       type: "datetime",
-      readOnly: ({ document }) => Boolean(document?.publishedAt),
       initialValue: () => new Date().toISOString(),
     }),
     defineField({
@@ -78,11 +93,21 @@ export const articleType = defineType({
       of: [{ type: "reference", to: [{ type: "comment" }] }],
       readOnly: true,
     }),
-    // defineField({
-    //   name: 'language',
-    //   title: 'Language',
-    //   type: 'string',
-    //   options: {list: ['en', 'fr', 'de']},
-    // }),
   ],
+  // Added: Preview configuration
+  preview: {
+    select: {
+      title: "title",
+      // We use the arrow syntax (->) to "follow" the reference and grab the name
+      author: "author->name",
+      media: "mainImage",
+    },
+    prepare(selection) {
+      const { author } = selection;
+      return {
+        ...selection,
+        subtitle: author && `by ${author}`, // Displays "by [Author Name]"
+      };
+    },
+  },
 });

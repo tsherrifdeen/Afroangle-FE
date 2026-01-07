@@ -1,3 +1,4 @@
+"use client";
 import { PortableTextComponents } from "@portabletext/react";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image"; // Ensure you have this helper
@@ -47,7 +48,23 @@ export const RichTextComponents: PortableTextComponents = {
       );
     },
   },
-
+  // videoEmbed: ({ value }) => {
+  //   const { url } = value;
+  //   // Using react-player handles Youtube, Vimeo, etc. automatically
+  //   return (
+  //     <div className="my-8 relative pt-[56.25%]">
+  //       {" "}
+  //       {/* 16:9 Aspect Ratio container */}
+  //       <ReactPlayer
+  //         url={url}
+  //         className="absolute top-0 left-0"
+  //         width="100%"
+  //         height="100%"
+  //         controls
+  //       />
+  //     </div>
+  //   );
+  // },
   // 4. Customizing Links (The "marks" property)
   marks: {
     link: ({ children, value }) => {

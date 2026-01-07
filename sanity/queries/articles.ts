@@ -7,9 +7,18 @@ export const ARTICLE_BY_SLUG_QUERY = groq`
     title,
     publishedAt,
     "slug": slug.current,
-    "author": author->name,
-    "mainImage": mainImage.asset->url,
-    "category": categories[0]->name,
+    "author":author-> {
+      name,
+      "slug": slug.current
+    },
+    "mainImage": {
+    "url": mainImage.asset->url,
+    "caption": mainImage.caption,
+    },
+  "category": categories[0]-> {
+    name, 
+    "slug": slug.current,
+    },
     content,
   }
 `;
@@ -21,12 +30,18 @@ export const ALL_ARTICLES_QUERY = groq`
     title,
     publishedAt,
     "slug": slug.current,
-    "author": author->name,
+    "author":author->{
+      name,
+      "slug": slug.current,
+    },
     "mainImage": mainImage.asset->url, 
     "excerpt": pt::text(
       content[_type == "block"][0...1]
     ),
-    "category": categories[0]->name,
+    "category": categories[0]-> {
+      name,
+      "slug": slug.current
+      },
   }
 `;
 
@@ -39,9 +54,16 @@ export const ARTICLES_BY_CATEGORY_QUERY = groq`
     title,
     publishedAt,
     "slug": slug.current,
-    "author": author->name,
+    "author": author-> { 
+      name,
+      "slug": slug.current,
+    },
     "mainImage": mainImage.asset->url,
-    "category": categories[0]->name, "excerpt": pt::text(
+    "category": categories[0]->{ 
+      name,
+      "slug": slug.current,
+    }, 
+    "excerpt": pt::text(
       content[_type == "block"][0...1]
     ),
   }

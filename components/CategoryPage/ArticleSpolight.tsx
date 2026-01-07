@@ -43,9 +43,10 @@
 
 import Link from "next/link";
 import ArticleMeta from "../common/ArticleMeta";
+import { ARTICLES_BY_CATEGORY_QUERY_RESULT } from "@/sanity/types";
 
 interface ArticleSpotlightProps {
-  article: ;
+  article: ARTICLES_BY_CATEGORY_QUERY_RESULT[number];
 }
 
 const ArticleSpotlight = ({ article }: ArticleSpotlightProps) => {
@@ -56,7 +57,7 @@ const ArticleSpotlight = ({ article }: ArticleSpotlightProps) => {
 
   // Define the link path here.
   // Note: If using Sanity CMS, this is usually `article.slug.current`
-  const linkPath = `/article/${article.slug.current || article.slug}`;
+  const linkPath = `/articles/${article.slug}`;
 
   return (
     <div className="flex flex-col lg:flex-row lg:gap-9 gap-6 lg:mt-8 mt-4 lg:mb-20 mb-12 w-full max-w-screen-xl mx-auto px-4 lg:px-16">
@@ -74,7 +75,7 @@ const ArticleSpotlight = ({ article }: ArticleSpotlightProps) => {
             </div>
             <div className="slant-left bottom-0 lg:py-5 py-3 bg-neutral pr-8 lg:pr-12 pl-18 lg:pl-24 right-0">
               <h4 className="text-primary-red font-secondary lg:text-4xl text-3xl">
-                {article.category}
+                {article.category.name}
               </h4>
             </div>
           </div>

@@ -1,6 +1,10 @@
+import { ALL_ARTICLES_QUERY_RESULT } from "@/sanity/types";
 import ArticleMeta from "../../common/ArticleMeta";
 
-const SidebarArticle = ({ article }) => {
+interface SidebarProps {
+  article: ALL_ARTICLES_QUERY_RESULT[number];
+}
+const SidebarArticle = ({ article }: SidebarProps) => {
   return (
     <article className="mb-5">
       {/* Image Container */}
@@ -10,7 +14,7 @@ const SidebarArticle = ({ article }) => {
       >
         <div className="slant-right bg-white py-2 pl-5 pr-10 left-0">
           <h5 className="text-primary-red font-secondary">
-            {article.category}
+            {article.category.name}
           </h5>
         </div>
       </div>

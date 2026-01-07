@@ -1,7 +1,11 @@
 import { formatDate } from "@/utils/DateConversion";
+import Link from "next/link";
 
 interface ArticleMetaProps {
-  author: string;
+  author: {
+    name: string;
+    slug: string;
+  };
   date: string;
   large?: boolean;
 }
@@ -11,7 +15,7 @@ const ArticleMeta = ({ author, date, large = false }: ArticleMetaProps) => {
     <div
       className={`flex items-center gap-2 ${large ? "lg:text-lg text-base" : "lg:text-base text-sm"}`}
     >
-      <span>{author}</span>
+      <Link href={`/authors/${author.slug}`}>{author.name}</Link>
       <span>•</span>
       <span>{formatDate(date)}</span>
     </div>

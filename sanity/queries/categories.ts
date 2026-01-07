@@ -5,8 +5,7 @@ export const ALL_CATEGORIES_QUERY = groq`
   *[_type == "category"] | order(name asc) {
     _id,
     name,
-    "slug": slug.current,
-    description
+    "slug": slug.current
   }
 `;
 
