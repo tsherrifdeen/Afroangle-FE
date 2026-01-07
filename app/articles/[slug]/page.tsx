@@ -22,11 +22,11 @@ export async function generateMetadata({
 
   return {
     title: article.title,
-    description: article.excerpt || article.title,
+    description: article.title,
     openGraph: {
       title: article.title,
-      description: article.excerpt || article.title,
-      images: [article.mainImage],
+      description: article.title,
+      images: [article.mainImage.url],
     },
   };
 }
@@ -34,7 +34,6 @@ export async function generateMetadata({
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { slug } = await params;
   const article = await getArticleBySlug(slug);
-  console.log(article);
   if (!article) {
     notFound();
   }
