@@ -15,8 +15,13 @@ const ArticleMeta = ({ author, date, large = false }: ArticleMetaProps) => {
     <div
       className={`flex items-center gap-2 ${large ? "lg:text-lg text-base" : "lg:text-base text-sm"}`}
     >
-      <Link href={`/authors/${author.slug}`}>{author.name}</Link>
-      <span>•</span>
+      <Link
+        href={`/authors/${author.slug}`}
+        className="hover:underline decoration-primary-red decoration-2"
+      >
+        {author.name}
+      </Link>
+      <span className="text-neutral-300">●</span>
       <span>{formatDate(date)}</span>
     </div>
   );
