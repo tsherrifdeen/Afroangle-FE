@@ -27,7 +27,7 @@ export default function ShareButton() {
   return (
     <button
       onClick={handleShare}
-      className="slant-top-left bg-neutral py-1.5 pl-6 pr-4 font-secondary lg:text-lg"
+      className="slant-top-left bg-neutral py-1.5 pl-6 pr-4 font-secondary lg:text-lg active:bg-neutral-600 active:text-white"
       aria-label="Share article"
     >
       {copied ? "Copied!" : "Share"}

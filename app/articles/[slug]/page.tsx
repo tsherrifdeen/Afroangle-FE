@@ -22,11 +22,11 @@ export async function generateMetadata({
 
   return {
     title: article.title,
-    description: article.title,
+    description: `${article.title} - Afroangle`,
     openGraph: {
-      title: article.title,
-      description: article.title,
-      images: [article.mainImage.url],
+      title: article.title || "Afroangle",
+      description: `${article.title} - Afroangle`,
+      images: article.mainImage?.url ? [article.mainImage.url] : [],
     },
   };
 }

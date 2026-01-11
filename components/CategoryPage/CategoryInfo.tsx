@@ -15,8 +15,7 @@ const CategoryInfo = ({ name, description }: CategoryInfoProps) => {
           {name}
         </h1>
         <p className="lg:text-xl font-secondary max-w-5xl mb-2">
-          Writers explore the depths of our cultural heritage and how it shapes
-          who we are and who we’ll be
+          {description}
         </p>
       </div>
     </div>

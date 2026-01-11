@@ -12,9 +12,9 @@ const ArticleItem = ({ article }: ArticleItemProps) => {
       ? article.excerpt.slice(0, 320) + "…"
       : article.excerpt;
   return (
-    <Link href={`/articles/${article.slug}`} className="block">
-      <div className="flex gap-5 flex-col lg:flex-row lg:gap-10">
-        <div className="lg:w-1/2 w-full">
+    <div className="flex gap-5 flex-col lg:flex-row lg:gap-10">
+      <div className="lg:w-1/2 w-full">
+        <Link href={`/articles/${article.slug}`}>
           <div
             className="w-full p-8 relative h-80 bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: `url(${article.mainImage})` }}
@@ -25,14 +25,19 @@ const ArticleItem = ({ article }: ArticleItemProps) => {
               </h6>
             </div>
           </div>
-        </div>
-        <div className="flex flex-col justify-center lg:gap-4 gap-3 w-full lg:w-2/5">
-          <h2 className="font-extrabold text-2xl">{article.title}</h2>
-          <ArticleMeta author={article.author} date={article.publishedAt} />
-          <p className="font-secondary leading-tight">{extract}</p>
-        </div>
+        </Link>
       </div>
-    </Link>
+      <div className="flex flex-col justify-center lg:gap-4 gap-3 w-full lg:w-2/5">
+        <Link
+          href={`/articles/${article.slug}`}
+          className="hover:underline decoration-primary-red decoration-2"
+        >
+          <h2 className="font-extrabold text-2xl">{article.title}</h2>
+        </Link>
+        <ArticleMeta author={article.author} date={article.publishedAt} />
+        <p className="font-secondary leading-tight">{extract}</p>
+      </div>
+    </div>
   );
 };
 

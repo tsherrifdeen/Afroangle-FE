@@ -1,5 +1,6 @@
 import { ALL_ARTICLES_QUERY_RESULT } from "@/sanity/types";
 import ArticleMeta from "../../common/ArticleMeta";
+import Link from "next/link";
 
 interface FeaturedArticleProps {
   article: ALL_ARTICLES_QUERY_RESULT[number];
@@ -19,18 +20,28 @@ const FeaturedArticle = ({ article }: FeaturedArticleProps) => {
       style={backgroundStyle}
     >
       <div className="lg:w-3/5 space-y-3">
-        <h2 className="lg:text-4xl text-2xl font-extrabold italic">
-          {article.title}
-        </h2>
+        <Link
+          href={`/articles/${article.slug}`}
+          className="active::underline decoration-primary-red decoration-2"
+        >
+          <h2 className="lg:text-4xl text-2xl font-extrabold">
+            {article.title}
+          </h2>
+        </Link>
+
         <ArticleMeta author={article.author} date={article.publishedAt} />
-        <p className="font-secondary leading-tight">{extract}</p>
+        <Link href={`/articles/${article.slug}`}>
+          <p className="font-secondary leading-tight">{extract}</p>
+        </Link>
       </div>
 
       {/* Floating Category Badge */}
       <div className="slant-left lg:bottom-0 top-0 lg:top-auto lg:py-5 bg-neutral lg:pr-12 lg:pl-24 py-4 pr-5 pl-10 right-0">
-        <h4 className="text-primary-red font-secondary text-xl lg:text-4xl">
-          {article.category.name}
-        </h4>
+        <Link href={`/categories/${article.category.slug}`}>
+          <h4 className="text-primary-red font-secondary text-xl lg:text-4xl">
+            {article.category.name}
+          </h4>
+        </Link>
       </div>
     </article>
   );

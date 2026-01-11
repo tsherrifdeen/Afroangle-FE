@@ -73,11 +73,13 @@ export default function ArticlePageContent({
               date={article.publishedAt}
             />
           </div>
-
-          <ArticleImage
-            src={article.mainImage.url}
-            caption={article.mainImage.caption}
-          />
+          <div className="space-y-2">
+            <ArticleImage
+              src={article.mainImage.url}
+              caption={article.mainImage.caption}
+            />
+            <hr className="text-black/30" />
+          </div>
 
           <div className="prose prose-blue prose-lg max-w-3xl mx-auto ">
             <PortableText
