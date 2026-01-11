@@ -22,15 +22,17 @@ const FeaturedArticle = ({ article }: FeaturedArticleProps) => {
       <div className="lg:w-3/5 space-y-3">
         <Link
           href={`/articles/${article.slug}`}
-          className="hover:underline decoration-primary-red decoration-2"
+          className="active::underline decoration-primary-red decoration-2"
         >
-          <h2 className="lg:text-4xl text-2xl font-extrabold italic">
+          <h2 className="lg:text-4xl text-2xl font-extrabold">
             {article.title}
           </h2>
         </Link>
 
         <ArticleMeta author={article.author} date={article.publishedAt} />
-        <p className="font-secondary leading-tight">{extract}</p>
+        <Link href={`/articles/${article.slug}`}>
+          <p className="font-secondary leading-tight">{extract}</p>
+        </Link>
       </div>
 
       {/* Floating Category Badge */}

@@ -2,8 +2,8 @@
 import Image from "next/image";
 
 interface ArticleImageProps {
-  src?: string;
-  caption?: string;
+  src: string;
+  caption: string;
 }
 
 export default function ArticleImage({ src, caption }: ArticleImageProps) {

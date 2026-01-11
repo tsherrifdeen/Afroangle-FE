@@ -22,7 +22,7 @@ const SidebarArticle = ({ article }: SidebarProps) => {
         </div>
 
         {/* Content */}
-        <h5 className="font-black text-lg tracking-wider leading-tight mb-2 hover:underline decoration-primary-red">
+        <h5 className="font-black text-lg tracking-wider leading-tight mb-2 active:underline decoration-primary-red">
           {article.title}
         </h5>
       </Link>

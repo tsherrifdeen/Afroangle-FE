@@ -10,7 +10,7 @@ const HomePage = async () => {
   return (
     <>
       <CategoryNav categories={categories} />
-      <Hero articles={articles} />
+      <Hero articles={articles.slice(0, 3)} />
       <ArticleList
         heading="THIS WEEK’S TOP IDEAS"
         subheading="Our top analyses, debates, ideas and stories of the week."

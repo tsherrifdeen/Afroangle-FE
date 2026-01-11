@@ -89,7 +89,7 @@ const ArticleSpotlight = ({ article }: ArticleSpotlightProps) => {
           href={linkPath}
           className="hover:underline decoration-primary-red decoration-2"
         >
-          <h2 className="font-extrabold text-3xl lg:text-4xl italic">
+          <h2 className="font-extrabold text-3xl lg:text-4xl">
             {article.title}
           </h2>
         </Link>
