@@ -13,6 +13,16 @@
  */
 
 // Source: sanity\schema.json
+export type VideoEmbed = {
+  _type: "videoEmbed";
+  url?: string;
+};
+
+export type TwitterEmbed = {
+  _type: "twitterEmbed";
+  url?: string;
+};
+
 export type Comment = {
   _id: string;
   _type: "comment";
@@ -20,7 +30,8 @@ export type Comment = {
   _updatedAt: string;
   _rev: string;
   name?: string;
-  comment?: string;
+  email?: string;
+  message?: string;
   article?: {
     _ref: string;
     _type: "reference";
@@ -81,24 +92,54 @@ export type Article = {
     caption?: string;
     _type: "image";
   };
-  content?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
+  content?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?:
+          | "normal"
+          | "h1"
+          | "h2"
+          | "h3"
+          | "h4"
+          | "h5"
+          | "h6"
+          | "blockquote";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+        _key: string;
+      }
+    | ({
+        _key: string;
+      } & VideoEmbed)
+    | ({
+        _key: string;
+      } & TwitterEmbed)
+  >;
   audioUrl?: string;
   publishedAt?: string;
   comments?: Array<{
@@ -234,6 +275,8 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
+  | VideoEmbed
+  | TwitterEmbed
   | Comment
   | Category
   | Slug
@@ -252,9 +295,15 @@ export type AllSanitySchemaTypes =
 
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
+type ArrayOf<T> = Array<
+  T & {
+    _key: string;
+  }
+>;
+
 // Source: sanity\queries\articles.ts
 // Variable: ARTICLE_BY_SLUG_QUERY
-// Query: *[_type == "article" && slug.current == $slug][0] {    _id,    title,    publishedAt,    "slug": slug.current,    "author":author-> {      name,      "slug": slug.current    },    "mainImage": mainImage.asset->url,    "category": categories[0]-> {    name,     "slug": slug.current,    },    content,  }
+// Query: *[_type == "article" && slug.current == $slug][0] {    _id,    title,    publishedAt,    "slug": slug.current,    "author":author-> {      name,      "slug": slug.current    },    "mainImage": {    "url": mainImage.asset->url,    "caption": mainImage.caption,    },  "category": categories[0]-> {    name,     "slug": slug.current,    },    content,  }
 export type ARTICLE_BY_SLUG_QUERY_RESULT = {
   _id: string;
   title: string | null;
@@ -264,29 +313,62 @@ export type ARTICLE_BY_SLUG_QUERY_RESULT = {
     name: string | null;
     slug: string | null;
   } | null;
-  mainImage: string | null;
+  mainImage: {
+    url: string | null;
+    caption: string | null;
+  };
   category: {
     name: string | null;
     slug: string | null;
   } | null;
-  content: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }> | null;
+  content: Array<
+    | ({
+        _key: string;
+      } & TwitterEmbed)
+    | ({
+        _key: string;
+      } & VideoEmbed)
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?:
+          | "blockquote"
+          | "h1"
+          | "h2"
+          | "h3"
+          | "h4"
+          | "h5"
+          | "h6"
+          | "normal";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+        _key: string;
+      }
+  > | null;
 } | null;
 
 // Source: sanity\queries\articles.ts
@@ -336,12 +418,11 @@ export type ARTICLES_BY_CATEGORY_QUERY_RESULT = Array<{
 
 // Source: sanity\queries\categories.ts
 // Variable: ALL_CATEGORIES_QUERY
-// Query: *[_type == "category"] | order(name asc) {    _id,    name,    "slug": slug.current,    description  }
+// Query: *[_type == "category"] | order(name asc) {    _id,    name,    "slug": slug.current  }
 export type ALL_CATEGORIES_QUERY_RESULT = Array<{
   _id: string;
   name: string | null;
   slug: string | null;
-  description: string | null;
 }>;
 
 // Source: sanity\queries\categories.ts
@@ -359,16 +440,27 @@ export type CATEGORY_BY_SLUG_QUERY_RESULT = {
 // Query: count(*[_type == "article" && $slug in categories[]->slug.current])
 export type TOTAL_CATEGORY_COUNT_RESULT = number;
 
+// Source: sanity\queries\comments.ts
+// Variable: GET_COMMENTS_BY_ARTICLE
+// Query: *[_type == "comment" && approved == true && article._ref == $_id] | order(_createdAt desc) {     _id,     name,    message,    _createdAt  }
+export type GET_COMMENTS_BY_ARTICLE_RESULT = Array<{
+  _id: string;
+  name: string | null;
+  message: string | null;
+  _createdAt: string;
+}>;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '\n  *[_type == "article" && slug.current == $slug][0] {\n    _id,\n    title,\n    publishedAt,\n    "slug": slug.current,\n    "author":author-> {\n      name,\n      "slug": slug.current\n    },\n    "mainImage": mainImage.asset->url,\n    "category": categories[0]-> {\n    name, \n    "slug": slug.current,\n    },\n    content,\n  }\n': ARTICLE_BY_SLUG_QUERY_RESULT;
+    '\n  *[_type == "article" && slug.current == $slug][0] {\n    _id,\n    title,\n    publishedAt,\n    "slug": slug.current,\n    "author":author-> {\n      name,\n      "slug": slug.current\n    },\n    "mainImage": {\n    "url": mainImage.asset->url,\n    "caption": mainImage.caption,\n    },\n  "category": categories[0]-> {\n    name, \n    "slug": slug.current,\n    },\n    content,\n  }\n': ARTICLE_BY_SLUG_QUERY_RESULT;
     '\n  *[_type == "article"] | order(publishedAt desc) [$start...$end] {\n    _id,\n    title,\n    publishedAt,\n    "slug": slug.current,\n    "author":author->{\n      name,\n      "slug": slug.current,\n    },\n    "mainImage": mainImage.asset->url, \n    "excerpt": pt::text(\n      content[_type == "block"][0...1]\n    ),\n    "category": categories[0]-> {\n      name,\n      "slug": slug.current\n      },\n  }\n': ALL_ARTICLES_QUERY_RESULT;
     'count(*[_type == "article"])': TOTAL_ARTICLES_COUNT_RESULT;
     '\n  *[_type == "article" && $slug in categories[]->slug.current] | order(publishedAt desc) [$start...$end] {\n    _id,\n    title,\n    publishedAt,\n    "slug": slug.current,\n    "author": author-> { \n      name,\n      "slug": slug.current,\n    },\n    "mainImage": mainImage.asset->url,\n    "category": categories[0]->{ \n      name,\n      "slug": slug.current,\n    }, \n    "excerpt": pt::text(\n      content[_type == "block"][0...1]\n    ),\n  }\n': ARTICLES_BY_CATEGORY_QUERY_RESULT;
-    '\n  *[_type == "category"] | order(name asc) {\n    _id,\n    name,\n    "slug": slug.current,\n    description\n  }\n': ALL_CATEGORIES_QUERY_RESULT;
+    '\n  *[_type == "category"] | order(name asc) {\n    _id,\n    name,\n    "slug": slug.current\n  }\n': ALL_CATEGORIES_QUERY_RESULT;
     '\n  *[_type == "category" && slug.current == $slug][0] {\n    _id,\n    name,\n    "slug": slug.current,\n    description\n  }\n': CATEGORY_BY_SLUG_QUERY_RESULT;
     '\n  count(*[_type == "article" && $slug in categories[]->slug.current])\n': TOTAL_CATEGORY_COUNT_RESULT;
+    '\n  *[_type == "comment" && approved == true && article._ref == $_id] | order(_createdAt desc) { \n    _id, \n    name,\n    message,\n    _createdAt\n  }\n': GET_COMMENTS_BY_ARTICLE_RESULT;
   }
 }

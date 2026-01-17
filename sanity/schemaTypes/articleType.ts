@@ -1,9 +1,12 @@
+import { GenerateAudioInput } from "@/components/common/GenerateAudio";
+import { DocumentIcon } from "@sanity/icons";
 import { defineType, defineField } from "sanity";
 
 export const articleType = defineType({
   name: "article",
   title: "Article",
   type: "document",
+  icon: DocumentIcon,
   fields: [
     defineField({
       name: "title",
@@ -76,9 +79,16 @@ export const articleType = defineType({
       ],
     }),
     defineField({
-      name: "audioUrl",
-      title: "Audio URL",
-      type: "url",
+      name: "audio",
+      title: "Audio Form",
+      type: "file",
+      description: "Generate an AI audio version of this article.",
+      components: {
+        input: GenerateAudioInput,
+      },
+      options: {
+        accept: "audio/mpeg",
+      },
     }),
     defineField({
       name: "publishedAt",

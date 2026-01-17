@@ -1,9 +1,11 @@
+import { FolderIcon } from "@sanity/icons";
 import { defineType, defineField } from "sanity";
 
 export const categoryType = defineType({
   name: "category",
   title: "Category",
   type: "document",
+  icon: FolderIcon,
   fields: [
     defineField({
       name: "name",

@@ -11,7 +11,7 @@ export const twitterEmbed = defineType({
       type: "url",
       title: "Tweet URL",
       description:
-        "Paste the full URL of the tweet (e.g., https://twitter.com/sanity_io/status/123...)",
+        "Paste the full URL of the tweet (e.g., https://twitter.com/afroangle/status/123...)",
       validation: (Rule) => Rule.required().uri({ scheme: ["http", "https"] }),
     }),
   ],
