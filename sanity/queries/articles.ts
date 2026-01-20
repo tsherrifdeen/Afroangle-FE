@@ -11,6 +11,7 @@ export const ARTICLE_BY_SLUG_QUERY = groq`
       name,
       "slug": slug.current
     },
+    "audioUrl": audio.asset->url,
     "mainImage": {
     "url": mainImage.asset->url,
     "caption": mainImage.caption,

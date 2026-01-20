@@ -3,7 +3,7 @@ import { createClient } from "@sanity/client";
 import { ElevenLabsClient } from "@elevenlabs/elevenlabs-js";
 
 // 1. Initialize Sanity Client with WRITE permissions
-const sanityClient = createClient({
+export const sanityClient = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
   apiVersion: "2026-01-17",

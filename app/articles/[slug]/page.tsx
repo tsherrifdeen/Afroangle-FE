@@ -13,7 +13,7 @@ export async function generateMetadata({
 }: ArticlePageProps): Promise<Metadata> {
   const { slug } = await params;
   const article = await getArticleBySlug(slug);
-
+  console.log(article);
   if (!article) {
     return {
       title: "Article Not Found",

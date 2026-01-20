@@ -25,7 +25,7 @@ const kumbhSans = Kumbh_Sans({
 // });
 
 export const metadata: Metadata = {
-  title: "Afroangle Next App",
+  title: "Afroangle",
   description: "The African lens for global issues",
 };
 
