@@ -92,7 +92,8 @@
       "catchUp": "Rattraper"
     },
     "comments": {
-      "title": "Laisser un commentaire",
+      "title": "commentaires",
+      "leaveComment": "Laisser un commentaire",
       "noComments": "Pas encore de commentaires",
       "thankYou": "Merci pour votre commentaire !",
       "sending": "Envoi en cours...",

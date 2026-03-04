@@ -18,14 +18,14 @@ interface HeroSectionProps {
 const HeroSection = ({ articles, dict }: HeroSectionProps) => {
   return (
     <section className="pb-14 lg:mb-20 mb-12 border-b border-black/30">
-      <div className="flex flex-col lg:flex-row lg:gap-9 gap-12 max-w-screen-xl mx-auto px-4 lg:px-16">
+      <div className="flex flex-col lg:flex-row lg:gap-9 gap-10 max-w-screen-xl mx-auto px-4 lg:px-16">
         {/* Left Column: Featured */}
         <div className="lg:w-3/4 border border-black/10">
           <FeaturedArticle article={articles[0]} />
         </div>
         {/* Right Column: Sidebar */}
         {articles.length > 2 && (
-          <aside className="lg:w-1/4 bg-neutral pr-14 pl-8 py-3 space-y-5">
+          <aside className="lg:w-1/4 bg-neutral lg:p-9 p-6 space-y-5">
             <h3 className="italic text-3xl">{dict.articles.list.catchUp}</h3>
             <div className="flex flex-col gap-5">
               {articles.slice(1, 3).map((article, index) => (

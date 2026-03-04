@@ -22,8 +22,8 @@ const CategoryPage = async ({
   const dict = await getDictionary(locale);
 
   const [categories, categoryData, articlesResponse] = await Promise.all([
-    getAllCategories(),
-    getCategoryBySlug(slug),
+    getAllCategories(locale),
+    getCategoryBySlug(slug, locale),
     getArticlesByCategory(slug, locale),
   ]);
 

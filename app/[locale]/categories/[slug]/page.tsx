@@ -20,7 +20,7 @@ export async function generateMetadata({
 
   const dict = await getDictionary(locale);
   const seo = dict.common.seo.home;
-  const category = await getCategoryBySlug(slug);
+  const category = await getCategoryBySlug(slug, locale);
 
   if (!category) {
     return {

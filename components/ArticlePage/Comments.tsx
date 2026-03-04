@@ -11,37 +11,44 @@ type Dict = {
 };
 
 interface CommentsProps {
-  id: string;
-  locale: string;
+  articleId: string;
   dict: Dict;
 }
 
-const Comments = async ({ id, locale, dict }: CommentsProps) => {
-  const comments = (await getArticleComments(id, locale)).data;
+const Comments = async ({ articleId, dict }: CommentsProps) => {
+  const response = await getArticleComments(articleId);
+  const comments = response?.data || [];
   const { comments: c } = dict.articles;
 
   return (
-    <div className="max-w-3xl mt-8 w-full mx-auto space-y-6">
-      <h5 className="uppercase text-2xl text-primary-red leading-none">
+    <div className="mx-auto mt-8 w-full max-w-3xl space-y-6">
+      {/* Always show the section title */}
+      <h5 className="text-2xl uppercase leading-none text-primary-red">
         {c.title}
       </h5>
+
+      {/* Safely check if the array is empty */}
       {comments.length === 0 ? (
-        <p className="text-sm text-center">{c.noComments}</p>
+        <p className="text-center font-secondary text-gray-500">
+          {c.noComments}
+        </p>
       ) : (
-        comments.map((comment, index) => (
-          <div
-            key={index}
-            className="bg-neutral lg:px-10 space-y-2 lg:space-y-2.5 lg:py-8 px-6 py-3"
-          >
-            <div className="flex gap-2 items-center">
-              <h6 className="lg:text-xl capitalize font-medium">
-                {comment.name}
-              </h6>
-              <p className="text-black/60">{timeAgo(comment._createdAt)}</p>
+        <div className="space-y-4">
+          {comments.map((comment) => (
+            <div
+              key={comment._id}
+              className="w-full space-y-2 bg-neutral px-6 py-3 lg:space-y-2.5 lg:px-10 lg:py-8"
+            >
+              <div className="flex items-center gap-2">
+                <h6 className="font-medium capitalize lg:text-xl">
+                  {comment.name}
+                </h6>
+                <p className="text-black/60">{timeAgo(comment._createdAt)}</p>
+              </div>
+              <p>{comment.message}</p>
             </div>
-            <p className="">{comment.message}</p>
-          </div>
-        ))
+          ))}
+        </div>
       )}
     </div>
   );

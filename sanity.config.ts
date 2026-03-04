@@ -39,7 +39,7 @@ export default defineConfig({
         { id: "en", title: "English" },
         { id: "fr", title: "French" },
       ],
-      schemaTypes: ["article", "category", "author"],
+      schemaTypes: ["article", "category", "author", "comment"],
       languageField: "language",
       bulkPublish: true,
     }),

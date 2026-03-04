@@ -5,6 +5,7 @@ import {
   ARTICLES_BY_CATEGORY_QUERY,
   ARTICLE_BY_SLUG_QUERY,
   ARTICLES_BY_AUTHOR_QUERY,
+  RELATED_ARTICLES_QUERY,
 } from "../queries/articles";
 import {
   ALL_ARTICLES_QUERY_RESULT,
@@ -40,7 +41,12 @@ export async function getAllArticles(
       { locale, start, end },
       { next: { revalidate: 3600 } },
     ),
-    client.fetch(TOTAL_ARTICLES_COUNT, {}, { next: { revalidate: 3600 } }),
+    //Added locale to the variables object
+    client.fetch(
+      TOTAL_ARTICLES_COUNT,
+      { locale },
+      { next: { revalidate: 3600 } },
+    ),
   ]);
 
   return {
@@ -67,9 +73,10 @@ export async function getArticlesByCategory(
       { slug, locale, start, end },
       { next: { revalidate: 3600 } },
     ),
+    // Added locale to the variables object
     client.fetch(
       ARTICLES_IN_CATEGORY_COUNT,
-      { slug },
+      { slug, locale },
       { next: { revalidate: 3600 } },
     ),
   ]);
@@ -94,7 +101,7 @@ export async function getArticleBySlug(
   );
 }
 
-// 4. Get Articles by author
+// --- 4. Get Articles by author ---
 export async function getArticlesByAuthor(
   authorId: string,
   locale: string,
@@ -123,4 +130,18 @@ export async function getArticlesByAuthor(
     currentPage: page,
     totalPages: Math.ceil(total / limit),
   };
+}
+
+// --- 5. Get Related Articles ---
+export async function getRelatedArticles(
+  articleId: string,
+  categoryIds: string[],
+  authorId: string,
+  locale: string,
+) {
+  return await client.fetch(
+    RELATED_ARTICLES_QUERY,
+    { articleId, categoryIds, authorId, locale },
+    { next: { revalidate: 3600 } }, // Added a sensible cache here too!
+  );
 }

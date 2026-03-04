@@ -92,7 +92,8 @@
       "catchUp": "Catch up"
     },
     "comments": {
-      "title": "Leave a Comment",
+      "title": "comments",
+      "leaveComment": "Leave a comment",
       "noComments": "No comments yet",
       "thankYou": "Thank you for your comment!",
       "sending": "Sending...",

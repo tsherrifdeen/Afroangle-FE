@@ -2,10 +2,10 @@ import LocaleLink from "../common/LocaleLink";
 import ShareButton from "../common/ShareButton";
 
 interface ArticleHeaderProps {
-  category: {
+  categories: {
     name: string;
     slug: string;
-  };
+  }[];
   dict: {
     common: {
       buttons: {
@@ -16,12 +16,23 @@ interface ArticleHeaderProps {
   };
 }
 
-export default function ArticleHeader({ category, dict }: ArticleHeaderProps) {
+export default function ArticleHeader({
+  categories,
+  dict,
+}: ArticleHeaderProps) {
   return (
-    <div className="mb-4 flex justify-between px-4 items-center lg:mb-8 lg:pl-24 lg:pr-8">
-      <LocaleLink href={`/categories/${category.slug}`}>
-        <h3 className="text-2xl text-primary-red">{category.name}</h3>
-      </LocaleLink>
+    <div className="flex items-baseline justify-between px-4 mb-4 lg:mb-8 lg:pl-24 lg:pr-8">
+      <div className="inline-flex ">
+        {categories.length > 0 &&
+          categories.map((category, index) => (
+            <LocaleLink href={`/categories/${category.slug}`} key={index}>
+              <h3 className="text-2xl text-primary-red">
+                {category.name}
+                {index < categories.length - 1 && ", "}
+              </h3>
+            </LocaleLink>
+          ))}
+      </div>
       <ShareButton dict={dict} />
     </div>
   );

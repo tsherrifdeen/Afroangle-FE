@@ -16,7 +16,7 @@ export async function generateMetadata({
 
   const dict = await getDictionary(locale);
   const seo = dict.common.seo.home;
-  const author = await getAuthorBySlug(slug);
+  const author = await getAuthorBySlug(slug, locale);
 
   if (!author) {
     return {
@@ -36,7 +36,7 @@ export async function generateMetadata({
 
 export default async function AuthorPage({ params }: AuthorPageProps) {
   const { slug, locale } = await params;
-  const author = await getAuthorBySlug(slug);
+  const author = await getAuthorBySlug(slug, locale);
   if (!author) {
     notFound();
   }

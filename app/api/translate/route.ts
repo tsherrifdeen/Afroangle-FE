@@ -54,6 +54,11 @@ export async function POST(req: Request) {
       // 3. Process based on Document Type
       if (sourceDoc._type === "author") {
         translatedDoc.bio = await translateText(sourceDoc.bio);
+        const baseSlug = slugify(sourceDoc.name);
+        translatedDoc.slug = {
+          _type: "slug",
+          current: `${baseSlug}-${targetLang}`,
+        };
         if (sourceDoc.image?.alt)
           translatedDoc.image.alt = await translateText(sourceDoc.image.alt);
       } else if (sourceDoc._type === "category") {

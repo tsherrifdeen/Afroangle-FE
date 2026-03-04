@@ -58,7 +58,7 @@ const SocialLink = ({ platform, url }: SocialLinkProps) => {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Visit their ${label} page`}
-      className="text-primary-green text-2xl hover:opacity-80 transition-opacity inline-block"
+      className="p-2 bg-primary-green rounded-full text-white text-2xl hover:opacity-80 transition-opacity inline-block"
     >
       {Icon}
     </a>

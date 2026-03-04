@@ -10,7 +10,8 @@ const HomePage = async ({ locale }: { locale: string }) => {
   if (!hasLocale(locale)) notFound();
 
   const dict = await getDictionary(locale);
-  const categories = await getAllCategories();
+  const categories = await getAllCategories(locale);
+  console.log(categories);
   const articles = (await getAllArticles(locale)).data;
 
   return (

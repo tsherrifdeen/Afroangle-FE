@@ -1,7 +1,5 @@
 "use client";
 import { ALL_CATEGORIES_QUERY_RESULT } from "@/sanity/types";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import LocaleLink from "./LocaleLink";
 
 type Dict = {
@@ -31,7 +29,7 @@ const CategoryNav = ({ categories, dict }: CategoryNavProps) => {
             <LocaleLink
               key={category.name}
               href={`/categories/${category.slug}`}
-              className="whitespace-nowrap font-secondary [clip-path:polygon(0_0,80%_0,100%_30%,100%_100%,0_100%)] px-5 py-3 text-primary-red hover:text-white capitalize bg-neutral hover:bg-primary-red  transition-colors leading-none"
+              className="whitespace-nowrap font-secondary [clip-path:polygon(0_0,80%_0,100%_30%,100%_100%,0_100%)] px-5 py-3 text-primary-red hover:text-white capitalize bg-neutral hover:bg-primary-red transition-colors leading-none"
               activeClassName="!bg-primary-red !text-white"
             >
               {category.name}

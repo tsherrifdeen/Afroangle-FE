@@ -27,6 +27,7 @@ type Dict = {
   articles: {
     comments: {
       title: string;
+      leaveComment: string;
       thankYou: string;
       sending: string;
       validation: {
@@ -113,7 +114,7 @@ export default function CommentForm({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mx-auto max-w-3xl space-y-5 bg-neutral p-6 mt-10"
+      className="mx-auto max-w-3xl space-y-5 bg-neutral font-secondary p-6 mt-10"
     >
       {/* Honeypot */}
       <input
@@ -124,7 +125,7 @@ export default function CommentForm({
         className="hidden"
       />
 
-      <h3 className="text-2xl text-primary-red">{comments.title}</h3>
+      <h3 className="text-xl text-primary-red">{comments.leaveComment}</h3>
 
       {/* Name */}
       <div className="space-y-1">

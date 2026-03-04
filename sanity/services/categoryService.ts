@@ -15,23 +15,26 @@ export interface CategoryData {
   description?: string;
 }
 
-//get all categories
-export async function getAllCategories(): Promise<ALL_CATEGORIES_QUERY_RESULT> {
+// Get all categories for a specific locale
+export async function getAllCategories(
+  locale: string,
+): Promise<ALL_CATEGORIES_QUERY_RESULT> {
   // 1 hour cache (3600s) is usually good for categories since they rarely change
   return await client.fetch(
     ALL_CATEGORIES_QUERY,
-    {},
+    { locale },
     { next: { revalidate: 3600 } },
   );
 }
 
-// get category by slug
+// Get category by slug for a specific locale
 export async function getCategoryBySlug(
   slug: string,
+  locale: string,
 ): Promise<CATEGORY_BY_SLUG_QUERY_RESULT | null> {
   return await client.fetch(
     CATEGORY_BY_SLUG_QUERY,
-    { slug }, // Default to English locale if not provided
-    { next: { revalidate: 3600 } }, // Cache for 1 hour
+    { slug, locale }, // Passed both slug and locale
+    { next: { revalidate: 3600 } },
   );
 }
