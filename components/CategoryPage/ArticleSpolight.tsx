@@ -16,8 +16,8 @@ interface ArticleSpotlightProps {
 
 const ArticleSpotlight = ({ article, dict }: ArticleSpotlightProps) => {
   const extract =
-    article.excerpt.length > 400
-      ? article.excerpt.slice(0, 400) + "…"
+    article.excerpt.length > 370
+      ? article.excerpt.slice(0, 370) + "…"
       : article.excerpt;
   const linkPath = `/articles/${article.slug}`;
   return (
@@ -44,7 +44,7 @@ const ArticleSpotlight = ({ article, dict }: ArticleSpotlightProps) => {
       </div>
 
       {/* RIGHT SIDE: CONTENT */}
-      <div className="flex flex-col justify-center w-full gap-4 lg:gap-8 lg:w-2/5">
+      <div className="flex flex-col justify-center w-full gap-4 lg:gap-6 lg:w-2/5">
         {/* TITLE (Wrapped in Link) */}
         <LocaleLink
           href={linkPath}
@@ -62,7 +62,15 @@ const ArticleSpotlight = ({ article, dict }: ArticleSpotlightProps) => {
         </LocaleLink>
 
         <ArticleMeta author={article.author} date={article.publishedAt} large />
-        <p className="font-secondary lg:leading-tight lg:text-lg">{extract}</p>
+        <p className="text-xl leading-tight">
+          {extract}.{" "}
+          <LocaleLink
+            href={linkPath}
+            className="underline decoration-primary-green decoration-1"
+          >
+            read more.
+          </LocaleLink>
+        </p>
       </div>
     </div>
   );

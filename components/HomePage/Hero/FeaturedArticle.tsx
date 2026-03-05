@@ -12,23 +12,23 @@ const FeaturedArticle = ({ article }: FeaturedArticleProps) => {
     article.excerpt.length > 240
       ? article.excerpt.slice(0, 240) + "…"
       : article.excerpt;
-
+  const linkPath = `/articles/${article.slug}`;
   return (
     <article className="relative flex flex-col w-full h-full min-h-140 lg:bg-neutral">
       {/* Image on top */}
-      <div className="relative w-full min-h-110">
+      <LocaleLink href={linkPath} className="relative w-full h-full">
         <Image
           src={article.mainImage}
           alt={article.title}
           fill
           className="object-cover"
         />
-      </div>
+      </LocaleLink>
       {/* Content below image */}
       <div className="relative flex items-end flex-1 p-4 lg:p-8">
         <div className="space-y-3 lg:w-4/5">
           <LocaleLink
-            href={`/articles/${article.slug}`}
+            href={linkPath}
             className="active:underline hover:underline decoration-primary-red decoration-2"
           >
             <h2
@@ -45,8 +45,13 @@ const FeaturedArticle = ({ article }: FeaturedArticleProps) => {
           </LocaleLink>
 
           <ArticleMeta author={article.author} date={article.publishedAt} />
-          <LocaleLink href={`/articles/${article.slug}`}>
-            <p className="leading-tight font-secondary">{extract}</p>
+          <LocaleLink href={linkPath}>
+            <p className="text-lg leading-tight">
+              {extract}{" "}
+              <span className="underline decoration-primary-green decoration-1">
+                read more
+              </span>
+            </p>
           </LocaleLink>
         </div>
 

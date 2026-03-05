@@ -19,16 +19,16 @@ const ArticleMeta = ({
 }: ArticleMetaProps) => {
   return (
     <div
-      className={`flex items-center gap-2 ${large ? "lg:text-lg text-base" : "lg:text-base text-sm"}`}
+      className={`flex font-secondary items-center gap-2 min-w-0 ${large ? "lg:text-base text-sm" : "lg:text-sm text-xs"}`}
     >
       <LocaleLink
         href={`/authors/${author.slug}`}
-        className="hover:underline decoration-primary-red decoration-2"
+        className="min-w-0 hover:underline decoration-primary-red decoration-1"
       >
-        {author.name}
+        <span className="block truncate">{author.name}</span>
       </LocaleLink>
-      <span className="text-neutral-300">●</span>
-      <span>{formatDate(date, locale)}</span>
+      <span className="text-neutral-300 shrink-0">●</span>
+      <span className="shrink-0">{formatDate(date, locale)}</span>
     </div>
   );
 };

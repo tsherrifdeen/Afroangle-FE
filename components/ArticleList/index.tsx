@@ -36,7 +36,7 @@ const ArticleList = async ({
       </div>
       <div className="mb-5 space-y-11">
         {articles.length === 0 ? (
-          <p className="italic text-gray-500">
+          <p className="text-gray-500 font-secondary">
             {dict.articles.list.noArticles}
           </p>
         ) : (

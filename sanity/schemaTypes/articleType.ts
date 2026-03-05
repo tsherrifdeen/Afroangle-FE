@@ -23,6 +23,7 @@ export const articleType = defineType({
       type: "string",
       readOnly: true,
       hidden: true,
+      initialValue: "en",
     }),
     defineField({
       name: "title",

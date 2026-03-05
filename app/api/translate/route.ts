@@ -129,6 +129,44 @@ export async function POST(req: Request) {
 
       // 4. Save the newly translated document
       await sanity.createIfNotExists(translatedDoc);
+
+      // 5. UPDATE METADATA TO LINK THE DOCUMENTS
+      const metadataQuery = `*[_type == "translation.metadata" && references($docId)][0]`;
+      const metadataDoc = await sanity.fetch(metadataQuery, { docId });
+
+      if (metadataDoc) {
+        // If metadata exists, patch the target language reference into it
+        await sanity
+          .patch(metadataDoc._id)
+          .setIfMissing({ translations: [] })
+          .insert("after", "translations[-1]", [
+            {
+              _key: targetLang,
+              value: {
+                _type: "reference",
+                _ref: targetId,
+              },
+            },
+          ])
+          .commit();
+      } else {
+        // If no metadata exists, create a new one linking English to French
+        await sanity.create({
+          _type: "translation.metadata",
+          schemaTypes: [sourceDoc._type], // Safely uses article, author, or category
+          translations: [
+            {
+              _key: "en",
+              value: { _type: "reference", _ref: docId },
+            },
+            {
+              _key: targetLang,
+              value: { _type: "reference", _ref: targetId },
+            },
+          ],
+        });
+      }
+
       return targetId;
     };
 

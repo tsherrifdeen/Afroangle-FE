@@ -52,7 +52,7 @@ const CategoryPage = async ({
       )}
 
       <div className="border-t border-t-black/30">
-        <div className="max-w-screen-xl mx-auto lg:px-16 px-4 pt-12">
+        <div className="max-w-screen-xl px-4 pt-12 mx-auto lg:px-16">
           {articles.length > 0 ? (
             <ArticleList
               heading={`${dict.categories.readMore}${categoryData.name}`}
@@ -61,7 +61,7 @@ const CategoryPage = async ({
               dict={dict}
             />
           ) : (
-            <p className="text-center text-gray-600 py-10">
+            <p className="py-10 text-center text-gray-600 font-secondary">
               {dict.categories.noArticlesInCategory}
             </p>
           )}

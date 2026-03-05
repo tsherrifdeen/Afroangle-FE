@@ -12,6 +12,7 @@ export const categoryType = defineType({
       type: "string",
       readOnly: true,
       hidden: true,
+      initialValue: "en",
     }),
     defineField({
       name: "name",

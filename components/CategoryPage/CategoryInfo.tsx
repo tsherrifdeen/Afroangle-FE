@@ -15,14 +15,14 @@ interface CategoryInfoProps {
 const CategoryInfo = ({ name, description, dict }: CategoryInfoProps) => {
   return (
     <div>
-      <div className="w-full max-w-screen-xl mx-auto lg:pt-16 pt-6 lg:pr-10 lg:pl-16 px-4">
+      <div className="w-full max-w-screen-xl px-4 pt-6 mx-auto lg:pt-16 lg:pr-10 lg:pl-16">
         <div className="flex justify-end">
           <ShareButton dict={dict} />
         </div>
-        <h1 className="text-5xl lg:text-7xl uppercase text-primary-red tracking-wider mb-4">
+        <h1 className="mb-4 text-5xl tracking-wider uppercase lg:text-7xl text-primary-red">
           {name}
         </h1>
-        <p className="lg:text-xl font-secondary max-w-5xl mb-2">
+        <p className="max-w-5xl mb-2 lg:text-xl font-secondary">
           {description}
         </p>
       </div>

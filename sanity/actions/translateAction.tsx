@@ -46,19 +46,24 @@ export function TranslateAction(props: any) {
           });
         } else {
           // 3. Show API error toast
+          const errorData = await response.json();
           toast.push({
             status: "error",
             title: "Translation failed",
-            description: "Check the console for details.",
+            // Display the actual error message from the server
+            description:
+              errorData.error ||
+              `Server responded with status ${response.status}`,
           });
         }
-      } catch (err) {
+      } catch (err: any) {
         console.error(err);
-        // 4. Show catch block error toast
+
         toast.push({
           status: "error",
           title: "Translation error",
-          description: "An unexpected error occurred during translation.",
+          // Display the actual caught error message
+          description: err.message || "An unexpected error occurred.",
         });
       } finally {
         setIsTranslating(false);

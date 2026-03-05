@@ -8,8 +8,8 @@ interface ArticleItemProps {
 
 const ArticleItem = ({ article }: ArticleItemProps) => {
   const extract =
-    article.excerpt.length > 290
-      ? article.excerpt.slice(0, 290) + "…"
+    article.excerpt.length > 240
+      ? article.excerpt.slice(0, 240) + "…"
       : article.excerpt;
   return (
     <div className="flex flex-col gap-5 lg:flex-row lg:gap-10">
@@ -40,8 +40,18 @@ const ArticleItem = ({ article }: ArticleItemProps) => {
             {article.title}
           </h2>
         </LocaleLink>
+
         <ArticleMeta author={article.author} date={article.publishedAt} />
-        <p className="leading-tight font-secondary">{extract}</p>
+
+        <p className="text-lg leading-tight">
+          {extract}.{" "}
+          <LocaleLink
+            href={`/articles/${article.slug}`}
+            className="underline decoration-primary-green decoration-1"
+          >
+            read more.
+          </LocaleLink>
+        </p>
       </div>
     </div>
   );
