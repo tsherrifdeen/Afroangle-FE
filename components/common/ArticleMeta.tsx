@@ -8,9 +8,15 @@ interface ArticleMetaProps {
   };
   date: string;
   large?: boolean;
+  locale: string;
 }
 
-const ArticleMeta = ({ author, date, large = false }: ArticleMetaProps) => {
+const ArticleMeta = ({
+  author,
+  date,
+  large = false,
+  locale,
+}: ArticleMetaProps) => {
   return (
     <div
       className={`flex items-center gap-2 ${large ? "lg:text-lg text-base" : "lg:text-base text-sm"}`}
@@ -22,7 +28,7 @@ const ArticleMeta = ({ author, date, large = false }: ArticleMetaProps) => {
         {author.name}
       </LocaleLink>
       <span className="text-neutral-300">●</span>
-      <span>{formatDate(date)}</span>
+      <span>{formatDate(date, locale)}</span>
     </div>
   );
 };

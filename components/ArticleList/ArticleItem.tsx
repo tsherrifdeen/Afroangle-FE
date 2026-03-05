@@ -12,22 +12,22 @@ const ArticleItem = ({ article }: ArticleItemProps) => {
       ? article.excerpt.slice(0, 290) + "…"
       : article.excerpt;
   return (
-    <div className="flex gap-5 flex-col lg:flex-row lg:gap-10">
-      <div className="lg:w-1/2 w-full">
+    <div className="flex flex-col gap-5 lg:flex-row lg:gap-10">
+      <div className="w-full lg:w-1/2">
         <LocaleLink href={`/articles/${article.slug}`}>
           <div
-            className="w-full p-8 relative h-80 bg-cover bg-center bg-no-repeat"
+            className="relative w-full p-8 bg-center bg-no-repeat bg-cover h-80"
             style={{ backgroundImage: `url(${article.mainImage})` }}
           >
-            <div className="bg-neutral slant-right-top py-3 pl-6 pr-10 left-0">
-              <h6 className="font-secondary text-lg text-primary-green">
+            <div className="left-0 py-3 pl-6 pr-10 bg-neutral slant-right-top">
+              <h6 className="text-lg font-secondary text-primary-green">
                 {article.category.name}
               </h6>
             </div>
           </div>
         </LocaleLink>
       </div>
-      <div className="flex flex-col justify-center lg:gap-4 gap-3 w-full lg:w-2/5">
+      <div className="flex flex-col justify-center w-full gap-3 lg:gap-4 lg:w-2/5">
         <LocaleLink
           href={`/articles/${article.slug}`}
           className="hover:underline decoration-primary-red decoration-2"
@@ -41,7 +41,7 @@ const ArticleItem = ({ article }: ArticleItemProps) => {
           </h2>
         </LocaleLink>
         <ArticleMeta author={article.author} date={article.publishedAt} />
-        <p className="font-secondary leading-tight">{extract}</p>
+        <p className="leading-tight font-secondary">{extract}</p>
       </div>
     </div>
   );

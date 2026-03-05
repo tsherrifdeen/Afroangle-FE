@@ -21,21 +21,21 @@ const ArticleSpotlight = ({ article, dict }: ArticleSpotlightProps) => {
       : article.excerpt;
   const linkPath = `/articles/${article.slug}`;
   return (
-    <div className="flex flex-col lg:flex-row lg:gap-9 gap-6 lg:mt-8 mt-4 lg:mb-20 mb-12 w-full max-w-screen-xl mx-auto px-4 lg:px-16">
+    <div className="flex flex-col w-full max-w-screen-xl gap-6 px-4 mx-auto mt-4 mb-12 lg:flex-row lg:gap-9 lg:mt-8 lg:mb-20 lg:px-16">
       {/* LEFT SIDE: IMAGE (Wrapped in Link) */}
       <div className="lg:w-1/2">
         <LocaleLink href={linkPath} className="block w-full">
           <div
-            className="w-full lg:p-8 p-4 relative h-120 lg:h-110 bg-cover bg-center bg-no-repeat cursor-pointer hover:opacity-95 transition-opacity"
+            className="relative w-full p-4 transition-opacity bg-center bg-no-repeat bg-cover cursor-pointer lg:p-8 h-120 lg:h-110 hover:opacity-95"
             style={{ backgroundImage: `url(${article.mainImage})` }}
           >
-            <div className="top-banner-slant lg:py-5 py-3 pr-8 pl-10 bg-neutral lg:pr-12 lg:pl-18 ">
-              <h4 className="text-primary-red font-secondary lg:text-3xl text-2xl capitalize">
+            <div className="py-3 pl-10 pr-8 top-banner-slant lg:py-5 bg-neutral lg:pr-12 lg:pl-18 ">
+              <h4 className="text-2xl capitalize text-primary-red font-secondary lg:text-3xl">
                 {dict.list.topArticle}
               </h4>
             </div>
-            <div className="slant-left bottom-0 lg:py-5 py-3 bg-neutral pr-8 lg:pr-12 pl-18 lg:pl-24 right-0">
-              <h4 className="text-primary-red font-secondary lg:text-3xl text-2xl capitalize">
+            <div className="bottom-0 right-0 py-3 pr-8 slant-left lg:py-5 bg-neutral lg:pr-12 pl-18 lg:pl-24">
+              <h4 className="text-2xl capitalize text-primary-red font-secondary lg:text-3xl">
                 {article.category.name}
               </h4>
             </div>
@@ -44,7 +44,7 @@ const ArticleSpotlight = ({ article, dict }: ArticleSpotlightProps) => {
       </div>
 
       {/* RIGHT SIDE: CONTENT */}
-      <div className="flex flex-col justify-center lg:gap-8 gap-4 lg:w-2/5 w-full">
+      <div className="flex flex-col justify-center w-full gap-4 lg:gap-8 lg:w-2/5">
         {/* TITLE (Wrapped in Link) */}
         <LocaleLink
           href={linkPath}

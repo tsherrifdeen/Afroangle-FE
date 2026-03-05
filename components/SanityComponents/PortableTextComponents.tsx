@@ -7,9 +7,9 @@ export const components: PortableTextComponents = {
   types: {
     image: ({ value }) => {
       return (
-        <figure className="my-4 lg:my-6 w-full flex flex-col items-center">
+        <figure className="flex flex-col items-center w-full my-4 lg:my-6">
           {/* Image Container */}
-          <div className="relative w-full h-80 lg:h-112 overflow-hidden">
+          <div className="relative w-full overflow-hidden h-80 lg:h-112">
             <Image
               src={urlFor(value).url()}
               alt={value.alt || "Article Image"}
@@ -21,7 +21,7 @@ export const components: PortableTextComponents = {
 
           {/* Caption */}
           {value.alt && (
-            <figcaption className="mt-1 w-full max-w-3xl px-4 font-secondary text-sm text-center text-gray-700 leading-relaxed capitalize">
+            <figcaption className="w-full max-w-3xl px-4 mt-1 text-sm leading-relaxed text-center text-gray-700 capitalize font-secondary">
               {value.alt}
             </figcaption>
           )}
@@ -35,7 +35,7 @@ export const components: PortableTextComponents = {
       if (!source) return null;
 
       return (
-        <div className="my-4 lg:my-6 w-full overflow-hidden items-center flex aspect-video shadow-md rounded-md">
+        <div className="flex items-center w-full my-4 overflow-hidden rounded-md shadow-md lg:my-6 aspect-video">
           <ReactPlayer
             src={source}
             width="100%"
@@ -54,16 +54,16 @@ export const components: PortableTextComponents = {
   // 1. Customizing Block types (Headers, Paragraphs)
   block: {
     h1: ({ children }) => (
-      <h1 className="text-4xl font-bold mt-10 mb-4">{children}</h1>
+      <h1 className="mt-10 mb-4 text-4xl font-bold">{children}</h1>
     ),
     h2: ({ children }) => (
-      <h2 className="text-3xl font-semibold mt-8 mb-4">{children}</h2>
+      <h2 className="mt-8 mb-4 text-3xl font-semibold">{children}</h2>
     ),
     h3: ({ children }) => (
-      <h3 className="text-2xl font-semibold mt-6 mb-3">{children}</h3>
+      <h3 className="mt-6 mb-3 text-2xl font-semibold">{children}</h3>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="border-l-4 border-gray-500 pl-4 py-1 italic my-5">
+      <blockquote className="py-1 pl-4 my-5 italic border-l-4 border-gray-500">
         {children}
       </blockquote>
     ),
@@ -72,10 +72,10 @@ export const components: PortableTextComponents = {
   // 2. Customizing List types
   list: {
     bullet: ({ children }) => (
-      <ul className="list-disc ml-10 space-y-2 my-4">{children}</ul>
+      <ul className="my-4 ml-10 space-y-2 list-disc">{children}</ul>
     ),
     number: ({ children }) => (
-      <ol className="list-decimal ml-10 space-y-2 my-4">{children}</ol>
+      <ol className="my-4 ml-10 space-y-2 list-decimal">{children}</ol>
     ),
   },
   marks: {

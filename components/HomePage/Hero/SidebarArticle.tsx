@@ -11,10 +11,10 @@ const SidebarArticle = ({ article }: SidebarProps) => {
       {/* Image Container */}
       <LocaleLink href={`/articles/${article.slug}`}>
         <div
-          className="w-full h-40 relative mb-2 bg-cover bg-center bg-no-repeat"
+          className="relative w-full h-40 mb-2 bg-center bg-no-repeat bg-cover"
           style={{ backgroundImage: `url(${article.mainImage})` }}
         >
-          <div className="slant-right bg-white py-2 pl-5 pr-10 left-0">
+          <div className="left-0 py-2 pl-5 pr-10 bg-white slant-right">
             <h5 className="text-primary-red font-secondary">
               {article.category.name}
             </h5>

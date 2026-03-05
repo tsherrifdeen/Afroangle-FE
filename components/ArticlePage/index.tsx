@@ -10,7 +10,7 @@ import AudioPlayer from "./AudioPlayer";
 import CommentForm from "./AddComment";
 import { getDictionary, hasLocale } from "@/app/[locale]/dictionaries";
 import AuthorBio from "./AuthorBio";
-import ReadMore from "./Readmore";
+import ReadMore from "./ReadMore";
 
 interface ArticlePageContentProps {
   locale: string;
@@ -42,6 +42,7 @@ export default async function ArticlePageContent({
               large
               author={article.author}
               date={article.publishedAt}
+              locale={locale}
             />
           </div>
 
@@ -66,7 +67,7 @@ export default async function ArticlePageContent({
 
           {/* 4. Safely check for content before rendering PortableText */}
           {article.content && (
-            <div className="max-w-3xl mx-auto prose prose-xl prose-blue">
+            <div className="max-w-3xl mx-auto prose prose-xl [&>p:first-of-type]:first-letter:float-left [&>p:first-of-type]:first-letter:text-9xl [&>p:first-of-type]:first-letter:font-semibold [&>p:first-of-type]:first-letter:pr-2 [&>p:first-of-type]:first-letter:-mt-5 [&>p:first-of-type]:first-letter:leading-none">
               <PortableText value={article.content} components={components} />
             </div>
           )}
@@ -80,9 +81,14 @@ export default async function ArticlePageContent({
             <CommentForm locale={locale} postId={article._id} dict={dict} />
           </div>
 
-          {/* <div>
-            <ReadMore articleId={article._id} locale={locale} />
-          </div> */}
+          <div>
+            <ReadMore
+              articleId={article._id}
+              categories={article.categories}
+              locale={locale}
+              dict={dict}
+            />
+          </div>
         </article>
       </section>
     </main>

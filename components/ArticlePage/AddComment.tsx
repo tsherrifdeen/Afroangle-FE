@@ -114,7 +114,7 @@ export default function CommentForm({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mx-auto max-w-3xl space-y-5 bg-neutral font-secondary p-6 mt-10"
+      className="max-w-3xl p-6 mx-auto mt-10 space-y-4 bg-neutral font-secondary"
     >
       {/* Honeypot */}
       <input
@@ -132,9 +132,7 @@ export default function CommentForm({
         <input
           {...register("name", { required: errors.required })}
           placeholder={forms.name}
-          className="w-full resize-none rounded bg-white px-3 py-2
-                 focus:outline-none focus:ring-1
-                 focus:ring-primary-green"
+          className="w-full px-3 py-2 text-sm bg-white rounded resize-none focus:outline-none focus:ring-1 focus:ring-primary-green"
         />
         {formErrors.name && (
           <p className="text-sm text-primary-red">{formErrors.name.message}</p>
@@ -152,9 +150,7 @@ export default function CommentForm({
             },
           })}
           placeholder={forms.email}
-          className="w-full resize-none rounded bg-white px-3 py-2
-                 focus:outline-none focus:ring-1
-                 focus:ring-primary-green"
+          className="w-full px-3 py-2 text-sm bg-white rounded resize-none focus:outline-none focus:ring-1 focus:ring-primary-green"
         />
         {formErrors.email && (
           <p className="text-sm text-primary-red">{formErrors.email.message}</p>
@@ -177,9 +173,7 @@ export default function CommentForm({
           })}
           placeholder={forms.message}
           rows={3}
-          className="w-full resize-none rounded bg-white px-3 py-2
-                 focus:outline-none focus:ring-1
-                 focus:ring-primary-green"
+          className="w-full px-3 py-2 text-sm bg-white rounded resize-none focus:outline-none focus:ring-1 focus:ring-primary-green"
         />
         {formErrors.message && (
           <p className="text-sm text-primary-red">
@@ -191,11 +185,7 @@ export default function CommentForm({
       {/* Submit */}
       <button
         disabled={isSubmitting}
-        className="w-full bg-primary-green px-4 py-2 font-secondary
-                text-white transition
-               hover:opacity-90
-               disabled:cursor-not-allowed
-               disabled:opacity-60"
+        className="w-full px-4 py-2 text-white transition bg-primary-green font-secondary hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isSubmitting ? comments.sending : buttons.submit}
       </button>

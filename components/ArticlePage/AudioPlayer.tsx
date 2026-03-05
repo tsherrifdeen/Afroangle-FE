@@ -20,16 +20,18 @@ export default function AudioPlayer({ src, dict }: AudioPlayerProps) {
 
   if (!src)
     return (
-      <div className="py-4 w-full mx-auto">
-        <span className="text-black/70 text-sm text-center">
+      <div className="w-full py-4 mx-auto">
+        <span className="text-sm text-center text-black/70">
           {audio.noAudio}
         </span>
       </div>
     );
 
   return (
-    <div className="max-w-3xl mx-auto lg:px-8 py-6">
-      <h3 className="text-sm text-center uppercase mb-2">{audio.listen}</h3>
+    <div className="max-w-3xl py-6 mx-auto lg:px-8">
+      <h3 className="mb-2 text-center uppercase font-secondary">
+        {audio.listen}
+      </h3>
       <audio
         controls
         preload="auto"

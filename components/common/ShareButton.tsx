@@ -27,7 +27,7 @@ export default function ShareButton({ dict }: ShareButtonProps) {
           url: window.location.href,
         });
       } catch (err) {
-        console.error("Error sharing:", err);
+        alert("Error sharing:", err);
       }
     } else {
       await navigator.clipboard.writeText(window.location.href);

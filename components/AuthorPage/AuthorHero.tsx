@@ -23,16 +23,16 @@ interface AuthorHeroProps {
 
 const AuthorHero = ({ author }: AuthorHeroProps) => {
   return (
-    <section className="w-full max-w-screen-xl mx-auto px-4 lg:px-24 space-y-6 border-b border-b-gray-400 mb-8 pb-2">
+    <section className="w-full max-w-screen-xl px-4 pb-2 mx-auto mb-8 space-y-6 border-b lg:px-24 border-b-gray-400">
       <header className="space-y-3">
-        <h1 className="text-7xl uppercase font-bold">{author.name}</h1>
+        <h1 className="font-bold uppercase text-7xl">{author.name}</h1>
 
         {author.bio && (
-          <p className="font-secondary max-w-5xl text-gray-700">{author.bio}</p>
+          <p className="max-w-5xl text-gray-700 font-secondary">{author.bio}</p>
         )}
       </header>
 
-      <div className="flex gap-4 items-center">
+      <div className="flex items-center gap-4">
         {author.socials?.map((social, index) => (
           <SocialLink
             key={`${social.platform}-${index}`}
@@ -50,12 +50,12 @@ const AuthorHero = ({ author }: AuthorHeroProps) => {
             width={800}
             height={600}
             sizes="(max-width: 1024px) 100vw, 800px"
-            className="h-auto w-full max-w-xl object-contain"
+            className="object-contain w-full h-auto max-w-xl"
             loading="lazy"
           />
 
           {author.alt && (
-            <figcaption className="max-w-2xl w-full text-sm text-gray-600 italic">
+            <figcaption className="w-full max-w-2xl italic text-gray-600 capitalize font-secondary">
               {author.alt}
             </figcaption>
           )}

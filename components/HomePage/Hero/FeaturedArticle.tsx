@@ -14,7 +14,7 @@ const FeaturedArticle = ({ article }: FeaturedArticleProps) => {
       : article.excerpt;
 
   return (
-    <article className="w-full h-full min-h-140 flex flex-col relative lg:bg-neutral">
+    <article className="relative flex flex-col w-full h-full min-h-140 lg:bg-neutral">
       {/* Image on top */}
       <div className="relative w-full min-h-110">
         <Image
@@ -25,8 +25,8 @@ const FeaturedArticle = ({ article }: FeaturedArticleProps) => {
         />
       </div>
       {/* Content below image */}
-      <div className="flex items-end flex-1 lg:p-8 p-4 relative">
-        <div className="lg:w-4/5 space-y-3">
+      <div className="relative flex items-end flex-1 p-4 lg:p-8">
+        <div className="space-y-3 lg:w-4/5">
           <LocaleLink
             href={`/articles/${article.slug}`}
             className="active:underline hover:underline decoration-primary-red decoration-2"
@@ -46,15 +46,15 @@ const FeaturedArticle = ({ article }: FeaturedArticleProps) => {
 
           <ArticleMeta author={article.author} date={article.publishedAt} />
           <LocaleLink href={`/articles/${article.slug}`}>
-            <p className="font-secondary leading-tight">{extract}</p>
+            <p className="leading-tight font-secondary">{extract}</p>
           </LocaleLink>
         </div>
 
         {/* Floating Category Badge */}
       </div>
-      <div className="slant-left lg:bottom-0 top-0 lg:top-auto lg:py-5 bg-white lg:pr-12 lg:pl-24 py-4 pr-5 pl-10 right-0 absolute">
+      <div className="absolute top-0 right-0 py-4 pl-10 pr-5 bg-white slant-left lg:bottom-0 lg:top-auto lg:py-5 lg:pr-12 lg:pl-24">
         <LocaleLink href={`/categories/${article.category.slug}`}>
-          <h4 className="text-primary-red font-secondary text-xl lg:text-4xl">
+          <h4 className="text-xl text-primary-red font-secondary lg:text-4xl">
             {article.category.name}
           </h4>
         </LocaleLink>

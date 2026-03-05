@@ -11,7 +11,6 @@ export async function generateMetadata({
   params,
 }: AuthorPageProps): Promise<Metadata> {
   const { slug, locale } = await params;
-
   if (!hasLocale(locale)) notFound();
 
   const dict = await getDictionary(locale);

@@ -15,13 +15,13 @@ export default function ArticleImage({ src, caption }: ArticleImageProps) {
           alt={caption}
           width={1024}
           height={400}
-          className="h-auto w-full object-contain"
+          className="object-contain w-full h-auto"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
           priority
         />
       </div>
       {caption && (
-        <figcaption className="mt-4 capitalize text-black text-sm">
+        <figcaption className="mt-4 italic text-gray-600 capitalize font-secondary">
           {caption}
         </figcaption>
       )}

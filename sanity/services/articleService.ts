@@ -135,13 +135,12 @@ export async function getArticlesByAuthor(
 // --- 5. Get Related Articles ---
 export async function getRelatedArticles(
   articleId: string,
-  categoryIds: string[],
-  authorId: string,
+  categorySlugs: string[], // Pass an array of category slugs here instead
   locale: string,
 ) {
   return await client.fetch(
     RELATED_ARTICLES_QUERY,
-    { articleId, categoryIds, authorId, locale },
-    { next: { revalidate: 3600 } }, // Added a sensible cache here too!
+    { articleId, categorySlugs, locale },
+    { next: { revalidate: 3600 } },
   );
 }

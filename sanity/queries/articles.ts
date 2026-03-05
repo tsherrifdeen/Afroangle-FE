@@ -120,16 +120,9 @@ export const RELATED_ARTICLES_QUERY = groq`
     _id != $articleId && 
     language == $locale && 
     !(_id in path('drafts.**')) &&
-    // Match IF there is a shared category OR a shared author
-    (
-      count(categories[@._ref in $categoryIds]) > 0 || 
-      author._ref == $authorId
-    )
-  ] 
-  // 1st sort: Higher number of overlapping categories rises to the top
-  // 2nd sort: Fallback to newest published
-  | order(count(categories[@._ref in $categoryIds]) desc, publishedAt desc) 
-  [0...3] {
+    // Safely checks if the current article's category slugs exist in the passed array
+    count(categories[@->slug.current in $categorySlugs]) > 0
+  ] | order(publishedAt desc) [0...3] {
     _id,
     title,
     publishedAt,

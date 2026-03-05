@@ -27,14 +27,16 @@ const ArticleList = async ({
   return (
     <section className={`w-full max-w-5xl px-4 ${center ? "mx-auto" : ""}`}>
       <div className={`${center ? "text-center" : ""} space-y-3 mb-8 lg:mb-14`}>
-        <h2 className="text-2xl lg:text-3xl tracking-widest mb-0 lg:mb-2 uppercase">
+        <h2 className="mb-0 text-2xl tracking-widest uppercase lg:text-3xl lg:mb-2">
           {heading}
         </h2>
-        <p className="text-lg lg:text-xl">{subheading}</p>
+        <p className="text-lg font-light lg:text-xl font-secondary">
+          {subheading}
+        </p>
       </div>
-      <div className="space-y-11 mb-5">
+      <div className="mb-5 space-y-11">
         {articles.length === 0 ? (
-          <p className="text-gray-500 italic">
+          <p className="italic text-gray-500">
             {dict.articles.list.noArticles}
           </p>
         ) : (

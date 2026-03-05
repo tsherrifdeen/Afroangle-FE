@@ -11,7 +11,6 @@ const HomePage = async ({ locale }: { locale: string }) => {
 
   const dict = await getDictionary(locale);
   const categories = await getAllCategories(locale);
-  console.log(categories);
   const articles = (await getAllArticles(locale)).data;
 
   return (
