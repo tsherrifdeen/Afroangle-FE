@@ -22,13 +22,35 @@ export async function generateMetadata({
       title: dict.authors.notExist,
     };
   }
+
+  const baseUrl = process.env.NEXT_PUBLIC_URL || "https://afroangle.com";
+  const currentUrl = `${baseUrl}/${locale}/authors/${slug}`;
+
   return {
     title: author.name,
     description: `${author.bio} - ${seo.defaultTitle}`,
     openGraph: {
       title: author.name || seo.ogTitle,
       description: `${author.name} - ${seo.defaultTitle}`,
-      images: author.mainImage?.url ? [author.mainImage.url] : [],
+      url: currentUrl,
+      images: author.mainImage?.url
+        ? [
+            {
+              url: author.mainImage.url,
+              width: 800, // Profile pictures are usually square, 800x800 is a good standard
+              height: 800,
+              alt: author.name,
+            },
+          ]
+        : [],
+    },
+    // The Bilingual SEO Magic
+    alternates: {
+      canonical: currentUrl,
+      languages: {
+        en: `${baseUrl}/en/authors/${slug}`,
+        fr: `${baseUrl}/fr/authors/${slug}`,
+      },
     },
   };
 }

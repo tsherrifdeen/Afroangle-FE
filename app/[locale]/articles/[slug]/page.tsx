@@ -24,13 +24,36 @@ export async function generateMetadata({
       title: seo.defaultTitle,
     };
   }
+  const baseUrl = process.env.NEXT_PUBLIC_URL || "https://afroangle.com";
+  const currentUrl = `${baseUrl}/${locale}/articles/${slug}`;
+
   return {
     title: article.title,
-    description: `${article.title} - ${seo.defaultTitle}`,
+    description: article.excerpt || `${article.title} - ${seo.defaultTitle}`,
+
+    // 1. Upgraded OpenGraph Object
     openGraph: {
       title: article.title || seo.ogTitle,
-      description: `${article.title} - ${seo.defaultTitle}`,
-      images: article.mainImage?.url ? [article.mainImage.url] : [],
+      description: article.excerpt || `${article.title} - ${seo.defaultTitle}`,
+      url: currentUrl,
+      images: article.mainImage?.url
+        ? [
+            {
+              url: article.mainImage.url,
+              width: 1200,
+              height: 630,
+              alt: article.mainImage.caption || article.title, // Add an alt tag for accessibility
+            },
+          ]
+        : [],
+    },
+
+    alternates: {
+      canonical: currentUrl,
+      languages: {
+        en: `${baseUrl}/en/articles/${slug}`,
+        fr: `${baseUrl}/fr/articles/${slug}`,
+      },
     },
   };
 }

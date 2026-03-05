@@ -18,13 +18,26 @@ export async function generateMetadata({
 
   const dict = await getDictionary(locale);
   const seo = dict.common.seo.about;
+  const baseUrl = process.env.NEXT_PUBLIC_URL || "https://afroangle.com";
+  const currentUrl = `${baseUrl}/${locale}/about`;
 
   return {
     title: seo.title,
     description: seo.description,
+    openGraph: {
+      title: seo.title,
+      description: seo.description,
+      url: currentUrl,
+    },
+    alternates: {
+      canonical: currentUrl,
+      languages: {
+        en: `${baseUrl}/en/about`,
+        fr: `${baseUrl}/fr/about`,
+      },
+    },
   };
 }
-
 const About = async ({ params }: AboutPageProps) => {
   const { locale } = await params;
 

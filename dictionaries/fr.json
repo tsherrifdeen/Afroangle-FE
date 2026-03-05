@@ -119,15 +119,14 @@
   },
   "about": {
     "pageTitle": "À propos de nous",
-    "heading": "L'Afrique en point de mire — sans filtre, évolutive, plurielle.",
-    "body": "Afroangle est une plateforme éditoriale racontant les histoires qui façonnent l'Afrique contemporaine et sa diaspora mondiale...",
-    "submission": {
-      "title": "Soumettre une tribune",
-      "intro": "Afroangle recherche des reportages originaux et des analyses pointues...",
-      "strongStoryTitle": "Qu'est-ce qui fait une bonne histoire pour Afroangle ?",
-      "strongStoryBody": "Des perspectives nouvelles, des recherches rigoureuses et des récits qui révèlent la complexité de l'Afrique...",
-      "readyToPitch": "Prêt à soumettre ?"
-    }
+    "heading": "L'Afrique en point de mire : sans filtre, en évolution et plurielle.",
+    "aboutTitle": "Qui Sommes-Nous",
+    "aboutBody": "Afroangle est une plateforme éditoriale qui raconte les histoires qui façonnent l'Afrique contemporaine et sa diaspora mondiale. Nous couvrons la culture, l'histoire, la politique, l'innovation, les arts et le divertissement pour explorer comment les voix africaines redéfinissent la créativité, remettent en question les récits établis et construisent l'avenir selon leurs propres termes. En reliant l'histoire africaine aux conversations urgentes d'aujourd'hui, nous révélons la complexité du continent au-delà des gros titres et des récits uniques. Voici l'Afrique en point de mire : sans filtre, en évolution et plurielle.",
+    "convictionTitle": "Notre Conviction",
+    "convictionBody": "Nous avons fondé Afroangle avec une conviction simple mais urgente : les 1,4 milliard d'habitants de l'Afrique méritent bien plus qu'une histoire unique et déformée sur ce qu'ils sont et à quoi ressemble leur monde aujourd'hui.",
+    "missionTitle": "Notre Mission",
+    "missionBody": "En tant que plateforme éditoriale indépendante dédiée à centraliser les perspectives africaines et de la diaspora sur des questions allant de l'expérience vécue au quotidien à une analyse sociopolitique, historique et économique approfondie, nous couvrons toute l'étendue de la vie africaine avec le sérieux qu'elle mérite.",
+    "closing": "Lorsque nous publions, c'est parce que nous avons quelque chose qui vaut la peine d'être lu."
   },
   "newsletter": {
     "modal": {

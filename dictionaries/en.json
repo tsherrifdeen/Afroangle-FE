@@ -120,14 +120,13 @@
   "about": {
     "pageTitle": "About Us",
     "heading": "Africa in focus—unfiltered, evolving, plural.",
-    "body": "Afroangle is an editorial platform telling the stories that shape contemporary Africa and its global diaspora...",
-    "submission": {
-      "title": "Submit an Opinion Piece",
-      "intro": "Afroangle is looking for original reporting and sharp analysis...",
-      "strongStoryTitle": "What makes a strong Afroangle story?",
-      "strongStoryBody": "Fresh perspectives, rigorous research, and narratives that reveal Africa's complexity...",
-      "readyToPitch": "Ready to submit?"
-    }
+    "aboutTitle": "Who we are",
+    "aboutBody": "Afroangle is an editorial platform telling the stories that shape contemporary Africa and its global diaspora. We cover culture, history, politics, innovation, the arts and entertainment to explore how African voices are redefining creativity, challenging narratives, and building the future on their own terms. By connecting African history with today's urgent conversations, we reveal the continent's complexity beyond headlines and single narratives. This is Africa in focus: unfiltered, evolving, and plural.",
+    "convictionTitle": "Our Conviction",
+    "convictionBody": "We started Afroangle with a simple but urgent conviction: that Africa's 1.4 billion people deserve more than a single, distorted story about who they are and what their world looks like today.",
+    "missionTitle": "Our Mission",
+    "missionBody": "As an independent editorial platform dedicated to centering African and diaspora perspectives on issues ranging from everyday lived experience to deep sociopolitical, historical, and economic analysis, we cover the full breadth of African life with the seriousness it deserves.",
+    "closing": "When we publish, it's because we have something worth knowing."
   },
   "newsletter": {
     "modal": {

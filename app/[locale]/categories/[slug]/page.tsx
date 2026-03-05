@@ -28,12 +28,25 @@ export async function generateMetadata({
     };
   }
 
+  const baseUrl = process.env.NEXT_PUBLIC_URL || "https://afroangle.com";
+  const currentUrl = `${baseUrl}/${locale}/categories/${slug}`;
+
   return {
     title: category.name,
     description: category.description,
     openGraph: {
       title: category.name || seo.ogTitle,
       description: `${category.description} - ${seo.defaultTitle}`,
+      url: currentUrl,
+      // Leaving images empty here will make it fall back to your layout.tsx default!
+    },
+    // The Bilingual SEO Magic
+    alternates: {
+      canonical: currentUrl,
+      languages: {
+        en: `${baseUrl}/en/categories/${slug}`,
+        fr: `${baseUrl}/fr/categories/${slug}`,
+      },
     },
   };
 }
