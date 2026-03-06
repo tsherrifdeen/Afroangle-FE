@@ -25,6 +25,10 @@
       "about": {
         "title": "About us",
         "description": "Learn about Afroangle, our mission, and the team behind the African lens for global issues."
+      },
+      "submitPiece": {
+        "title": "Submit Your Work",
+        "description": "Pitch your original reporting and sharp analysis on African culture, politics, and innovation. Read our pitching guide and submit your story to Afroangle."
       }
     },
     "forms": {
@@ -138,6 +142,17 @@
         "description": "Check your email for limited free articles, news alerts, select newsletters, podcasts and some daily games."
       }
     }
+  },
+  "submitPiece": {
+    "pageTitle": "Submit Your Work",
+    "heading": "Pitch your original reporting and sharp analysis.",
+    "introTitle": "What we are looking for",
+    "introBody": "Afroangle is looking for original reporting and sharp analysis on African culture, politics, economics, technology, arts, gender, sexuality, and security with a strong focus on underreported stories from Nigeria and across the continent.",
+    "downloadGuide": "Download style guide (PDF)",
+    "strongStoryTitle": "What makes a strong Afroangle story?",
+    "strongStoryBody": "Fresh perspectives, rigorous research, and narratives that reveal Africa's complexity beyond stereotypes. Whether you're analyzing historical events, covering breaking news, or exploring emerging voices in arts and entertainment, we want the stories mainstream media overlooks and the commentary they won't publish on the stories they do cover.",
+    "readyToPitch": "Ready to pitch? Fill out the form below.",
+    "openForm": "Open Submission Form"
   },
   "opinionSubmission": {
     "modal": {

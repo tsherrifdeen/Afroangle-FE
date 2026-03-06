@@ -185,7 +185,7 @@ export default function CommentForm({
       {/* Submit */}
       <button
         disabled={isSubmitting}
-        className="w-full px-4 py-2 text-white transition bg-primary-green font-secondary hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+        className="w-full px-4 py-2 text-white transition bg-primary-green tracking-wider text-lg font-primary hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isSubmitting ? comments.sending : buttons.submit}
       </button>

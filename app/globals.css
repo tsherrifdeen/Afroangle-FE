@@ -3,15 +3,15 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #000000;
 }
-
+/* 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #ffffff;
     --foreground: #171717;
   }
-}
+} */
 
 @theme inline {
   --color-background: var(--background);

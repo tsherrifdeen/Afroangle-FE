@@ -16,7 +16,10 @@ const FeaturedArticle = ({ article }: FeaturedArticleProps) => {
   return (
     <article className="relative flex flex-col w-full h-full min-h-140 lg:bg-neutral">
       {/* Image on top */}
-      <LocaleLink href={linkPath} className="relative w-full h-full">
+      <LocaleLink
+        href={linkPath}
+        className="relative block w-full lg:h-full h-96"
+      >
         <Image
           src={article.mainImage}
           alt={article.title}

@@ -26,7 +26,7 @@ const ArticleSpotlight = ({ article, dict }: ArticleSpotlightProps) => {
       <div className="lg:w-1/2">
         <LocaleLink href={linkPath} className="block w-full">
           <div
-            className="relative w-full p-4 transition-opacity bg-center bg-no-repeat bg-cover cursor-pointer lg:p-8 h-120 lg:h-110 hover:opacity-95"
+            className="relative w-full p-4 transition-opacity bg-center bg-no-repeat bg-cover cursor-pointer lg:p-8 h-96 lg:h-110 hover:opacity-95"
             style={{ backgroundImage: `url(${article.mainImage})` }}
           >
             <div className="py-3 pl-10 pr-8 top-banner-slant lg:py-5 bg-neutral lg:pr-12 lg:pl-18 ">

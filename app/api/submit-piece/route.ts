@@ -1,52 +1,9 @@
+import {
+  sendAuthorConfirmation,
+  sendEmailNotification,
+} from "@/lib/brevoHelper";
 import { sanityUploadClient } from "@/lib/SanityUploadClient";
 import { NextResponse } from "next/server";
-
-// Helper function to send email via Brevo
-async function sendEmailNotification(
-  authorName: string,
-  authorEmail: string,
-  fileName: string,
-) {
-  const BREVO_API_KEY = process.env.BREVO_API_KEY;
-
-  const emailData = {
-    sender: {
-      name: "Afroangle Notification",
-      email: "editorial@afroangle.com",
-    },
-    to: [
-      {
-        email: "editorial@afroangle.com",
-        name: "Israel Winlade",
-      },
-    ],
-    subject: `New Opinion Piece Submission: ${authorName}`,
-    htmlContent: `
-      <html>
-        <body style="font-family: sans-serif; line-height: 1.6; color: #333;">
-          <h2>New Submission Received</h2>
-          <p>A new opinion piece has been uploaded to Sanity.</p>
-          <hr />
-          <p><strong>Author:</strong> ${authorName}</p>
-          <p><strong>Email:</strong> ${authorEmail}</p>
-          <p><strong>File Name:</strong> ${fileName}</p>
-          <hr />
-          <p>You can view and download this submission in the <a href="https://afroangle.com/admin">Sanity Studio</a>.</p>
-        </body> 
-      </html>
-    `,
-  };
-
-  return fetch("https://api.brevo.com/v3/smtp/email", {
-    method: "POST",
-    headers: {
-      accept: "application/json",
-      "api-key": BREVO_API_KEY || "",
-      "content-type": "application/json",
-    },
-    body: JSON.stringify(emailData),
-  });
-}
 
 export async function POST(req: Request) {
   try {
@@ -82,11 +39,12 @@ export async function POST(req: Request) {
       },
     });
 
-    // 3. Trigger Brevo Email Notification
-    // We don't necessarily need to 'await' this if we want to return the response faster,
-    // but awaiting ensures we know if the email failed.
+    // 3. Trigger Brevo Email Notifications
     try {
-      await sendEmailNotification(name, email, file.name);
+      await Promise.all([
+        sendEmailNotification(name, email, file.name),
+        sendAuthorConfirmation(name, email),
+      ]);
     } catch (emailErr) {
       console.error("Brevo Email Error:", emailErr);
       // We don't stop the process if the email fails, as the document is already in Sanity

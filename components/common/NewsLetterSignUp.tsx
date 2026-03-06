@@ -113,7 +113,7 @@ export default function NewsletterModal({
             {/* Close Button */}
             <button
               onClick={handleClose}
-              className="absolute top-4 right-6 flex items-center gap-2 text-sm font-light tracking-widest text-black hover:opacity-70 transition-opacity"
+              className="absolute top-4 text-secondary right-6 flex items-center gap-2 text-sm font-light tracking-widest text-black hover:opacity-70 transition-opacity"
             >
               {common.buttons.close}
               <CloseIcon className="text-[#d32f2f]" fontSize={22} />

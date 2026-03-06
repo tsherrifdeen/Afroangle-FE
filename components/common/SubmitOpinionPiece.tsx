@@ -125,7 +125,7 @@ export default function OpinionSubmissionModal({
             {/* Close Button */}
             <button
               onClick={handleClose}
-              className="absolute top-4 right-6 flex items-center gap-2 text-sm font-light tracking-widest text-black hover:opacity-70 transition-opacity"
+              className="absolute top-4 right-6 flex font-secondary items-center gap-2 text-sm font-light tracking-widest text-black hover:opacity-70 transition-opacity"
             >
               {common.buttons.close}
               <CloseIcon className="text-[#d32f2f]" fontSize={22} />
@@ -154,7 +154,7 @@ export default function OpinionSubmissionModal({
                   onClick={handleClose}
                   className="w-40 bg-primary-green text-white py-3 px-6 flex items-center justify-center gap-3 hover:bg-[#0a3a24] transition-colors group"
                 >
-                  <span className="font-primary font-light text-lg tracking-wider">
+                  <span className="font-light tracking-wider">
                     {common.buttons.close}
                   </span>
                   <CloseIcon className="text-[#FF9696]" fontSize={24} />
@@ -184,7 +184,7 @@ export default function OpinionSubmissionModal({
 
                 <form
                   onSubmit={handleSubmit(onSubmit)}
-                  className="w-full space-y-4"
+                  className="w-full space-y-4 font-secondary"
                 >
                   {/* NAME INPUT */}
                   <div className="w-full text-left">

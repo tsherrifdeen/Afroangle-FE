@@ -25,6 +25,10 @@
       "about": {
         "title": "À propos de nous",
         "description": "Découvrez Afroangle, notre mission et l'équipe derrière le regard africain sur les enjeux mondiaux."
+      },
+      "submitPiece": {
+        "title": "Soumettez Votre Travail",
+        "description": "Proposez vos reportages originaux et analyses pointues sur la culture, la politique et l'innovation en Afrique. Lisez notre guide et soumettez votre article à Afroangle."
       }
     },
     "forms": {
@@ -138,6 +142,17 @@
         "description": "Consultez vos e-mails pour accéder aux articles gratuits, aux alertes info, aux newsletters, aux podcasts et aux jeux."
       }
     }
+  },
+  "submitPiece": {
+    "pageTitle": "Soumettez Votre Travail",
+    "heading": "Proposez vos reportages originaux et vos analyses pointues.",
+    "introTitle": "Ce Que Nous Recherchons",
+    "introBody": "Afroangle est à la recherche de reportages originaux et d'analyses pointues sur la culture, la politique, l'économie, la technologie, les arts, le genre, la sexualité et la sécurité en Afrique, avec un accent particulier sur les histoires sous-médiatisées du Nigeria et de tout le continent.",
+    "downloadGuide": "Télécharger le guide de style (PDF)",
+    "strongStoryTitle": "Qu'est-ce qui fait la force d'un article Afroangle ?",
+    "strongStoryBody": "Des perspectives nouvelles, des recherches rigoureuses et des récits qui révèlent la complexité de l'Afrique au-delà des stéréotypes. Que vous analysiez des événements historiques, couvriez l'actualité de dernière minute ou exploriez les voix émergentes dans les arts et le divertissement, nous voulons les histoires que les médias traditionnels négligent et les commentaires qu'ils ne publieront pas sur les sujets qu'ils couvrent.",
+    "readyToPitch": "Prêt à proposer un sujet ? Remplissez le formulaire ci-dessous.",
+    "openForm": "Ouvrir le formulaire de soumission"
   },
   "opinionSubmission": {
     "modal": {

@@ -15,7 +15,6 @@ export async function POST(req: Request) {
         { status: 400 },
       );
     }
-
     // Split name for Brevo attributes (FNAME/LNAME are standard defaults)
     const nameParts = fullName.trim().split(" ");
     const firstName = nameParts[0];

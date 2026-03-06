@@ -53,15 +53,9 @@ export const components: PortableTextComponents = {
 
   // 1. Customizing Block types (Headers, Paragraphs)
   block: {
-    h1: ({ children }) => (
-      <h1 className="mt-10 mb-4 text-4xl font-bold">{children}</h1>
-    ),
-    h2: ({ children }) => (
-      <h2 className="mt-8 mb-4 text-3xl font-semibold">{children}</h2>
-    ),
-    h3: ({ children }) => (
-      <h3 className="mt-6 mb-3 text-2xl font-semibold">{children}</h3>
-    ),
+    h1: ({ children }) => <h1 className="mt-10 mb-4 text-4xl">{children}</h1>,
+    h2: ({ children }) => <h2 className="mt-8 mb-4 text-3xl">{children}</h2>,
+    h3: ({ children }) => <h3 className="mt-6 mb-3 text-2xl">{children}</h3>,
     blockquote: ({ children }) => (
       <blockquote className="py-1 pl-4 my-5 italic border-l-4 border-gray-500">
         {children}
@@ -87,7 +81,7 @@ export const components: PortableTextComponents = {
         <a
           href={value.href}
           rel={rel}
-          className="text-blue-600 hover:underline"
+          className="text-blue-500 no-underline hover:underline"
         >
           {children}
         </a>

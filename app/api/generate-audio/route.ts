@@ -1,32 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ElevenLabsClient } from "@elevenlabs/elevenlabs-js";
 import { sanityUploadClient } from "@/lib/SanityUploadClient";
+import { blocksToText } from "@/lib/blocksToText";
 
 // Initialize ElevenLabs
 const elevenLabs = new ElevenLabsClient({
   apiKey: process.env.ELEVENLABS_API_KEY,
 });
-
-// Helper: Convert Portable Text Blocks to Plain String
-function blocksToText(blocks: any[] = []) {
-  return blocks
-    .map((block) => {
-      if (block._type !== "block" || !block.children) return "";
-
-      // --- Handle Lists ---
-      let prefix = "";
-      if (block.listItem === "bullet") {
-        prefix = "• "; // Adds a bullet point for TTS pause/emphasis
-      } else if (block.listItem === "number") {
-        prefix = "1. "; // Adds a generic number (simplest approach for flat maps)
-      }
-
-      const content = block.children.map((child: any) => child.text).join("");
-
-      return `${prefix}${content}`;
-    })
-    .join("\n\n");
-}
 
 export async function POST(req: NextRequest) {
   try {

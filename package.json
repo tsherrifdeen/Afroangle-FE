@@ -27,6 +27,7 @@
     "react-player": "^3.4.0",
     "react-social-media-embed": "^2.5.18",
     "sanity": "^5.13.0",
+    "sanity-plugin-media": "^4.1.1",
     "styled-components": "^6.1.19"
   },
   "devDependencies": {
