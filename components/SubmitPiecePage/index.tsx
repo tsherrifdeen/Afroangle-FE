@@ -34,7 +34,7 @@ const SubmitPieceContent = ({ dict }: SubmitPieceProps) => {
               {/* PDF Download Link */}
               <div className="pt-2">
                 <a
-                  href="/Official_Style_Guide_for_Afroangle_Contributors.pdf"
+                  href="/style_guide.pdf"
                   download
                   className="inline-flex items-center font-secondary font-medium text-primary-red underline hover:text-red-700"
                 >
