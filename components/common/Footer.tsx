@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import LanguageSwitcher from "./Languagewitcher";
 import { localePath } from "../../utils/navigation";
 import LocaleLink from "./LocaleLink";
+import FooterSearch from "./FooterSearch";
 
 interface FooterProps {
   locale: string;
@@ -57,15 +58,6 @@ export default async function Footer({ locale }: FooterProps) {
         },
       ],
     },
-    {
-      title: footer.sections.subscription,
-      links: [
-        {
-          label: footer.links.monthlyDigest,
-          href: localePath(locale, "/digest"),
-        },
-      ],
-    },
   ];
 
   return (
@@ -103,6 +95,11 @@ export default async function Footer({ locale }: FooterProps) {
               </ul>
             </div>
           ))}
+          <div className="lg:col-span-2">
+            <div className="flex gap-2">
+              <FooterSearch dict={common} locale={locale} />
+            </div>
+          </div>
         </div>
 
         {/* --- Divider --- */}

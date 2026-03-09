@@ -18,6 +18,9 @@ type Dict = {
       email: string;
       message: string;
     };
+    buttons: {
+      submit: string;
+    };
     errors: {
       required: string;
       invalidEmail: string;
@@ -34,11 +37,6 @@ type Dict = {
         commentTooShort: string;
         commentTooLong: string;
       };
-    };
-  };
-  common: {
-    buttons: {
-      submit: string;
     };
   };
 };

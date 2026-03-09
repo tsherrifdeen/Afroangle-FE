@@ -3,8 +3,8 @@ import LocaleLink from "./LocaleLink";
 
 interface ArticleMetaProps {
   author: {
-    name: string;
-    slug: string;
+    name: string | null;
+    slug: string | null;
   };
   date: string;
   large?: boolean;

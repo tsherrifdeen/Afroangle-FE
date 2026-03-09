@@ -36,9 +36,9 @@ const FeaturedArticle = ({ article }: FeaturedArticleProps) => {
           >
             <h2
               className={`font-extrabold tracking-wide uppercase ${
-                article?.title.length > 80
+                article.title?.length > 80
                   ? "lg:text-2xl text-xl"
-                  : article?.title.length > 50
+                  : article.title?.length > 50
                     ? "lg:text-3xl text-xl"
                     : "lg:text-4xl text-2xl"
               }`}
@@ -61,9 +61,9 @@ const FeaturedArticle = ({ article }: FeaturedArticleProps) => {
         {/* Floating Category Badge */}
       </div>
       <div className="absolute top-0 right-0 py-4 pl-10 pr-5 bg-white slant-left lg:bottom-0 lg:top-auto lg:py-5 lg:pr-12 lg:pl-24">
-        <LocaleLink href={`/categories/${article.category.slug}`}>
+        <LocaleLink href={`/categories/${article.category?.slug}`}>
           <h4 className="text-xl text-primary-red font-secondary lg:text-4xl">
-            {article.category.name}
+            {article.category?.name}
           </h4>
         </LocaleLink>
       </div>

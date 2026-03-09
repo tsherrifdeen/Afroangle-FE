@@ -4,7 +4,7 @@ import {
   TOTAL_COMMENTS_COUNT,
 } from "../queries/comments";
 import { GET_COMMENTS_BY_ARTICLE_RESULT } from "../types";
-import { PaginatedResponse } from "./articleService"; // Adjust import path if needed
+import { PaginatedResponse } from "./articleService";
 
 const DEFAULT_LIMIT = 5;
 
@@ -19,7 +19,7 @@ export async function getArticleComments(
   const [data, total] = await Promise.all([
     client.fetch(
       GET_COMMENTS_BY_ARTICLE,
-      { _id: articleId, start, end }, // Removed locale from variables
+      { _id: articleId, start, end },
       { next: { revalidate: 10 } },
     ),
     client.fetch(

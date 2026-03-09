@@ -1,12 +1,10 @@
 import { getRelatedArticles } from "@/sanity/services/articleService";
 import ArticleList from "../ArticleList";
+import { ALL_CATEGORIES_QUERY_RESULT } from "@/sanity/types";
 
 interface ReadMoreProps {
   articleId: string;
-  categories: {
-    name: string;
-    slug: string;
-  }[];
+  categories: ALL_CATEGORIES_QUERY_RESULT;
   locale: string;
   dict: {
     articles: {

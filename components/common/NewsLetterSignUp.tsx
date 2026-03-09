@@ -183,7 +183,7 @@ export default function NewsletterModal({
                       })}
                       className={`w-full bg-[#f4f4f4] border ${
                         errors.fullName ? "border-red-500" : "border-[#e5aeae]"
-                      } text-gray-800 p-4 outline-none focus:border-[#d32f2f] focus:ring-1 focus:ring-[#d32f2f] transition-all placeholder:text-gray-400`}
+                      } text-gray-800 p-4 outline-none text-secondary focus:border-[#d32f2f] focus:ring-1 focus:ring-[#d32f2f] transition-all placeholder:text-gray-400`}
                     />
                     {errors.fullName && (
                       <span className="text-red-500 text-xs mt-1 block pl-1">
@@ -207,7 +207,7 @@ export default function NewsletterModal({
                       })}
                       className={`w-full bg-[#f4f4f4] border ${
                         errors.email ? "border-red-500" : "border-[#e5aeae]"
-                      } text-gray-800 p-4 outline-none focus:border-[#d32f2f] focus:ring-1 focus:ring-[#d32f2f] transition-all placeholder:text-gray-400`}
+                      } text-gray-800 p-4 outline-none focus:border-[#d32f2f] text-secondary focus:ring-1 focus:ring-[#d32f2f] transition-all placeholder:text-gray-400`}
                     />
                     {errors.email && (
                       <span className="text-red-500 text-xs mt-1 block pl-1">

@@ -21,7 +21,7 @@ export default function ArticleImage({ src, caption }: ArticleImageProps) {
         />
       </div>
       {caption && (
-        <figcaption className="mt-4 text-gray-700 capitalize italic text-lg">
+        <figcaption className="mt-4 text-gray-700 capitalize font-secondary">
           {caption}
         </figcaption>
       )}

@@ -12,33 +12,56 @@
  * ---------------------------------------------------------------------------------
  */
 
-// Source: sanity\schema.json
-export type VideoEmbed = {
-  _type: "videoEmbed";
-  url?: string;
+// Source: sanity/schema.json
+export type SanityFileAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
 };
 
-export type TwitterEmbed = {
-  _type: "twitterEmbed";
-  url?: string;
-};
-
-export type Category = {
+export type OpinionPiece = {
   _id: string;
-  _type: "category";
+  _type: "opinionPiece";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
   name?: string;
-  language?: string;
-  slug?: Slug;
-  description?: string;
+  email?: string;
+  fileUpload?: {
+    asset?: SanityFileAssetReference;
+    media?: unknown;
+    _type: "file";
+  };
+  downloadButton?: string;
 };
 
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
+export type SocialLink = {
+  _type: "socialLink";
+  platform?:
+    | "x"
+    | "instagram"
+    | "linkedin"
+    | "facebook"
+    | "youtube"
+    | "tiktok"
+    | "website";
+  url?: string;
+};
+
+export type VideoUpload = {
+  _type: "videoUpload";
+  url?: string;
+  videoFile?: {
+    asset?: SanityFileAssetReference;
+    media?: unknown;
+    _type: "file";
+  };
+};
+
+export type SocialMediaPost = {
+  _type: "socialMediaPost";
+  url?: string;
 };
 
 export type TranslationMetadata = {
@@ -57,21 +80,41 @@ export type InternationalizedArrayReference = Array<
   } & InternationalizedArrayReferenceValue
 >;
 
+export type ArticleReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "article";
+};
+
+export type CategoryReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "category";
+};
+
+export type AuthorReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "author";
+};
+
+export type CommentReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "comment";
+};
+
 export type InternationalizedArrayReferenceValue = {
   _type: "internationalizedArrayReferenceValue";
   value?:
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "article";
-      }
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "comment";
-      };
+    | ArticleReference
+    | CategoryReference
+    | AuthorReference
+    | CommentReference;
 };
 
 export type Comment = {
@@ -80,17 +123,37 @@ export type Comment = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  approved?: boolean;
   name?: string;
-  language?: string;
   email?: string;
   message?: string;
-  article?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "article";
-  };
-  approved?: boolean;
+  article?: ArticleReference;
+  language?: string;
+};
+
+export type Category = {
+  _id: string;
+  _type: "category";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  name?: string;
+  slug?: Slug;
+  description?: string;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
 };
 
 export type Article = {
@@ -102,32 +165,7 @@ export type Article = {
   language?: string;
   title?: string;
   slug?: Slug;
-  author?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "author";
-  };
-  categories?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "category";
-  }>;
-  mainImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    caption?: string;
-    _type: "image";
-  };
+  author?: AuthorReference;
   content?: Array<
     | {
         children?: Array<{
@@ -156,12 +194,7 @@ export type Article = {
         _key: string;
       }
     | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
+        asset?: SanityImageAssetReference;
         media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
@@ -171,29 +204,30 @@ export type Article = {
       }
     | ({
         _key: string;
-      } & VideoEmbed)
+      } & VideoUpload)
     | ({
         _key: string;
-      } & TwitterEmbed)
+      } & SocialMediaPost)
   >;
+  mainImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    caption?: string;
+    _type: "image";
+  };
   audio?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-    };
+    asset?: SanityFileAssetReference;
     media?: unknown;
     _type: "file";
   };
+  categories?: Array<
+    {
+      _key: string;
+    } & CategoryReference
+  >;
   publishedAt?: string;
-  comments?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "comment";
-  }>;
 };
 
 export type SanityImageCrop = {
@@ -218,22 +252,32 @@ export type Author = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
   name?: string;
   slug?: Slug;
   image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    caption?: string;
+    alt?: string;
     _type: "image";
   };
   bio?: string;
+  socials?: Array<
+    {
+      _key: string;
+    } & SocialLink
+  >;
+};
+
+export type MediaTag = {
+  _id: string;
+  _type: "media.tag";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: Slug;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -269,6 +313,7 @@ export type SanityImageMetadata = {
   palette?: SanityImagePalette;
   lqip?: string;
   blurHash?: string;
+  thumbHash?: string;
   hasAlpha?: boolean;
   isOpaque?: boolean;
 };
@@ -333,18 +378,27 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
-  | VideoEmbed
-  | TwitterEmbed
-  | Category
-  | Slug
+  | SanityFileAssetReference
+  | OpinionPiece
+  | SocialLink
+  | VideoUpload
+  | SocialMediaPost
   | TranslationMetadata
   | InternationalizedArrayReference
+  | ArticleReference
+  | CategoryReference
+  | AuthorReference
+  | CommentReference
   | InternationalizedArrayReferenceValue
   | Comment
+  | Category
+  | Slug
+  | SanityImageAssetReference
   | Article
   | SanityImageCrop
   | SanityImageHotspot
   | Author
+  | MediaTag
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
@@ -356,20 +410,18 @@ export type AllSanitySchemaTypes =
 
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
-type ArrayOf<T> = Array<
-  T & {
-    _key: string;
-  }
->;
-
-// Source: sanity\queries\articles.ts
+// Source: sanity/queries/articles.ts
 // Variable: ARTICLE_BY_SLUG_QUERY
-// Query: *[_type == "article" && slug.current == $slug && language == $locale][0] {    _id,    title,    publishedAt,    "slug": slug.current,    "author":author-> {      name,      "slug": slug.current    },    "audioUrl": audio.asset->url,    "mainImage": {    "url": mainImage.asset->url,    "caption": mainImage.caption,    },  "category": categories[0]-> {    name,     "slug": slug.current,    },    content,  }
+// Query: *[_type == "article" && slug.current == $slug && language == $locale][0] {    _id,    title,    publishedAt,    "slug": slug.current,    "translations": *[      _type == ^._type &&       _id match string::split(^._id, "__i18n_")[0] + "*" &&       _id != ^._id &&       !(_id in path('drafts.**'))    ] {      "language": language,      "slug": slug.current    },    "author": author-> {      name,      "slug": slug.current    },    "audioUrl": audio.asset->url,    "mainImage": {      "url": mainImage.asset->url,      "caption": mainImage.caption,    },    "categories": categories[]-> {      name,       "slug": slug.current,    },    "content": content[]{      ...,      // Portable Text images      _type == "image" => {        alt,        "url": asset->url      },      // Uploaded video (file) + optional external URL      _type == "videoUpload" => {        "videoFileUrl": videoFile.asset->url      },      // Social post embed      _type == "socialMediaPost" => {        url      }    }  }
 export type ARTICLE_BY_SLUG_QUERY_RESULT = {
   _id: string;
   title: string | null;
   publishedAt: string | null;
   slug: string | null;
+  translations: Array<{
+    language: string | null;
+    slug: string | null;
+  }>;
   author: {
     name: string | null;
     slug: string | null;
@@ -379,17 +431,11 @@ export type ARTICLE_BY_SLUG_QUERY_RESULT = {
     url: string | null;
     caption: string | null;
   };
-  category: {
+  categories: Array<{
     name: string | null;
     slug: string | null;
-  } | null;
+  }> | null;
   content: Array<
-    | ({
-        _key: string;
-      } & TwitterEmbed)
-    | ({
-        _key: string;
-      } & VideoEmbed)
     | {
         children?: Array<{
           marks?: Array<string>;
@@ -417,25 +463,37 @@ export type ARTICLE_BY_SLUG_QUERY_RESULT = {
         _key: string;
       }
     | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
+        asset?: SanityImageAssetReference;
         media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
-        alt?: string;
+        alt: string | null;
         _type: "image";
         _key: string;
+        url: string | null;
+      }
+    | {
+        _key: string;
+        _type: "socialMediaPost";
+        url: string | null;
+      }
+    | {
+        _key: string;
+        _type: "videoUpload";
+        url?: string;
+        videoFile?: {
+          asset?: SanityFileAssetReference;
+          media?: unknown;
+          _type: "file";
+        };
+        videoFileUrl: string | null;
       }
   > | null;
 } | null;
 
-// Source: sanity\queries\articles.ts
+// Source: sanity/queries/articles.ts
 // Variable: ALL_ARTICLES_QUERY
-// Query: *[_type == "article" && language == $locale] | order(publishedAt desc) [$start...$end] {    _id,    title,    publishedAt,    "slug": slug.current,    "author":author->{      name,      "slug": slug.current,    },    "mainImage": mainImage.asset->url,     "excerpt": pt::text(      content[_type == "block"][0...1]    ),    "category": categories[0]-> {      name,      "slug": slug.current      },  }
+// Query: *[_type == "article" && language == $locale && !(_id in path('drafts.**'))] | order(publishedAt desc) [$start...$end] {    _id,    title,    publishedAt,    "slug": slug.current,    "author": author->{      name,      "slug": slug.current,    },    "mainImage": mainImage.asset->url,     "excerpt": pt::text(content[_type == "block"][0...1]),    "category": categories[0]-> {      name,      "slug": slug.current    }  }
 export type ALL_ARTICLES_QUERY_RESULT = Array<{
   _id: string;
   title: string | null;
@@ -453,14 +511,14 @@ export type ALL_ARTICLES_QUERY_RESULT = Array<{
   } | null;
 }>;
 
-// Source: sanity\queries\articles.ts
+// Source: sanity/queries/articles.ts
 // Variable: TOTAL_ARTICLES_COUNT
-// Query: count(*[_type == "article"])
+// Query: count(*[_type == "article" && language == $locale && !(_id in path('drafts.**'))])
 export type TOTAL_ARTICLES_COUNT_RESULT = number;
 
-// Source: sanity\queries\articles.ts
+// Source: sanity/queries/articles.ts
 // Variable: ARTICLES_BY_CATEGORY_QUERY
-// Query: *[_type == "article" && $slug in categories[]->slug.current && language == $locale] | order(publishedAt desc) [$start...$end] {    _id,    title,    publishedAt,    "slug": slug.current,    "author": author-> {       name,      "slug": slug.current,    },    "mainImage": mainImage.asset->url,    "category": categories[0]->{       name,      "slug": slug.current,    },     "excerpt": pt::text(      content[_type == "block"][0...1]    ),  }
+// Query: *[_type == "article" && $slug in categories[]->slug.current && language == $locale && !(_id in path('drafts.**'))] | order(publishedAt desc) [$start...$end] {    _id,    title,    publishedAt,    "slug": slug.current,    "author": author-> {       name,      "slug": slug.current,    },    "mainImage": mainImage.asset->url,    "category": categories[0]->{       name,      "slug": slug.current,    },     "excerpt": pt::text(content[_type == "block"][0...1])  }
 export type ARTICLES_BY_CATEGORY_QUERY_RESULT = Array<{
   _id: string;
   title: string | null;
@@ -478,33 +536,138 @@ export type ARTICLES_BY_CATEGORY_QUERY_RESULT = Array<{
   excerpt: string;
 }>;
 
-// Source: sanity\queries\categories.ts
+// Source: sanity/queries/articles.ts
+// Variable: ARTICLES_BY_AUTHOR_QUERY
+// Query: *[_type == "article" && author._ref == $authorId && language == $locale && !(_id in path('drafts.**'))] | order(publishedAt desc) [$start...$end] {     _id,    title,    publishedAt,    "slug": slug.current,    "author": author-> {       name,      "slug": slug.current,    },    "mainImage": mainImage.asset->url,      "category": categories[0]->{       name,      "slug": slug.current,    },     "excerpt": pt::text(content[_type == "block"][0...1])  }
+export type ARTICLES_BY_AUTHOR_QUERY_RESULT = Array<{
+  _id: string;
+  title: string | null;
+  publishedAt: string | null;
+  slug: string | null;
+  author: {
+    name: string | null;
+    slug: string | null;
+  } | null;
+  mainImage: string | null;
+  category: {
+    name: string | null;
+    slug: string | null;
+  } | null;
+  excerpt: string;
+}>;
+
+// Source: sanity/queries/articles.ts
+// Variable: RELATED_ARTICLES_QUERY
+// Query: *[    _type == "article" &&     _id != $articleId &&     language == $locale &&     !(_id in path('drafts.**')) &&    // Safely checks if the current article's category slugs exist in the passed array    count(categories[@->slug.current in $categorySlugs]) > 0  ] | order(publishedAt desc) [0...3] {    _id,    title,    publishedAt,    "slug": slug.current,    "author": author->{      name,      "slug": slug.current,    },    "mainImage": mainImage.asset->url,     "excerpt": pt::text(content[_type == "block"][0...1]),    "category": categories[0]-> {      name,      "slug": slug.current    }  }
+export type RELATED_ARTICLES_QUERY_RESULT = Array<{
+  _id: string;
+  title: string | null;
+  publishedAt: string | null;
+  slug: string | null;
+  author: {
+    name: string | null;
+    slug: string | null;
+  } | null;
+  mainImage: string | null;
+  excerpt: string;
+  category: {
+    name: string | null;
+    slug: string | null;
+  } | null;
+}>;
+
+// Source: sanity/queries/articles.ts
+// Variable: SEARCH_ARTICLES_QUERY
+// Query: *[  _type == "article" &&   language == $locale &&   (title match $searchTerm + "*" || pt::text(content) match $searchTerm + "*")] | order(publishedAt desc) [0...12] {   _id,  title,  publishedAt,  "slug": slug.current,  "author": author->{    name,    "slug": slug.current  },  "mainImage": mainImage.asset->url,   "excerpt": pt::text(content[_type == "block"][0...1]),  "category": categories[0]-> {    name,    "slug": slug.current  }}
+export type SEARCH_ARTICLES_QUERY_RESULT = Array<{
+  _id: string;
+  title: string | null;
+  publishedAt: string | null;
+  slug: string | null;
+  author: {
+    name: string | null;
+    slug: string | null;
+  } | null;
+  mainImage: string | null;
+  excerpt: string;
+  category: {
+    name: string | null;
+    slug: string | null;
+  } | null;
+}>;
+
+// Source: sanity/queries/authors.ts
+// Variable: GET_AUTHOR_BY_SLUG
+// Query: *[_type == "author" && slug.current == $slug && language == $locale && !(_id in path('drafts.**'))][0]{    _id,    name,     bio,    "image": image.asset->url,    "alt": image.alt,    socials[]{platform, url},    // Fetch translations for the Language Switcher    "translations": *[      _type == ^._type &&       _id match string::split(^._id, "__i18n_")[0] + "*" &&       _id != ^._id &&       !(_id in path('drafts.**'))    ] {      "language": language,      "slug": slug.current    }  }
+export type GET_AUTHOR_BY_SLUG_RESULT = {
+  _id: string;
+  name: string | null;
+  bio: string | null;
+  image: string | null;
+  alt: string | null;
+  socials: Array<{
+    platform:
+      | "facebook"
+      | "instagram"
+      | "linkedin"
+      | "tiktok"
+      | "website"
+      | "x"
+      | "youtube"
+      | null;
+    url: string | null;
+  }> | null;
+  translations: Array<{
+    language: string | null;
+    slug: string | null;
+  }>;
+} | null;
+
+// Source: sanity/queries/authors.ts
+// Variable: ARTICLES_IN_AUTHOR_COUNT
+// Query: count(*[    _type == "article" &&    author._ref == $authorId &&    language == $locale &&     !(_id in path('drafts.**'))  ])
+export type ARTICLES_IN_AUTHOR_COUNT_RESULT = number;
+
+// Source: sanity/queries/authors.ts
+// Variable: AUTHOR_BY_ARTICLE_ID
+// Query: *[_type == "article" && _id == $articleId && !(_id in path('drafts.**'))][0].author-> {    name,    "slug": slug.current,    bio  }
+export type AUTHOR_BY_ARTICLE_ID_RESULT = {
+  name: string | null;
+  slug: string | null;
+  bio: string | null;
+} | null;
+
+// Source: sanity/queries/categories.ts
 // Variable: ALL_CATEGORIES_QUERY
-// Query: *[_type == "category"] | order(name asc) {    _id,    name,    "slug": slug.current  }
+// Query: *[_type == "category" && language == $locale && !(_id in path('drafts.**'))] | order(name asc) {    _id,    name,    "slug": slug.current  }
 export type ALL_CATEGORIES_QUERY_RESULT = Array<{
   _id: string;
   name: string | null;
   slug: string | null;
 }>;
 
-// Source: sanity\queries\categories.ts
+// Source: sanity/queries/categories.ts
 // Variable: CATEGORY_BY_SLUG_QUERY
-// Query: *[_type == "category" && slug.current == $slug][0] {    _id,    name,    "slug": slug.current,    description  }
+// Query: *[_type == "category" && slug.current == $slug && language == $locale && !(_id in path('drafts.**'))][0] {    _id,    name,    "slug": slug.current,    description,        // Fetch translations for the Language Switcher    "translations": *[      _type == ^._type &&       _id match string::split(^._id, "__i18n_")[0] + "*" &&       _id != ^._id &&       !(_id in path('drafts.**'))    ] {      "language": language,      "slug": slug.current    }  }
 export type CATEGORY_BY_SLUG_QUERY_RESULT = {
   _id: string;
   name: string | null;
   slug: string | null;
   description: string | null;
+  translations: Array<{
+    language: string | null;
+    slug: string | null;
+  }>;
 } | null;
 
-// Source: sanity\queries\categories.ts
-// Variable: TOTAL_CATEGORY_COUNT
-// Query: count(*[_type == "article" && $slug in categories[]->slug.current])
-export type TOTAL_CATEGORY_COUNT_RESULT = number;
+// Source: sanity/queries/categories.ts
+// Variable: ARTICLES_IN_CATEGORY_COUNT
+// Query: count(*[    _type == "article" &&     $slug in categories[]->slug.current &&     language == $locale &&     !(_id in path('drafts.**'))  ])
+export type ARTICLES_IN_CATEGORY_COUNT_RESULT = number;
 
-// Source: sanity\queries\comments.ts
+// Source: sanity/queries/comments.ts
 // Variable: GET_COMMENTS_BY_ARTICLE
-// Query: *[_type=="comment" && approved==true && article._ref==$_id] | order(_createdAt desc) [$start...$end] {     _id,     name,    message,    _createdAt  }
+// Query: *[_type == "comment" && approved == true && article._ref == $_id && !(_id in path('drafts.**'))] | order(_createdAt desc) [$start...$end] {     _id,     name,    message,    _createdAt  }
 export type GET_COMMENTS_BY_ARTICLE_RESULT = Array<{
   _id: string;
   name: string | null;
@@ -512,23 +675,29 @@ export type GET_COMMENTS_BY_ARTICLE_RESULT = Array<{
   _createdAt: string;
 }>;
 
-// Source: sanity\queries\comments.ts
+// Source: sanity/queries/comments.ts
 // Variable: TOTAL_COMMENTS_COUNT
-// Query: count(*[    _type == "comment" &&    approved == true &&    article_ref == $_id  ])
+// Query: count(*[    _type == "comment" &&    approved == true &&    article._ref == $_id && // Fixed typo here (was article_ref)    !(_id in path('drafts.**'))  ])
 export type TOTAL_COMMENTS_COUNT_RESULT = number;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '\n  *[_type == "article" && slug.current == $slug && language == $locale][0] {\n    _id,\n    title,\n    publishedAt,\n    "slug": slug.current,\n    "author":author-> {\n      name,\n      "slug": slug.current\n    },\n    "audioUrl": audio.asset->url,\n    "mainImage": {\n    "url": mainImage.asset->url,\n    "caption": mainImage.caption,\n    },\n  "category": categories[0]-> {\n    name, \n    "slug": slug.current,\n    },\n    content,\n  }\n': ARTICLE_BY_SLUG_QUERY_RESULT;
-    '\n  *[_type == "article" && language == $locale] | order(publishedAt desc) [$start...$end] {\n    _id,\n    title,\n    publishedAt,\n    "slug": slug.current,\n    "author":author->{\n      name,\n      "slug": slug.current,\n    },\n    "mainImage": mainImage.asset->url, \n    "excerpt": pt::text(\n      content[_type == "block"][0...1]\n    ),\n    "category": categories[0]-> {\n      name,\n      "slug": slug.current\n      },\n  }\n': ALL_ARTICLES_QUERY_RESULT;
-    'count(*[_type == "article"])': TOTAL_ARTICLES_COUNT_RESULT;
-    '\n  *[_type == "article" && $slug in categories[]->slug.current && language == $locale] | order(publishedAt desc) [$start...$end] {\n    _id,\n    title,\n    publishedAt,\n    "slug": slug.current,\n    "author": author-> { \n      name,\n      "slug": slug.current,\n    },\n    "mainImage": mainImage.asset->url,\n    "category": categories[0]->{ \n      name,\n      "slug": slug.current,\n    }, \n    "excerpt": pt::text(\n      content[_type == "block"][0...1]\n    ),\n  }\n': ARTICLES_BY_CATEGORY_QUERY_RESULT;
-    '\n  *[_type == "category"] | order(name asc) {\n    _id,\n    name,\n    "slug": slug.current\n  }\n': ALL_CATEGORIES_QUERY_RESULT;
-    '\n  *[_type == "category" && slug.current == $slug][0] {\n    _id,\n    name,\n    "slug": slug.current,\n    description\n  }\n': CATEGORY_BY_SLUG_QUERY_RESULT;
-    '\n  count(*[_type == "article" && $slug in categories[]->slug.current])\n': TOTAL_CATEGORY_COUNT_RESULT;
-    '\n  *[_type=="comment" && approved==true && article._ref==$_id] | order(_createdAt desc) [$start...$end] { \n    _id, \n    name,\n    message,\n    _createdAt\n  }\n': GET_COMMENTS_BY_ARTICLE_RESULT;
-    '\n  count(*[\n    _type == "comment" &&\n    approved == true &&\n    article_ref == $_id\n  ])\n': TOTAL_COMMENTS_COUNT_RESULT;
+    '\n  *[_type == "article" && slug.current == $slug && language == $locale][0] {\n    _id,\n    title,\n    publishedAt,\n    "slug": slug.current,\n    "translations": *[\n      _type == ^._type && \n      _id match string::split(^._id, "__i18n_")[0] + "*" && \n      _id != ^._id && \n      !(_id in path(\'drafts.**\'))\n    ] {\n      "language": language,\n      "slug": slug.current\n    },\n\n    "author": author-> {\n      name,\n      "slug": slug.current\n    },\n    "audioUrl": audio.asset->url,\n    "mainImage": {\n      "url": mainImage.asset->url,\n      "caption": mainImage.caption,\n    },\n    "categories": categories[]-> {\n      name, \n      "slug": slug.current,\n    },\n    "content": content[]{\n      ...,\n      // Portable Text images\n      _type == "image" => {\n        alt,\n        "url": asset->url\n      },\n      // Uploaded video (file) + optional external URL\n      _type == "videoUpload" => {\n        "videoFileUrl": videoFile.asset->url\n      },\n      // Social post embed\n      _type == "socialMediaPost" => {\n        url\n      }\n    }\n  }\n': ARTICLE_BY_SLUG_QUERY_RESULT;
+    '\n  *[_type == "article" && language == $locale && !(_id in path(\'drafts.**\'))] | order(publishedAt desc) [$start...$end] {\n    _id,\n    title,\n    publishedAt,\n    "slug": slug.current,\n    "author": author->{\n      name,\n      "slug": slug.current,\n    },\n    "mainImage": mainImage.asset->url, \n    "excerpt": pt::text(content[_type == "block"][0...1]),\n    "category": categories[0]-> {\n      name,\n      "slug": slug.current\n    }\n  }\n': ALL_ARTICLES_QUERY_RESULT;
+    "count(*[_type == \"article\" && language == $locale && !(_id in path('drafts.**'))])": TOTAL_ARTICLES_COUNT_RESULT;
+    '\n  *[_type == "article" && $slug in categories[]->slug.current && language == $locale && !(_id in path(\'drafts.**\'))] | order(publishedAt desc) [$start...$end] {\n    _id,\n    title,\n    publishedAt,\n    "slug": slug.current,\n    "author": author-> { \n      name,\n      "slug": slug.current,\n    },\n    "mainImage": mainImage.asset->url,\n    "category": categories[0]->{ \n      name,\n      "slug": slug.current,\n    }, \n    "excerpt": pt::text(content[_type == "block"][0...1])\n  }\n': ARTICLES_BY_CATEGORY_QUERY_RESULT;
+    '\n  *[_type == "article" && author._ref == $authorId && language == $locale && !(_id in path(\'drafts.**\'))] | order(publishedAt desc) [$start...$end] { \n    _id,\n    title,\n    publishedAt,\n    "slug": slug.current,\n    "author": author-> { \n      name,\n      "slug": slug.current,\n    },\n    "mainImage": mainImage.asset->url,  \n    "category": categories[0]->{ \n      name,\n      "slug": slug.current,\n    }, \n    "excerpt": pt::text(content[_type == "block"][0...1])\n  }\n': ARTICLES_BY_AUTHOR_QUERY_RESULT;
+    '\n  *[\n    _type == "article" && \n    _id != $articleId && \n    language == $locale && \n    !(_id in path(\'drafts.**\')) &&\n    // Safely checks if the current article\'s category slugs exist in the passed array\n    count(categories[@->slug.current in $categorySlugs]) > 0\n  ] | order(publishedAt desc) [0...3] {\n    _id,\n    title,\n    publishedAt,\n    "slug": slug.current,\n    "author": author->{\n      name,\n      "slug": slug.current,\n    },\n    "mainImage": mainImage.asset->url, \n    "excerpt": pt::text(content[_type == "block"][0...1]),\n    "category": categories[0]-> {\n      name,\n      "slug": slug.current\n    }\n  }\n': RELATED_ARTICLES_QUERY_RESULT;
+    '*[\n  _type == "article" && \n  language == $locale && \n  (title match $searchTerm + "*" || pt::text(content) match $searchTerm + "*")\n] | order(publishedAt desc) [0...12] { \n  _id,\n  title,\n  publishedAt,\n  "slug": slug.current,\n  "author": author->{\n    name,\n    "slug": slug.current\n  },\n  "mainImage": mainImage.asset->url, \n  "excerpt": pt::text(content[_type == "block"][0...1]),\n  "category": categories[0]-> {\n    name,\n    "slug": slug.current\n  }\n}': SEARCH_ARTICLES_QUERY_RESULT;
+    ' \n  *[_type == "author" && slug.current == $slug && language == $locale && !(_id in path(\'drafts.**\'))][0]{\n    _id,\n    name, \n    bio,\n    "image": image.asset->url,\n    "alt": image.alt,\n    socials[]{platform, url},\n    // Fetch translations for the Language Switcher\n    "translations": *[\n      _type == ^._type && \n      _id match string::split(^._id, "__i18n_")[0] + "*" && \n      _id != ^._id && \n      !(_id in path(\'drafts.**\'))\n    ] {\n      "language": language,\n      "slug": slug.current\n    }\n  }\n': GET_AUTHOR_BY_SLUG_RESULT;
+    "\n  count(*[\n    _type == \"article\" &&\n    author._ref == $authorId &&\n    language == $locale && \n    !(_id in path('drafts.**'))\n  ])\n": ARTICLES_IN_AUTHOR_COUNT_RESULT;
+    '\n  *[_type == "article" && _id == $articleId && !(_id in path(\'drafts.**\'))][0].author-> {\n    name,\n    "slug": slug.current,\n    bio\n  }\n': AUTHOR_BY_ARTICLE_ID_RESULT;
+    '\n  *[_type == "category" && language == $locale && !(_id in path(\'drafts.**\'))] | order(name asc) {\n    _id,\n    name,\n    "slug": slug.current\n  }\n': ALL_CATEGORIES_QUERY_RESULT;
+    '\n  *[_type == "category" && slug.current == $slug && language == $locale && !(_id in path(\'drafts.**\'))][0] {\n    _id,\n    name,\n    "slug": slug.current,\n    description,\n    \n    // Fetch translations for the Language Switcher\n    "translations": *[\n      _type == ^._type && \n      _id match string::split(^._id, "__i18n_")[0] + "*" && \n      _id != ^._id && \n      !(_id in path(\'drafts.**\'))\n    ] {\n      "language": language,\n      "slug": slug.current\n    }\n  }\n': CATEGORY_BY_SLUG_QUERY_RESULT;
+    "\n  count(*[\n    _type == \"article\" && \n    $slug in categories[]->slug.current && \n    language == $locale && \n    !(_id in path('drafts.**'))\n  ])\n": ARTICLES_IN_CATEGORY_COUNT_RESULT;
+    "\n  *[_type == \"comment\" && approved == true && article._ref == $_id && !(_id in path('drafts.**'))] | order(_createdAt desc) [$start...$end] { \n    _id, \n    name,\n    message,\n    _createdAt\n  }\n": GET_COMMENTS_BY_ARTICLE_RESULT;
+    "\n  count(*[\n    _type == \"comment\" &&\n    approved == true &&\n    article._ref == $_id && // Fixed typo here (was article_ref)\n    !(_id in path('drafts.**'))\n  ])\n": TOTAL_COMMENTS_COUNT_RESULT;
   }
 }

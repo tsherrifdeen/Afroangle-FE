@@ -7,6 +7,9 @@ interface ArticleItemProps {
 }
 
 const ArticleItem = ({ article }: ArticleItemProps) => {
+  if (!article) {
+    return null;
+  }
   const extract =
     article.excerpt.length > 240
       ? article.excerpt.slice(0, 240) + "…"
@@ -34,7 +37,7 @@ const ArticleItem = ({ article }: ArticleItemProps) => {
         >
           <h2
             className={`font-extrabold uppercase tracking-wide ${
-              article?.title.length > 80 ? "text-xl" : "text-2xl"
+              article.title.length > 80 ? "text-xl" : "text-2xl"
             }`}
           >
             {article.title}

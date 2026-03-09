@@ -8,7 +8,7 @@ import { ARTICLE_BY_SLUG_QUERY_RESULT } from "@/sanity/types";
 import Comments from "./Comments";
 import AudioPlayer from "./AudioPlayer";
 import CommentForm from "./AddComment";
-import { getDictionary, hasLocale } from "@/app/[locale]/dictionaries";
+import { getDictionary } from "@/app/[locale]/dictionaries";
 import AuthorBio from "./AuthorBio";
 import ReadMore from "./ReadMore";
 
@@ -21,9 +21,6 @@ export default async function ArticlePageContent({
   locale,
   article,
 }: ArticlePageContentProps) {
-  if (!hasLocale(locale)) notFound();
-  if (!article) notFound();
-
   const dict = await getDictionary(locale);
 
   return (
@@ -37,7 +34,7 @@ export default async function ArticlePageContent({
           </h1>
 
           <div className="flex gap-2">
-            <p className="text-lg">{dict.articles.metadata.by}</p>
+            <p className="font-secondary">{dict.articles.metadata.by}</p>
             <ArticleMeta
               large
               author={article.author}
@@ -77,7 +74,7 @@ export default async function ArticlePageContent({
           </div>
 
           <div>
-            <Comments articleId={article._id} locale={locale} dict={dict} />
+            <Comments articleId={article._id} dict={dict} />
             <CommentForm locale={locale} postId={article._id} dict={dict} />
           </div>
 

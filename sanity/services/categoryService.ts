@@ -8,13 +8,6 @@ import {
   CATEGORY_BY_SLUG_QUERY_RESULT,
 } from "../types";
 
-export interface CategoryData {
-  _id: string;
-  name: string;
-  slug: string;
-  description?: string;
-}
-
 // Get all categories for a specific locale
 export async function getAllCategories(
   locale: string,

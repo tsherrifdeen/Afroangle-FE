@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import NewsletterModal from "./NewsLetterSignUp";
 import { getDictionary, hasLocale } from "@/app/[locale]/dictionaries";
 import { notFound } from "next/navigation";

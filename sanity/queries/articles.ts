@@ -1,15 +1,12 @@
-import { groq } from "next-sanity";
+import { defineQuery } from "next-sanity";
 
 // --- 1. Single Article ---
-export const ARTICLE_BY_SLUG_QUERY = groq`
+export const ARTICLE_BY_SLUG_QUERY = defineQuery(`
   *[_type == "article" && slug.current == $slug && language == $locale][0] {
     _id,
     title,
     publishedAt,
     "slug": slug.current,
-    
-    // Fetch all translations for this document (Great for Language Switcher!)
-    // This looks for documents sharing the same base ID
     "translations": *[
       _type == ^._type && 
       _id match string::split(^._id, "__i18n_")[0] + "*" && 
@@ -50,10 +47,10 @@ export const ARTICLE_BY_SLUG_QUERY = groq`
       }
     }
   }
-`;
+`);
 
 // --- 2. All Articles (Paginated) ---
-export const ALL_ARTICLES_QUERY = groq`
+export const ALL_ARTICLES_QUERY = defineQuery(`
   *[_type == "article" && language == $locale && !(_id in path('drafts.**'))] | order(publishedAt desc) [$start...$end] {
     _id,
     title,
@@ -70,12 +67,14 @@ export const ALL_ARTICLES_QUERY = groq`
       "slug": slug.current
     }
   }
-`;
+`);
 
-export const TOTAL_ARTICLES_COUNT = groq`count(*[_type == "article" && language == $locale && !(_id in path('drafts.**'))])`;
+export const TOTAL_ARTICLES_COUNT = defineQuery(
+  `count(*[_type == "article" && language == $locale && !(_id in path('drafts.**'))])`,
+);
 
 // --- 3. Articles by Category (Paginated) ---
-export const ARTICLES_BY_CATEGORY_QUERY = groq`
+export const ARTICLES_BY_CATEGORY_QUERY = defineQuery(`
   *[_type == "article" && $slug in categories[]->slug.current && language == $locale && !(_id in path('drafts.**'))] | order(publishedAt desc) [$start...$end] {
     _id,
     title,
@@ -92,10 +91,10 @@ export const ARTICLES_BY_CATEGORY_QUERY = groq`
     }, 
     "excerpt": pt::text(content[_type == "block"][0...1])
   }
-`;
+`);
 
 // --- 4. Articles by Author (Paginated) ---
-export const ARTICLES_BY_AUTHOR_QUERY = groq`
+export const ARTICLES_BY_AUTHOR_QUERY = defineQuery(`
   *[_type == "article" && author._ref == $authorId && language == $locale && !(_id in path('drafts.**'))] | order(publishedAt desc) [$start...$end] { 
     _id,
     title,
@@ -112,9 +111,9 @@ export const ARTICLES_BY_AUTHOR_QUERY = groq`
     }, 
     "excerpt": pt::text(content[_type == "block"][0...1])
   }
-`;
+`);
 
-export const RELATED_ARTICLES_QUERY = groq`
+export const RELATED_ARTICLES_QUERY = defineQuery(`
   *[
     _type == "article" && 
     _id != $articleId && 
@@ -138,4 +137,25 @@ export const RELATED_ARTICLES_QUERY = groq`
       "slug": slug.current
     }
   }
-`;
+`);
+
+export const SEARCH_ARTICLES_QUERY = defineQuery(`*[
+  _type == "article" && 
+  language == $locale && 
+  (title match $searchTerm + "*" || pt::text(content) match $searchTerm + "*")
+] | order(publishedAt desc) [0...12] { 
+  _id,
+  title,
+  publishedAt,
+  "slug": slug.current,
+  "author": author->{
+    name,
+    "slug": slug.current
+  },
+  "mainImage": mainImage.asset->url, 
+  "excerpt": pt::text(content[_type == "block"][0...1]),
+  "category": categories[0]-> {
+    name,
+    "slug": slug.current
+  }
+}`);

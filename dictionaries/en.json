@@ -29,6 +29,10 @@
       "submitPiece": {
         "title": "Submit Your Work",
         "description": "Pitch your original reporting and sharp analysis on African culture, politics, and innovation. Read our pitching guide and submit your story to Afroangle."
+      },
+      "search": {
+        "title": "Search Results",
+        "description": "Search Afroangle for original reporting and sharp analysis on African culture, politics, and technology."
       }
     },
     "forms": {
@@ -36,7 +40,7 @@
       "email": "Email",
       "message": "Comment",
       "placeholders": {
-        "search": "Search articles...",
+        "search": "Search articles",
         "name": "Your name...",
         "email": "Your email..."
       }
@@ -54,7 +58,12 @@
   },
   "navigation": {
     "home": "Home",
-    "tagline": "The African lens for all global issues"
+    "tagline": "The African lens for all global issues",
+    "languages": {
+      "label": "Language",
+      "en": "English",
+      "fr": "Français"
+    }
   },
   "footer": {
     "mission": "Afroangle is an editorial platform that covers culture, history, politics, innovation, the arts and entertainment to showcase Africa’s diversity of voices and narratives.",
@@ -73,6 +82,18 @@
     "legal": {
       "copyright": "Afroangle.com © 2026 The Afroangle Non-profit Organisation. All Rights Reserved.",
       "recaptcha": "This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply."
+    }
+  },
+  "search": {
+    "pageTitle": "Search",
+    "resultsFor": "Results for",
+    "articlesFound": "articles found",
+    "oneArticleFound": "article found",
+    "enterSearchTerm": "Enter a search term to find articles.",
+    "noArticles": "No articles found for",
+    "labels": {
+      "submitSearch": "Submit search",
+      "clearSearch": "Clear search"
     }
   },
   "articles": {

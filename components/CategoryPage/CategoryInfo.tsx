@@ -1,7 +1,7 @@
 import ShareButton from "../common/ShareButton";
 
 interface CategoryInfoProps {
-  name: string;
+  name: string | null;
   description: string;
   dict: {
     common: {

@@ -1,8 +1,14 @@
-import { getArticleBySlug } from "@/sanity/services/articleService";
+import { cache } from "react";
+import { getArticleBySlug as _getArticleBySlug } from "@/sanity/services/articleService";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import ArticlePageContent from "@/components/ArticlePage";
 import { getDictionary, hasLocale } from "@/app/[locale]/dictionaries";
+import { getExcerpt } from "@/lib/portableTextToPlain";
+
+const getArticle = cache(_getArticleBySlug);
+
+const BASE_URL = process.env.NEXT_PUBLIC_URL || "https://afroangle.com";
 
 interface ArticlePageProps {
   params: Promise<{ slug: string; locale: string }>;
@@ -15,53 +21,56 @@ export async function generateMetadata({
 
   if (!hasLocale(locale)) notFound();
 
-  const dict = await getDictionary(locale);
-  const seo = dict.common.seo.home;
-  const article = await getArticleBySlug(slug, locale);
+  const [article, dict] = await Promise.all([
+    getArticle(slug, locale),
+    getDictionary(locale),
+  ]);
+
+  const { defaultTitle, ogTitle } = dict.common.seo.home;
+  const currentUrl = `${BASE_URL}/${locale}/articles/${slug}`;
 
   if (!article) {
-    return {
-      title: seo.defaultTitle,
-    };
+    return { title: defaultTitle };
   }
-  const baseUrl = process.env.NEXT_PUBLIC_URL || "https://afroangle.com";
-  const currentUrl = `${baseUrl}/${locale}/articles/${slug}`;
+
+  const description =
+    article.excerpt ??
+    getExcerpt(article.content) ??
+    `${article.title} - ${defaultTitle}`;
 
   return {
     title: article.title,
-    description: article.excerpt || `${article.title} - ${seo.defaultTitle}`,
-
-    // 1. Upgraded OpenGraph Object
+    description,
     openGraph: {
-      title: article.title || seo.ogTitle,
-      description: article.excerpt || `${article.title} - ${seo.defaultTitle}`,
+      title: article.title || ogTitle,
+      description,
       url: currentUrl,
-      images: article.mainImage?.url
-        ? [
-            {
-              url: article.mainImage.url,
-              width: 1200,
-              height: 630,
-              alt: article.mainImage.caption || article.title, // Add an alt tag for accessibility
-            },
-          ]
-        : [],
+      ...(article.mainImage?.url && {
+        images: [
+          {
+            url: article.mainImage.url,
+            width: 1200,
+            height: 630,
+            alt: article.mainImage.caption || article.title,
+          },
+        ],
+      }),
     },
-
     alternates: {
       canonical: currentUrl,
       languages: {
-        en: `${baseUrl}/en/articles/${slug}`,
-        fr: `${baseUrl}/fr/articles/${slug}`,
+        en: `${BASE_URL}/en/articles/${slug}`,
+        fr: `${BASE_URL}/fr/articles/${slug}`,
       },
     },
   };
 }
+
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { slug, locale } = await params;
-  const article = await getArticleBySlug(slug, locale);
-  if (!article) {
-    notFound();
-  }
+  const article = await getArticle(slug, locale);
+
+  if (!article) notFound();
+
   return <ArticlePageContent article={article} locale={locale} />;
 }

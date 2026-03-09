@@ -1,33 +1,8 @@
+import { Dictionary } from "@/app/[locale]/dictionaries";
 import OpinionSubmissionModal from "../common/SubmitOpinionPiece";
-type Dict = {
-  submitPiece: {
-    pageTitle: string;
-    heading: string;
-    introTitle: string;
-    introBody: string;
-    downloadGuide: string;
-    strongStoryTitle: string;
-    strongStoryBody: string;
-    readyToPitch: string;
-    openForm: string;
-  };
-  opinionSubmission: {
-    modal: {
-      form: {
-        title: string;
-        description: string;
-        fileHint: string;
-      };
-      success: {
-        title: string;
-        description: string;
-      };
-    };
-  };
-};
 
 interface SubmitPieceProps {
-  dict: Dict;
+  dict: Dictionary;
 }
 
 const SubmitPieceContent = ({ dict }: SubmitPieceProps) => {

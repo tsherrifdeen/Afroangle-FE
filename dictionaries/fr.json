@@ -1,17 +1,17 @@
 {
   "common": {
     "buttons": {
-      "submit": "Envoyer",
+      "submit": "Soumettre",
+      "copied": "Copié !",
       "cancel": "Annuler",
       "share": "Partager",
-      "copied": "Copié !",
       "loadMore": "Charger plus",
       "backToHome": "Retour à l'accueil",
-      "viewAll": "Tout afficher",
+      "viewAll": "Voir tout",
       "clickHere": "Cliquez ici",
       "close": "Fermer",
-      "subscribe": "obtenez le résumé mensuel",
-      "sendToEditors": "Envoyer aux éditeurs d'Afroangle"
+      "subscribe": "Recevoir la revue mensuelle",
+      "sendToEditors": "Envoyer à la rédaction d'Afroangle"
     },
     "seo": {
       "home": {
@@ -19,7 +19,7 @@
         "titleTemplate": "%s | Afroangle",
         "description": "Le regard africain sur les enjeux mondiaux",
         "ogTitle": "Afroangle - Le regard africain sur les enjeux mondiaux",
-        "ogDescription": "Afroangle est une plateforme éditoriale qui couvre la culture, l'histoire, la politique, l'innovation, les arts et le divertissement pour mettre en avant la diversité des voix et des récits de l'Afrique.",
+        "ogDescription": "Afroangle est une plateforme éditoriale qui couvre la culture, l'histoire, la politique, l'innovation, les arts et le divertissement pour mettre en valeur la diversité des voix et des récits de l'Afrique.",
         "ogAlt": "Afroangle - Le regard africain sur les enjeux mondiaux"
       },
       "about": {
@@ -29,6 +29,10 @@
       "submitPiece": {
         "title": "Soumettez Votre Travail",
         "description": "Proposez vos reportages originaux et analyses pointues sur la culture, la politique et l'innovation en Afrique. Lisez notre guide et soumettez votre article à Afroangle."
+      },
+      "search": {
+        "title": "Résultats de recherche",
+        "description": "Recherchez sur Afroangle des reportages originaux et des analyses pointues sur la culture, la politique et la technologie en Afrique."
       }
     },
     "forms": {
@@ -36,117 +40,134 @@
       "email": "E-mail",
       "message": "Commentaire",
       "placeholders": {
-        "search": "Rechercher des articles...",
+        "search": "Rechercher des articles",
         "name": "Votre nom...",
         "email": "Votre e-mail..."
       }
     },
     "errors": {
-      "notFound": "Page non trouvée",
+      "notFound": "Page introuvable",
       "unauthorized": "Accès non autorisé",
-      "serverError": "Une erreur de serveur est survenue",
+      "serverError": "Erreur du serveur",
       "invalidEmail": "Entrez une adresse e-mail valide",
-      "required": "Ce champ est obligatoire",
-      "submissionFailed": "L'envoi a échoué. Veuillez réessayer.",
+      "required": "Ce champ est requis",
+      "submissionFailed": "La soumission a échoué. Veuillez réessayer.",
       "fileInvalid": "Seuls les fichiers PDF ou DOC sont autorisés",
       "fileTooLarge": "Le fichier doit faire 5 Mo ou moins"
     }
   },
   "navigation": {
     "home": "Accueil",
-    "tagline": "Le regard africain sur tous les enjeux mondiaux"
+    "tagline": "Le regard africain sur tous les enjeux mondiaux",
+    "languages": {
+      "label": "Langue",
+      "en": "English",
+      "fr": "Français"
+    }
   },
   "footer": {
-    "mission": "Afroangle est une plateforme éditoriale qui couvre la culture, l'histoire, la politique, l'innovation, les arts et le divertissement pour mettre en avant la diversité des voix et des récits de l'Afrique.",
+    "mission": "Afroangle est une plateforme éditoriale qui couvre la culture, l'histoire, la politique, l'innovation, les arts et le divertissement pour mettre en valeur la diversité des voix et des récits de l'Afrique.",
     "sections": {
       "about": "À propos",
-      "social": "Réseaux sociaux",
+      "social": "Réseaux Sociaux",
       "contact": "Contact",
       "subscription": "Abonnement"
     },
     "links": {
       "aboutAfroangle": "À propos d'Afroangle",
       "emailUs": "Envoyez-nous un e-mail",
-      "submitOpinion": "Soumettre une tribune",
-      "monthlyDigest": "Récapitulatif mensuel"
+      "submitOpinion": "Soumettre un article d'opinion",
+      "monthlyDigest": "Revue mensuelle"
     },
     "legal": {
-      "copyright": "Afroangle.com © 2026 L'Organisation à but non lucratif Afroangle. Tous droits réservés.",
-      "recaptcha": "Ce site est protégé par reCAPTCHA ; la politique de confidentialité et les conditions d'utilisation de Google s'appliquent."
+      "copyright": "Afroangle.com © 2026 L'organisation à but non lucratif Afroangle. Tous droits réservés.",
+      "recaptcha": "Ce site est protégé par reCAPTCHA et la politique de confidentialité ainsi que les conditions d'utilisation de Google s'appliquent."
+    }
+  },
+  "search": {
+    "pageTitle": "Recherche",
+    "resultsFor": "Résultats pour",
+    "articlesFound": "articles trouvés",
+    "oneArticleFound": "article trouvé",
+    "enterSearchTerm": "Entrez un terme de recherche pour trouver des articles.",
+    "noArticles": "Aucun article trouvé pour",
+    "labels": {
+      "submitSearch": "Lancer la recherche",
+      "clearSearch": "Effacer la recherche"
     }
   },
   "articles": {
     "metadata": {
       "author": "Auteur",
-      "publishedDate": "Publié le",
+      "publishedDate": "Publié",
       "category": "Catégorie",
-      "tags": "Étiquettes",
+      "tags": "Mots-clés",
       "by": "par",
       "writer": "RÉDACTEUR"
     },
     "audio": {
       "listen": "Écouter cet article",
-      "noAudio": "Aucun audio disponible pour cet article",
-      "notSupported": "Votre navigateur ne supporte pas ce format audio"
+      "noAudio": "Aucun fichier audio disponible pour cet article",
+      "notSupported": "Votre navigateur ne prend pas en charge ce format audio"
     },
     "list": {
       "topArticle": "à la une",
       "noArticles": "Aucun article trouvé",
-      "featured": "Articles à la une",
-      "catchUp": "Rattraper"
+      "featured": "Articles en vedette",
+      "catchUp": "Rattrapage"
     },
     "comments": {
       "title": "commentaires",
-      "leaveComment": "Laisser un commentaire",
-      "noComments": "Pas encore de commentaires",
+      "leaveComment": "Laissez un commentaire",
+      "noComments": "Aucun commentaire pour le moment",
       "thankYou": "Merci pour votre commentaire !",
       "sending": "Envoi en cours...",
       "validation": {
-        "commentTooShort": "Le commentaire doit comporter au moins 5 caractères",
+        "commentTooShort": "Le commentaire doit contenir au moins 5 caractères",
         "commentTooLong": "Le commentaire ne peut pas dépasser 600 caractères"
       }
     }
   },
   "authors": {
     "notExist": "L'auteur n'existe pas",
-    "readMoreFrom": "LIRE PLUS DE",
-    "subheading": "Voici toutes les tribunes qui ont été publiées par"
+    "readMoreFrom": "EN LIRE PLUS DE",
+    "subheading": "Voici tous les articles d'opinion publiés par"
   },
   "categories": {
     "viewAll": "Voir toutes les catégories",
     "explore": "Explorez nos articles sur",
-    "notFound": "Catégorie non trouvée",
+    "notFound": "Catégorie introuvable",
     "noArticlesInCategory": "Aucun article trouvé dans cette catégorie",
     "topIdea": "LES MEILLEURES IDÉES DE LA SEMAINE",
-    "readMore": "Lire plus de ",
-    "subheading": "Nos meilleures analyses, débats, idées et récits de la semaine."
+    "readMore": "En lire plus de ",
+    "subheading": "Nos meilleures analyses, débats, idées et histoires de la semaine."
   },
   "about": {
     "pageTitle": "À propos de nous",
-    "heading": "L'Afrique en point de mire : sans filtre, en évolution et plurielle.",
-    "aboutTitle": "Qui Sommes-Nous",
-    "aboutBody": "Afroangle est une plateforme éditoriale qui raconte les histoires qui façonnent l'Afrique contemporaine et sa diaspora mondiale. Nous couvrons la culture, l'histoire, la politique, l'innovation, les arts et le divertissement pour explorer comment les voix africaines redéfinissent la créativité, remettent en question les récits établis et construisent l'avenir selon leurs propres termes. En reliant l'histoire africaine aux conversations urgentes d'aujourd'hui, nous révélons la complexité du continent au-delà des gros titres et des récits uniques. Voici l'Afrique en point de mire : sans filtre, en évolution et plurielle.",
-    "convictionTitle": "Notre Conviction",
-    "convictionBody": "Nous avons fondé Afroangle avec une conviction simple mais urgente : les 1,4 milliard d'habitants de l'Afrique méritent bien plus qu'une histoire unique et déformée sur ce qu'ils sont et à quoi ressemble leur monde aujourd'hui.",
-    "missionTitle": "Notre Mission",
-    "missionBody": "En tant que plateforme éditoriale indépendante dédiée à centraliser les perspectives africaines et de la diaspora sur des questions allant de l'expérience vécue au quotidien à une analyse sociopolitique, historique et économique approfondie, nous couvrons toute l'étendue de la vie africaine avec le sérieux qu'elle mérite.",
-    "closing": "Lorsque nous publions, c'est parce que nous avons quelque chose qui vaut la peine d'être lu."
+    "heading": "L'Afrique en point de mire — sans filtre, en évolution, plurielle.",
+    "aboutTitle": "Qui sommes-nous",
+    "aboutBody": "Afroangle est une plateforme éditoriale qui raconte les histoires qui façonnent l'Afrique contemporaine et sa diaspora mondiale. Nous couvrons la culture, l'histoire, la politique, l'innovation, les arts et le divertissement pour explorer comment les voix africaines redéfinissent la créativité, remettent en question les récits et construisent l'avenir selon leurs propres termes. En reliant l'histoire africaine aux conversations urgentes d'aujourd'hui, nous révélons la complexité du continent au-delà des gros titres et des récits uniques. Voici l'Afrique en point de mire : sans filtre, en évolution et plurielle.",
+    "convictionTitle": "Notre conviction",
+    "convictionBody": "Nous avons lancé Afroangle avec une conviction simple mais urgente : les 1,4 milliard d'habitants de l'Afrique méritent mieux qu'un récit unique et déformé sur qui ils sont et à quoi ressemble leur monde aujourd'hui.",
+    "missionTitle": "Notre mission",
+    "missionBody": "En tant que plateforme éditoriale indépendante dédiée à centrer les perspectives africaines et de la diaspora sur des questions allant de l'expérience vécue au quotidien à l'analyse sociopolitique, historique et économique approfondie, nous couvrons toute l'étendue de la vie africaine avec le sérieux qu'elle mérite.",
+    "closing": "Quand nous publions, c'est parce que nous avons quelque chose qui vaut la peine d'être su."
   },
   "newsletter": {
     "modal": {
       "freeBadge": "Gratuit",
       "title": "Le journalisme qui explique <br /> l'Afrique au monde",
-      "description": "Accédez à un nombre limité d'articles gratuits, des alertes info, des newsletters sélectionnées, des podcasts et des jeux quotidiens.",
+      "description": "Accédez à un nombre limité d'articles gratuits, d'alertes d'actualité, de newsletters sélectionnées, de podcasts et de jeux quotidiens.",
       "success": {
         "title": "Vous êtes maintenant abonné",
-        "description": "Consultez vos e-mails pour accéder aux articles gratuits, aux alertes info, aux newsletters, aux podcasts et aux jeux."
+        "description": "Vérifiez vos e-mails pour accéder à un nombre limité d'articles gratuits, d'alertes d'actualité, de newsletters sélectionnées, de podcasts et de certains jeux quotidiens."
       }
     }
   },
   "submitPiece": {
     "pageTitle": "Soumettez Votre Travail",
     "heading": "Proposez vos reportages originaux et vos analyses pointues.",
-    "introTitle": "Ce Que Nous Recherchons",
+    "introTitle": "Ce que nous recherchons",
     "introBody": "Afroangle est à la recherche de reportages originaux et d'analyses pointues sur la culture, la politique, l'économie, la technologie, les arts, le genre, la sexualité et la sécurité en Afrique, avec un accent particulier sur les histoires sous-médiatisées du Nigeria et de tout le continent.",
     "downloadGuide": "Télécharger le guide de style (PDF)",
     "strongStoryTitle": "Qu'est-ce qui fait la force d'un article Afroangle ?",
@@ -157,13 +178,13 @@
   "opinionSubmission": {
     "modal": {
       "form": {
-        "title": "Devenez rédacteur pour Afroangle. <br /> Soumettez votre tribune",
-        "description": "Envoyez votre tribune ici pour que nos éditeurs l'examinent et reviennent vers vous.",
+        "title": "Devenez rédacteur pour Afroangle. <br /> Soumettez votre article d'opinion",
+        "description": "Envoyez votre article d'opinion ici, laissez nos éditeurs l'examiner et revenir vers vous.",
         "fileHint": "Formats acceptés : pdf, doc, docx (max 5 Mo)"
       },
       "success": {
-        "title": "Soumission reçue",
-        "description": "Merci pour votre envoi. Nos éditeurs vont examiner votre texte et reviendront vers vous rapidement par e-mail."
+        "title": "Soumission Reçue",
+        "description": "Merci pour votre soumission. Nos éditeurs examineront votre article et vous répondront sous peu par e-mail."
       }
     }
   }

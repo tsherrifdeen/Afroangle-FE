@@ -6,6 +6,7 @@ import {
 } from "@sanity/icons";
 import { defineType, defineField } from "sanity";
 import { GenerateAudioInput } from "@/components/SanityComponents/GenerateAudio";
+import { generateShortSlug } from "../lib/slug";
 
 export const articleType = defineType({
   name: "article",
@@ -37,7 +38,7 @@ export const articleType = defineType({
       group: "content",
       options: {
         source: "title",
-        maxLength: 96,
+        slugify: (input) => generateShortSlug(input, 8),
         isUnique: (value, context) => context.defaultIsUnique(value, context),
       },
       validation: (Rule) => Rule.required(),

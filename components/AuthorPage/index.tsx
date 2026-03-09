@@ -4,9 +4,10 @@ import AuthorHero from "./AuthorHero";
 import AuthorNav from "./AuthorNav";
 import { getDictionary, hasLocale } from "@/app/[locale]/dictionaries";
 import { notFound } from "next/navigation";
+import { GET_AUTHOR_BY_SLUG_RESULT } from "@/sanity/types";
 
 interface AuthorPageContentProps {
-  author: any;
+  author: GET_AUTHOR_BY_SLUG_RESULT;
   locale: string;
 }
 
@@ -14,7 +15,7 @@ const AuthorPageContent = async ({
   author,
   locale,
 }: AuthorPageContentProps) => {
-  if (!hasLocale(locale)) notFound();
+  if (!hasLocale(locale) || !author) notFound();
 
   const dict = await getDictionary(locale);
   const articles = (await getArticlesByAuthor(author._id, locale)).data;

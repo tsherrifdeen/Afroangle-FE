@@ -12,6 +12,7 @@
     "@elevenlabs/elevenlabs-js": "^2.31.0",
     "@getbrevo/brevo": "^4.0.1",
     "@portabletext/react": "^6.0.2",
+    "@portabletext/toolkit": "^5.0.2",
     "@sanity/document-internationalization": "^4.1.1",
     "@sanity/icons": "^3.7.4",
     "@sanity/image-url": "^1.2.0",
