@@ -25,7 +25,9 @@ const AuthorHero = ({ author }: AuthorHeroProps) => {
   return (
     <section className="w-full max-w-screen-xl px-4 pb-2 mx-auto mb-8 space-y-6 border-b lg:px-24 border-b-gray-400">
       <header className="space-y-3">
-        <h1 className="font-bold uppercase text-7xl">{author.name}</h1>
+        <h1 className="font-bold uppercase text-4xl lg:text-6xl">
+          {author.name}
+        </h1>
 
         {author.bio && (
           <p className="max-w-5xl text-gray-700 font-secondary">{author.bio}</p>

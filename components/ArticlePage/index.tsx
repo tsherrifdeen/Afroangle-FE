@@ -77,17 +77,14 @@ export default async function ArticlePageContent({
             <Comments articleId={article._id} dict={dict} />
             <CommentForm locale={locale} postId={article._id} dict={dict} />
           </div>
-
-          <div>
-            <ReadMore
-              articleId={article._id}
-              categories={article.categories}
-              locale={locale}
-              dict={dict}
-            />
-          </div>
         </article>
       </section>
+      <ReadMore
+        articleId={article._id}
+        categories={article.categories}
+        locale={locale}
+        dict={dict}
+      />
     </main>
   );
 }

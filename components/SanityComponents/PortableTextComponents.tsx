@@ -66,10 +66,10 @@ export const components: PortableTextComponents = {
   // 2. Customizing List types
   list: {
     bullet: ({ children }) => (
-      <ul className="my-4 ml-10 space-y-2 list-disc">{children}</ul>
+      <ul className="my-3 space-y-2 list-disc">{children}</ul>
     ),
     number: ({ children }) => (
-      <ol className="my-4 ml-10 space-y-2 list-decimal">{children}</ol>
+      <ol className="my-3 space-y-2 list-decimal">{children}</ol>
     ),
   },
   marks: {

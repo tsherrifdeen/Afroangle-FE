@@ -106,7 +106,7 @@ export default async function Footer({ locale }: FooterProps) {
         <div className="border-t border-white/20 mb-9"></div>
 
         {/* --- Bottom Section --- */}
-        <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center lg:gap-4">
+        <div className="flex flex-col justify-between gap-8 lg:flex-row items-center lg:gap-4">
           {/* Left: Logo & Tagline */}
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-3">
@@ -128,7 +128,7 @@ export default async function Footer({ locale }: FooterProps) {
           </div>
 
           {/* Center: Subscribe Button */}
-          <div className="w-full lg:w-auto">
+          <div className="w-full justify-center flex lg:w-auto">
             <NewsletterModal
               trigger={
                 <button className="py-4 pl-8 pr-6 leading-none text-white bg-primary-green font-secondary ring-1 ring-white slant-top-left">
