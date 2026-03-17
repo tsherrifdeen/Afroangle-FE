@@ -110,7 +110,7 @@ export async function getArticleBySlug(
     return await client.fetch(
       ARTICLE_BY_SLUG_QUERY,
       { slug, locale },
-      { next: { revalidate: 10 } }, // Short cache for single articles (good for edits)
+      { next: { revalidate: 300 } }, // Short cache for single articles (good for edits)
     );
   } catch (error) {
     console.error(`Error fetching article by slug ${slug}:`, error);
