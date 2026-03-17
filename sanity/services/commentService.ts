@@ -20,12 +20,12 @@ export async function getArticleComments(
     client.fetch(
       GET_COMMENTS_BY_ARTICLE,
       { _id: articleId, start, end },
-      { next: { revalidate: 10 } },
+      { next: { revalidate: 5 } },
     ),
     client.fetch(
       TOTAL_COMMENTS_COUNT,
       { _id: articleId },
-      { next: { revalidate: 10 } },
+      { next: { revalidate: 5 } },
     ),
   ]);
 

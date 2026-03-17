@@ -69,7 +69,6 @@ export async function generateMetadata({
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { slug, locale } = await params;
   const article = await getArticle(slug, locale);
-
   if (!article) notFound();
 
   return <ArticlePageContent article={article} locale={locale} />;

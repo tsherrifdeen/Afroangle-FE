@@ -43,12 +43,12 @@ export async function getAllArticles(
       client.fetch(
         ALL_ARTICLES_QUERY,
         { locale, start, end },
-        { next: { revalidate: 3600 } },
+        { next: { revalidate: 600} },
       ),
       client.fetch(
         TOTAL_ARTICLES_COUNT,
         { locale },
-        { next: { revalidate: 3600 } },
+        { next: { revalidate: 600 } },
       ),
     ]);
 
@@ -80,12 +80,12 @@ export async function getArticlesByCategory(
       client.fetch(
         ARTICLES_BY_CATEGORY_QUERY,
         { slug, locale, start, end },
-        { next: { revalidate: 3600 } },
+        { next: { revalidate: 600 } },
       ),
       client.fetch(
         ARTICLES_IN_CATEGORY_COUNT,
         { slug, locale },
-        { next: { revalidate: 3600 } },
+        { next: { revalidate: 600 } },
       ),
     ]);
 
@@ -133,12 +133,12 @@ export async function getArticlesByAuthor(
       client.fetch(
         ARTICLES_BY_AUTHOR_QUERY,
         { authorId, locale, start, end },
-        { next: { revalidate: 10 } },
+        { next: { revalidate: 600 } },
       ),
       client.fetch(
         ARTICLES_IN_AUTHOR_COUNT,
         { authorId, locale },
-        { next: { revalidate: 10 } },
+        { next: { revalidate: 600 } },
       ),
     ]);
 
@@ -164,7 +164,7 @@ export async function getRelatedArticles(
     const articles = await client.fetch(
       RELATED_ARTICLES_QUERY,
       { articleId, categorySlugs, locale },
-      { next: { revalidate: 3600 } },
+      { next: { revalidate: 600 } },
     );
     return articles;
   } catch (error) {
