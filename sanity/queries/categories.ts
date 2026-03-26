@@ -15,17 +15,13 @@ export const CATEGORY_BY_SLUG_QUERY = groq`
     name,
     "slug": slug.current,
     description,
-    
-    // Fetch translations for the Language Switcher
-    "translations": *[
-      _type == ^._type && 
-      _id match string::split(^._id, "__i18n_")[0] + "*" && 
-      _id != ^._id && 
-      !(_id in path('drafts.**'))
-    ] {
-      "language": language,
-      "slug": slug.current
-    }
+   "translations": *[
+    _type == "translation.metadata" &&
+    ^._id in translations[].value._ref
+  ][0].translations[]{
+    "language": _key,
+    "slug": value->slug.current
+  }
   }
 `;
 
@@ -37,3 +33,9 @@ export const ARTICLES_IN_CATEGORY_COUNT = groq`
     !(_id in path('drafts.**'))
   ])
 `;
+
+export const ALL_CATEGORY_SLUGS_QUERY = groq`
+  *[_type == "category" && defined(slug.current) && defined(language)]{
+      "slug": slug.current,
+      language
+    }`

@@ -4,6 +4,7 @@ import Header from "@/components/common/Header";
 import { notFound } from "next/navigation";
 import Footer from "@/components/common/Footer";
 import { hasLocale, getDictionary } from "./dictionaries";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const rokkitt = Rokkitt({
   variable: "--font-rokkitt",
@@ -77,7 +78,7 @@ export default async function RootLayout({
   const { locale } = await params;
 
   if (!hasLocale(locale)) notFound();
-
+  const gaid = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "";
   return (
     <html lang={locale}>
       <body className={`${rokkitt.variable} ${kumbhSans.variable} antialiased`}>
@@ -85,6 +86,7 @@ export default async function RootLayout({
         {children}
         <Footer locale={locale} />
       </body>
+      <GoogleAnalytics gaId={gaid} />
     </html>
   );
 }

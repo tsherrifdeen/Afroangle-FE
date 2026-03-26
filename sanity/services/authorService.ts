@@ -1,5 +1,5 @@
 import { client } from "../lib/client";
-import { GET_AUTHOR_BY_SLUG, AUTHOR_BY_ARTICLE_ID } from "../queries/authors";
+import { GET_AUTHOR_BY_SLUG, AUTHOR_BY_ARTICLE_ID, ALL_AUTHOR_SLUGS } from "../queries/authors";
 import {
   AUTHOR_BY_ARTICLE_ID_RESULT,
   GET_AUTHOR_BY_SLUG_RESULT,
@@ -25,5 +25,13 @@ export async function getAuthorById(
     AUTHOR_BY_ARTICLE_ID,
     { articleId },
     { next: { revalidate: 3600 } },
+  );
+}
+// Get all slugs for generateStaticParams
+export async function getAllAuthorSlugs() {
+  return client.fetch<Array<{ slug: string; language: string }>>(
+   ALL_AUTHOR_SLUGS,
+    {},
+    { next: { revalidate: 86400, tags: ["authors"] } }
   );
 }

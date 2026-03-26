@@ -1,6 +1,7 @@
 import { client } from "@/sanity/lib/client";
 import {
   ALL_CATEGORIES_QUERY,
+  ALL_CATEGORY_SLUGS_QUERY,
   CATEGORY_BY_SLUG_QUERY,
 } from "../queries/categories";
 import {
@@ -29,5 +30,14 @@ export async function getCategoryBySlug(
     CATEGORY_BY_SLUG_QUERY,
     { slug, locale }, // Passed both slug and locale
     { next: { revalidate: 3600 } },
+  );
+}
+
+// Get all slugs for generateStaticParams
+export async function getAllCategorySlugs() {
+  return client.fetch<Array<{ slug: string; language: string }>>(
+    ALL_CATEGORY_SLUGS_QUERY,
+    {},
+    { next: { revalidate: 3600, tags: ["categories"] } }
   );
 }

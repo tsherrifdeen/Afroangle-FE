@@ -16,7 +16,6 @@ export const ARTICLE_BY_SLUG_QUERY = defineQuery(`
       "language": language,
       "slug": slug.current
     },
-
     "author": author-> {
       name,
       "slug": slug.current
@@ -29,6 +28,13 @@ export const ARTICLE_BY_SLUG_QUERY = defineQuery(`
     "categories": categories[]-> {
       name, 
       "slug": slug.current,
+    },
+    "translations": *[
+      _type == "translation.metadata" &&
+      ^._id in translations[].value._ref
+    ][0].translations[]{
+      "language": _key,
+      "slug": value->slug.current
     },
     "content": content[]{
       ...,
@@ -159,3 +165,9 @@ export const SEARCH_ARTICLES_QUERY = defineQuery(`*[
     "slug": slug.current
   }
 }`);
+
+export const ALL_ARTICLE_SLUGS_QUERY = defineQuery(`*[
+  _type == "article" && !(_id in path('drafts.**')) && defined(slug.current) && defined(language)]{
+      "slug": slug.current,
+      language
+    }`);

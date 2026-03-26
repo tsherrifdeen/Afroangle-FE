@@ -64,7 +64,7 @@ export default async function ArticlePageContent({
 
           {/* 4. Safely check for content before rendering PortableText */}
           {article.content && (
-            <div className="text-black max-w-3xl leading-normal mx-auto prose prose-xl [&>p:first-of-type]:first-letter:float-left [&>p:first-of-type]:first-letter:text-9xl [&>p:first-of-type]:first-letter:font-semibold [&>p:first-of-type]:first-letter:pr-2 [&>p:first-of-type]:first-letter:-mt-5 [&>p:first-of-type]:first-letter:leading-none">
+            <div className="text-black max-w-4xl leading-normal mx-auto prose prose-xl [&>p:first-of-type]:first-letter:float-left [&>p:first-of-type]:first-letter:text-9xl [&>p:first-of-type]:first-letter:font-semibold [&>p:first-of-type]:first-letter:pr-2 [&>p:first-of-type]:first-letter:-mt-5 [&>p:first-of-type]:first-letter:leading-none">
               <PortableText value={article.content} components={components} />
             </div>
           )}

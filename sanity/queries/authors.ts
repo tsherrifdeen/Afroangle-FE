@@ -34,6 +34,19 @@ export const AUTHOR_BY_ARTICLE_ID = groq`
   *[_type == "article" && _id == $articleId && !(_id in path('drafts.**'))][0].author-> {
     name,
     "slug": slug.current,
-    bio
+    bio,
+     "translations": *[
+    _type == "translation.metadata" &&
+    ^._id in translations[].value._ref
+  ][0].translations[]{
+    "language": _key,
+    "slug": value->slug.current
+  }
   }
 `;
+
+export const ALL_AUTHOR_SLUGS = groq`
+  *[_type == "author" && defined(slug.current) && defined(language)]{
+      "slug": slug.current,
+      language
+    }`;

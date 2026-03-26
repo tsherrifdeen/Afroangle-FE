@@ -7,6 +7,7 @@ import {
   ARTICLES_BY_AUTHOR_QUERY,
   RELATED_ARTICLES_QUERY,
   SEARCH_ARTICLES_QUERY,
+  ALL_ARTICLE_SLUGS_QUERY,
 } from "../queries/articles";
 import {
   ALL_ARTICLES_QUERY_RESULT,
@@ -188,4 +189,12 @@ export async function searchArticles(
     console.error(`Error searching articles for query "${query}":`, error);
     return [];
   }
+}
+
+export async function getAllArticleSlugs() {
+  return client.fetch<Array<{ slug: string; language: string }>>(
+   ALL_ARTICLE_SLUGS_QUERY,
+    {},
+    { next: { revalidate: 3600, tags: ["articles"] } }
+  );
 }
