@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import Footer from "@/components/common/Footer";
 import { hasLocale, getDictionary } from "./dictionaries";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Analytics } from "@vercel/analytics/next";
 
 const rokkitt = Rokkitt({
   variable: "--font-rokkitt",
@@ -85,6 +86,7 @@ export default async function RootLayout({
         <Header locale={locale} />
         {children}
         <Footer locale={locale} />
+        <Analytics />
       </body>
       <GoogleAnalytics gaId={gaid} />
     </html>
