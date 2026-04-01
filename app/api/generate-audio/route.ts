@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
 
     const bodyText = blocksToText(body);
     // A. Prepare Text'
-    const textToSpeak = `${title || ""}. ${author ? `Written by ${author}.` : ""} \n\n${bodyText}`;
+    const textToSpeak = `${title || ""}. ${author ? `Written by ${author.name}.` : ""} \n\n${bodyText}`;
 
     // Safety check to save money
     if (textToSpeak.length < 50) {
@@ -33,10 +33,10 @@ export async function POST(req: NextRequest) {
     // B. Call ElevenLabs API
     // "Rachel" Voice ID: 21m00Tcm4TlvDq8ikWAM (Standard English Voice)
     const audioStream = await elevenLabs.textToSpeech.convert(
-      "21m00Tcm4TlvDq8ikWAM",
+      "neMPCpWtBwWZhxEC8qpe",
       {
         text: textToSpeak,
-        modelId: "eleven_turbo_v2",
+        modelId: "eleven_flash_v2_5",
         outputFormat: "mp3_44100_128",
       },
     );
@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
     // D. Upload to Sanity
     // This stores the actual file in Sanity's CDN
     const asset = await sanityUploadClient.assets.upload("file", audioBuffer, {
-      filename: `narration-${postId}.mp3`,
+      filename: `audio-${title}.mp3`,
       contentType: "audio/mpeg",
     });
 

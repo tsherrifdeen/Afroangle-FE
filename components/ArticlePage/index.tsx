@@ -28,7 +28,7 @@ export default async function ArticlePageContent({
       <section className="max-w-screen-xl py-8 mx-auto lg:py-12">
         <ArticleHeader categories={article.categories} dict={dict} />
 
-        <article className="px-4 space-y-4 lg:space-y-8 lg:px-24">
+        <article className="px-4 space-y-4 lg:space-y-6 lg:px-24">
           <h1 className="text-3xl font-bold capitalize lg:w-11/12 lg:text-6xl">
             {article.title}
           </h1>
@@ -50,7 +50,7 @@ export default async function ArticlePageContent({
                 src={article.mainImage.url}
                 caption={article.mainImage.caption || ""}
               />
-              <hr className="mt-10 border-black/30" />
+              <hr className="mt-6 border-black/30" />
             </div>
           )}
 
@@ -64,7 +64,7 @@ export default async function ArticlePageContent({
 
           {/* 4. Safely check for content before rendering PortableText */}
           {article.content && (
-            <div className="text-black max-w-4xl leading-normal mx-auto prose prose-xl [&>p:first-of-type]:first-letter:float-left [&>p:first-of-type]:first-letter:text-9xl [&>p:first-of-type]:first-letter:font-semibold [&>p:first-of-type]:first-letter:pr-2 [&>p:first-of-type]:first-letter:-mt-5 [&>p:first-of-type]:first-letter:leading-none">
+            <div className="text-black max-w-4xl leading-normal mx-auto prose prose-xl [&>p:first-of-type]:first-letter:float-left [&>p:first-of-type]:first-letter:text-9xl [&>p:first-of-type]:first-letter:font-semibold [&>p:first-of-type]:first-letter:pr-2 mt-4 [&>p:first-of-type]:first-letter:-mt-5 [&>p:first-of-type]:first-letter:leading-none">
               <PortableText value={article.content} components={components} />
             </div>
           )}
