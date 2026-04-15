@@ -24,6 +24,7 @@ const FeaturedArticle = ({ article }: FeaturedArticleProps) => {
           src={article.mainImage}
           alt={article.title}
           fill
+          loading="eager"
           className="object-cover"
         />
       </LocaleLink>

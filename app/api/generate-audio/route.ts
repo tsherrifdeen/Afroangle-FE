@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
         authorName = await sanityUploadClient.fetch(`*[_id == $id][0].name`, {
           id: authorId,
         });
-        console.log(authorName)
+        // console.log(authorName)
       } catch (err) {
         console.error("Failed to fetch author name:", err);
       }
