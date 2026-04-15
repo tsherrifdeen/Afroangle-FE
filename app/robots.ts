@@ -6,10 +6,11 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
-      allow: "/",
+      allow: ["/en/", "/fr/"],
       // Prevent crawlers from indexing Sanity Studio and api if it's hosted on the same domain
-      disallow: ["/admin/", "/api/"],
+      disallow: ["/admin/", "/api/", "/"],
     },
     sitemap: `${baseUrl}/sitemap.xml`,
+    host: baseUrl,
   };
 }

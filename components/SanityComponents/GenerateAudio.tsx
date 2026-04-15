@@ -5,7 +5,7 @@ import { useFormValue } from "sanity";
 export function GenerateAudioInput(props: any) {
   // 1. Grab necessary data from the document context
   const docId = useFormValue(["_id"]) as string;
-  const author = useFormValue(["author"]) as string;
+  const author = useFormValue(["author"]) as { _ref: string } | undefined;
   const bodyBlocks = useFormValue(["content"]);
   const title = useFormValue(["title"]);
 
@@ -31,7 +31,7 @@ export function GenerateAudioInput(props: any) {
           postId: docId.replace("drafts.", ""), // Handle draft IDs safely
           title: title,
           body: bodyBlocks,
-          author: author,
+          authorId: author?._ref,
         }),
       });
 

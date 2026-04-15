@@ -10,7 +10,7 @@ const elevenLabs = new ElevenLabsClient({
 
 export async function POST(req: NextRequest) {
   try {
-    const { postId, body, title, author } = await req.json();
+    const { postId, body, title, authorId } = await req.json();
 
     if (!postId || !body) {
       return NextResponse.json(
@@ -18,10 +18,21 @@ export async function POST(req: NextRequest) {
         { status: 400 },
       );
     }
-
+    let authorName = "";
+    if (authorId) {
+      try {
+        // Query Sanity for the author's name using the ID
+        authorName = await sanityUploadClient.fetch(`*[_id == $id][0].name`, {
+          id: authorId,
+        });
+        console.log(authorName)
+      } catch (err) {
+        console.error("Failed to fetch author name:", err);
+      }
+    }
     const bodyText = blocksToText(body);
     // A. Prepare Text'
-    const textToSpeak = `${title || ""}. ${author ? `Written by ${author.name}.` : ""} \n\n${bodyText}`;
+    const textToSpeak = `${title || ""}. ${authorId ? `Written by ${authorName}.` : ""} \n\n${bodyText}`;
 
     // Safety check to save money
     if (textToSpeak.length < 50) {

@@ -10,7 +10,6 @@ function getLocale(req: NextRequest): string {
   req.headers.forEach((value, key) => {
     negotiatorHeaders[key] = value;
   });
-
   const languages = new Negotiator({ headers: negotiatorHeaders }).languages();
   return match(languages, locales, defaultLocale);
 }
@@ -31,8 +30,8 @@ export function proxy(req: NextRequest) {
 
   const locale = getLocale(req);
   const url = req.nextUrl.clone();
-  url.pathname = `/${locale}${pathname}`;
-  return NextResponse.redirect(url);
+  url.pathname = `/${locale}${pathname === "/" ? "" : pathname}`;
+  return NextResponse.redirect(url, 307);
 }
 
 export const config = {
