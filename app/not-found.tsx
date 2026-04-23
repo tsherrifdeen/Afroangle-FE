@@ -1,18 +1,20 @@
-// app/not-found.tsx
-"use client";
-import { usePathname } from "next/navigation";
+import { headers } from "next/headers";
 import { FiArrowLeft } from "react-icons/fi";
 
-// Import dictionaries directly for synchronous client-side access
+// Import dictionaries directly
 import en from "@/dictionaries/en.json";
 import fr from "@/dictionaries/fr.json";
 import LocaleLink from "@/components/common/LocaleLink";
 
-export default function NotFound() {
-  const pathname = usePathname();
+export const dynamic = "force-dynamic";
 
-  // Check the URL to see if they were in the French section, otherwise default to English
-  const locale = pathname?.startsWith("/fr") ? "fr" : "en";
+export default async function NotFound() {
+  // Determine locale from Accept-Language header (server-side)
+  // Default to 'en' if not detectable
+  const headersList = await headers();
+  const acceptLang = headersList.get("accept-language") ?? "";
+  const preferred = acceptLang.split(",")[0].trim().slice(0, 2).toLowerCase();
+  const locale = preferred === "fr" ? "fr" : "en";
   const dict = locale === "fr" ? fr : en;
 
   return (

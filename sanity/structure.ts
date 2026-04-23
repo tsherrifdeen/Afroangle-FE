@@ -15,26 +15,12 @@ export const structure: StructureResolver = (S) => {
     { id: "fr", title: "French" },
   ];
 
-  // Define available sort options per document type
-  const orderingsByType: Record<string, SortOrderingItem[]> = {
-    article: [
-      { field: "publishedAt", direction: "desc" },
-      { field: "title", direction: "asc" },
-      { field: "_createdAt", direction: "desc" },
-      { field: "_updatedAt", direction: "desc" },
-    ],
-    author: [
-      { field: "name", direction: "asc" },
-      { field: "_createdAt", direction: "desc" },
-    ],
-    category: [
-      { field: "name", direction: "asc" },
-      { field: "_createdAt", direction: "desc" },
-    ],
-    comment: [
-      { field: "_createdAt", direction: "desc" },
-      { field: "name", direction: "asc" },
-    ],
+  // Define ONLY the initial, default load state here
+  const defaultOrderingsByType: Record<string, SortOrderingItem[]> = {
+    article: [{ field: "publishedAt", direction: "desc" }],
+    author: [{ field: "name", direction: "asc" }],
+    category: [{ field: "name", direction: "asc" }],
+    comment: [{ field: "_createdAt", direction: "desc" }],
   };
 
   const i18nTypes = [
@@ -66,8 +52,8 @@ export const structure: StructureResolver = (S) => {
                         .schemaType(schema.type)
                         .filter("_type == $type && language == $lang")
                         .params({ type: schema.type, lang: lang.id })
-                        // Default sort — first item in the array is the default
-                        .defaultOrdering(orderingsByType[schema.type] ?? [
+                        // Only pass the single default sort state
+                        .defaultOrdering(defaultOrderingsByType[schema.type] ?? [
                           { field: "_createdAt", direction: "desc" },
                         ])
                         .initialValueTemplates([

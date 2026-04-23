@@ -10,12 +10,20 @@ function getLocale(req: NextRequest): string {
   req.headers.forEach((value, key) => {
     negotiatorHeaders[key] = value;
   });
-  const languages = new Negotiator({ headers: negotiatorHeaders }).languages();
-  return match(languages, locales, defaultLocale);
+
+  try {
+    const languages = new Negotiator({ headers: negotiatorHeaders }).languages();
+    return match(languages, locales, defaultLocale);
+  } catch {
+    // If negotiation fails, fall back to default locale
+    return defaultLocale;
+  }
 }
 
 export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
+
+  // Skip middleware for API routes, static files, and Next.js internals
   if (
     pathname.startsWith("/api") ||
     pathname.startsWith("/_next") ||
@@ -25,12 +33,17 @@ export function proxy(req: NextRequest) {
     return NextResponse.next();
   }
 
+  // Check if the pathname already has a locale prefix
   const first = pathname.split("/")[1];
-  if (locales.includes(first)) return NextResponse.next();
+  if (locales.includes(first)) {
+    return NextResponse.next();
+  }
 
+  // Get the preferred locale and redirect
   const locale = getLocale(req);
   const url = req.nextUrl.clone();
   url.pathname = `/${locale}${pathname === "/" ? "" : pathname}`;
+
   return NextResponse.redirect(url, 307);
 }
 

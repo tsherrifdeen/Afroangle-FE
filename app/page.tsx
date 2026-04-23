@@ -1,17 +1,44 @@
-// app/page.tsx
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 
-// This should never render — middleware redirects / before it gets here.
-// This is purely a safety net for bots or edge cases middleware misses.
+/**
+ * Root page handler - serves as a fallback for middleware edge cases.
+ * In normal operation, middleware.ts should handle locale detection and redirect
+ * users to /{locale} before this component renders.
+ *
+ * This exists as a safety net for:
+ * - Direct bot access that bypasses middleware
+ * - Edge case routing scenarios
+ */
 export default async function RootPage() {
   try {
     const headersList = await headers();
     const acceptLang = headersList.get("accept-language") ?? "";
-    const preferred = acceptLang.split(",")[0].trim().slice(0, 2).toLowerCase();
-    const locale = preferred === "fr" ? "fr" : "en";
+
+    // Safely parse Accept-Language header
+    let locale = "en"; // default
+    if (acceptLang) {
+      try {
+        const preferred = acceptLang
+          .split(",")[0]
+          .trim()
+          .split("-")[0] // Get primary language code
+          .toLowerCase();
+
+        // Only accept known locales
+        if (preferred === "fr") {
+          locale = "fr";
+        }
+      } catch {
+        // If parsing fails, use default
+        locale = "en";
+      }
+    }
+
     redirect(`/${locale}`);
-  } catch {
+  } catch (error) {
+    // If redirect fails for any reason, default to English
+    console.error("Root page redirect error:", error);
     redirect("/en");
   }
 }
