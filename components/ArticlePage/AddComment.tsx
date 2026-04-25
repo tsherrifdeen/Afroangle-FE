@@ -112,7 +112,8 @@ export default function CommentForm({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="max-w-3xl p-6 mx-auto mt-10 space-y-4 bg-neutral font-secondary"
+      // Removed bg-neutral, added a top border to separate it from the comments
+      className="mx-auto mt-10 pt-6 font-secondary w-full max-w-3xl space-y-5 border-t border-gray-300"
     >
       {/* Honeypot */}
       <input
@@ -123,14 +124,23 @@ export default function CommentForm({
         className="hidden"
       />
 
-      <h3 className="text-xl text-primary-red">{comments.leaveComment}</h3>
+      {/* Softened the heading color to match the comment section heading */}
+      <h3 className="text-3xl font-primary font-semibold text-gray-800">
+        {comments.leaveComment}
+      </h3>
 
       {/* Name */}
       <div className="space-y-1">
+        {/* Added explicit label for accessibility and UX */}
+        <label htmlFor="name" className="sr-only">
+          {forms.name}
+        </label>
         <input
+          id="name"
           {...register("name", { required: errors.required })}
           placeholder={forms.name}
-          className="w-full px-3 py-2 text-sm bg-white rounded resize-none focus:outline-none focus:ring-1 focus:ring-primary-green"
+          // Added borders, shadow, and smoother focus states
+          className="w-full rounded-xs border border-gray-300 bg-white px-3 py-2  transition-colors focus:border-primary-green/50 focus:outline-none focus:ring-2 focus:ring-primary-green/50"
         />
         {formErrors.name && (
           <p className="text-sm text-primary-red">{formErrors.name.message}</p>
@@ -139,7 +149,11 @@ export default function CommentForm({
 
       {/* Email */}
       <div className="space-y-1">
+        <label htmlFor="email" className="sr-only">
+          {forms.email}
+        </label>
         <input
+          id="email"
           {...register("email", {
             required: errors.required,
             pattern: {
@@ -148,7 +162,7 @@ export default function CommentForm({
             },
           })}
           placeholder={forms.email}
-          className="w-full px-3 py-2 text-sm bg-white rounded resize-none focus:outline-none focus:ring-1 focus:ring-primary-green"
+          className="w-full rounded-xs border border-gray-300 bg-white px-3 py-2  transition-colors focus:border-primary-green/50 focus:outline-none focus:ring-2 focus:ring-primary-green/50"
         />
         {formErrors.email && (
           <p className="text-sm text-primary-red">{formErrors.email.message}</p>
@@ -157,7 +171,11 @@ export default function CommentForm({
 
       {/* Message */}
       <div className="space-y-1">
+        <label htmlFor="message" className="sr-only">
+          {forms.message}
+        </label>
         <textarea
+          id="message"
           {...register("message", {
             required: errors.required,
             minLength: {
@@ -170,8 +188,8 @@ export default function CommentForm({
             },
           })}
           placeholder={forms.message}
-          rows={3}
-          className="w-full px-3 py-2 text-sm bg-white rounded resize-none focus:outline-none focus:ring-1 focus:ring-primary-green"
+          rows={4}
+          className="w-full resize-y rounded-xs border border-gray-300 bg-white px-3 py-2  transition-colors focus:border-primary-green/50 focus:outline-none focus:ring-2 focus:ring-primary-green/50"
         />
         {formErrors.message && (
           <p className="text-sm text-primary-red">
@@ -183,7 +201,7 @@ export default function CommentForm({
       {/* Submit */}
       <button
         disabled={isSubmitting}
-        className="w-full px-4 py-2 text-white transition bg-primary-green tracking-wider text-lg font-primary hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+        className="mt-2 w-full rounded-xs bg-primary-green px-4 py-3 text-lg tracking-wider text-white transition hover:bg-opacity-90 disabled:cursor-not-allowed disabled:opacity-60 font-primary"
       >
         {isSubmitting ? comments.sending : buttons.submit}
       </button>

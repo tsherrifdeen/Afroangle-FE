@@ -21,31 +21,37 @@ const Comments = async ({ articleId, dict }: CommentsProps) => {
   const { comments: c } = dict.articles;
 
   return (
-    <div className="mx-auto mt-8 w-full max-w-3xl space-y-6">
-      {/* Always show the section title */}
-      <h5 className="text-2xl uppercase leading-none text-primary-red">
+    <div className="mx-auto mt-12 w-full max-w-3xl space-y-8">
+      {/* Removed uppercase, made it title-case and softened the color */}
+      <h5 className="text-3xl font-semibold capitalize text-gray-800">
         {c.title}
       </h5>
 
-      {/* Safely check if the array is empty */}
       {comments.length === 0 ? (
-        <p className="text-center font-secondary text-gray-500">
+        <p className="text-center text-gray-500 font-secondary">
           {c.noComments}
         </p>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-6">
           {comments.map((comment) => (
             <div
               key={comment._id}
-              className="w-full space-y-2 bg-neutral px-6 py-3 lg:space-y-2.5 lg:px-10 lg:py-8"
+              // Removed bg-neutral. Replaced with a clean bottom border
+              className="w-full space-y-3 border-b border-gray-300 pb-6 last:border-b-0"
             >
-              <div className="flex items-center gap-2">
-                <h6 className="font-medium capitalize lg:text-xl">
+              <div className="flex items-baseline gap-3">
+                <h6 className="font-semibold capitalize text-gray-900 lg:text-lg">
                   {comment.name}
                 </h6>
-                <p className="text-black/60">{timeAgo(comment._createdAt)}</p>
+                <p className="text-sm text-gray-500">
+                  {timeAgo(comment._createdAt)}
+                </p>
               </div>
-              <p>{comment.message}</p>
+
+              {/* Added leading-relaxed for better readability */}
+              <p className="font-secondary leading-relaxed text-gray-700">
+                {comment.message}
+              </p>
             </div>
           ))}
         </div>

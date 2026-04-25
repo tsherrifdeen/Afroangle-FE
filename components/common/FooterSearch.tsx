@@ -37,7 +37,7 @@ export default function FooterSearch({ dict, locale }: FooterSearchProps) {
   return (
     <form
       onSubmit={handleSearch}
-      className={`flex w-full items-center overflow-hidden border bg-white transition-all ${
+      className={`flex w-full items-center overflow-hidden rounded-xs border bg-white transition-all ${
         isPending
           ? "border-neutral-200 opacity-70"
           : "border-neutral-300 focus-within:border-primary-red focus-within:ring-1 focus-within:ring-primary-red"
@@ -54,7 +54,7 @@ export default function FooterSearch({ dict, locale }: FooterSearchProps) {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         disabled={isPending}
-        className="w-full bg-transparent pl-2.5 py-2 text-sm text-neutral-800 placeholder-neutral-400 focus:outline-none disabled:cursor-not-allowed"
+        className="w-full bg-transparent pl-2.5 py-2 text-sm text-neutral-800 placeholder-neutral-400 font-secondary focus:outline-none disabled:cursor-not-allowed"
       />
       <button
         type="submit"

@@ -13,13 +13,17 @@ const AuthorBio = async ({ articleId }: AuthorBioProps) => {
   }
 
   return (
-    <div className="flex flex-col w-full max-w-3xl gap-3 px-4 pt-4 pb-10 mx-auto mt-8 bg-neutral lg:px-6">
+    <div className="mx-auto mt-12 flex w-full max-w-4xl flex-col gap-3 bg-neutral-200 px-6 pt-6 pb-10 lg:px-8 rounded-xs">
       <LocaleLink href={`/authors/${author.slug}`} activeClassName="">
-        <h5 className="text-2xl font-medium capitalize hover:underline decoration-primary-red">
+        <h5 className="text-2xl font-semibold capitalize text-gray-900 hover:underline decoration-primary-red">
           {author.name}
         </h5>
       </LocaleLink>
-      <p className="text-sm font-secondary">{author.bio}</p>
+
+      {/* Added leading-relaxed for line height and text-gray-800 for softer contrast */}
+      <p className="text-gray-800 leading-relaxed font-secondary">
+        {author.bio}
+      </p>
     </div>
   );
 };

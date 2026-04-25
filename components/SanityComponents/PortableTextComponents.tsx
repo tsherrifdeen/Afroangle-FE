@@ -8,20 +8,21 @@ export const components: PortableTextComponents = {
     image: ({ value }) => {
       return (
         <figure className="flex flex-col items-center w-full my-4 lg:my-6">
-          {/* Image Container */}
-          <div className="relative w-full overflow-hidden h-80 lg:h-112">
+          {/* Image Container — drives height from image's natural aspect ratio */}
+          <div className="relative w-full">
             <Image
               src={urlFor(value).url()}
-              alt={value.alt || "Article Image"}
-              fill
-              className="object-contain" // object-contain is best for keeping aspect ratio visible
-              sizes="(max-width: 1024px) 100vw, 800px" // Improves performance/LCP
+              alt={value.alt || "Embedded article image"}
+              width={0}
+              height={0}
+              sizes="(max-width: 1024px) 100vw, 800px"
+              className="w-full h-auto object-cover"
             />
           </div>
 
           {/* Caption */}
           {value.alt && (
-            <figcaption className="w-full max-w-3xl px-4 mt-1 text-sm leading-relaxed text-center text-gray-700 capitalize font-secondary">
+            <figcaption className="w-full max-w-3xl -mt-4 text-center text-sm leading-relaxed text-gray-800 font-secondary">
               {value.alt}
             </figcaption>
           )}
@@ -57,7 +58,7 @@ export const components: PortableTextComponents = {
     h2: ({ children }) => <h2 className="mt-8 mb-4 text-3xl">{children}</h2>,
     h3: ({ children }) => <h3 className="mt-6 mb-3 text-2xl">{children}</h3>,
     blockquote: ({ children }) => (
-      <blockquote className="py-1 pl-4 my-5 italic border-l-4 border-gray-500">
+      <blockquote className="relative py-4 px-6 pl-5 my-6 bg-gray-50 border-l-4 border-gray-700 font-secondary text-base italic text-gray-700 leading-relaxed rounded-r-md">
         {children}
       </blockquote>
     ),
